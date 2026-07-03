@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>NexBank - Transfer Money</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background-color: #fbf8ff;
+        }
+
+        /* Hide scrollbars but keep functionality */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Custom PIN Input Styling */
+        .pin-digit:focus {
+            border-color: #143de7;
+            outline: none;
+        }
+    </style>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#e2e1ef",
+                        "on-surface-variant": "#444656",
+                        "error": "#ba1a1a",
+                        "on-primary-fixed-variant": "#002eca",
+                        "inverse-surface": "#2f303a",
+                        "on-tertiary-fixed": "#370e00",
+                        "tertiary-container": "#c14500",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#f4f2ff",
+                        "on-secondary-fixed-variant": "#344089",
+                        "on-background": "#1a1b24",
+                        "on-surface": "#1a1b24",
+                        "on-secondary-fixed": "#00105b",
+                        "on-secondary": "#ffffff",
+                        "outline-variant": "#c4c5d9",
+                        "on-secondary-container": "#323f87",
+                        "surface-bright": "#fbf8ff",
+                        "secondary-fixed": "#dee0ff",
+                        "on-primary-fixed": "#00105b",
+                        "secondary-fixed-dim": "#bac3ff",
+                        "tertiary-fixed-dim": "#ffb599",
+                        "tertiary": "#983500",
+                        "surface": "#fbf8ff",
+                        "background": "#fbf8ff",
+                        "surface-container-high": "#e8e7f4",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#7f2b00",
+                        "surface-tint": "#2448ef",
+                        "on-error": "#ffffff",
+                        "surface-dim": "#dad9e6",
+                        "on-tertiary-container": "#ffefe9",
+                        "primary-container": "#3b5bff",
+                        "surface-container": "#eeecfa",
+                        "error-container": "#ffdad6",
+                        "secondary": "#4c59a2",
+                        "inverse-on-surface": "#f1effd",
+                        "tertiary-fixed": "#ffdbce",
+                        "primary-fixed": "#dee0ff",
+                        "outline": "#747688",
+                        "surface-variant": "#e2e1ef",
+                        "on-primary-container": "#f2f1ff",
+                        "on-error-container": "#93000a",
+                        "on-tertiary": "#ffffff",
+                        "inverse-primary": "#bac3ff",
+                        "primary": "#143de7",
+                        "secondary-container": "#a2aefe",
+                        "primary-fixed-dim": "#bac3ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "8px",
+                        "xl": "32px",
+                        "margin": "24px",
+                        "xxl": "48px",
+                        "gutter": "16px",
+                        "xs": "4px",
+                        "md": "16px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "numeric-lg": ["Inter"],
+                        "headline": ["Inter"],
+                        "numeric-md": ["Inter"],
+                        "display-xl": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "label-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["13px", {"lineHeight": "18px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0", "fontWeight": "400"}],
+                        "numeric-lg": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "headline": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "numeric-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                        "display-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "body-sm": ["13px", {"lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "400"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0", "fontWeight": "400"}],
+                        "display-lg": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0", "fontWeight": "500"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+    <script src="theme_notifications.js"></script>
+<body class="bg-background text-on-surface">
+    <!-- Sidebar Navigation Shell -->
+    <aside class="fixed left-0 top-0 h-full w-[240px] border-r border-outline-variant bg-surface flex flex-col py-lg px-md h-full">
+        <div class="mb-xxl px-sm flex items-center gap-sm">
+            <div class="w-8 h-8 bg-primary rounded flex items-center justify-center text-on-primary">
+                <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">account_balance</span>
+            </div>
+            <span class="font-headline text-headline text-primary tracking-tight cursor-pointer" onclick="window.location.href='index.html'">NexBank</span>
+        </div>
+        <nav class="flex-1 space-y-xs overflow-y-auto no-scrollbar">
+            <!-- Nav Items -->
+            <a class="flex items-center gap-md px-md py-sm rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-low transition-colors duration-150 ease-out group cursor-pointer" href="dashboard.html">
+                <span class="material-symbols-outlined text-md">dashboard</span>
+                <span>Dashboard</span>
+            </a>
+            <a class="flex items-center gap-md px-md py-sm rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-low transition-colors duration-150 ease-out group cursor-pointer" href="create_account.html">
+                <span class="material-symbols-outlined text-md">contactless</span>
+                <span>Open New Account</span>
+            </a>
+            <a class="flex items-center gap-md px-md py-sm rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-low transition-colors duration-150 ease-out group cursor-pointer" href="deposit.html">
+                <span class="material-symbols-outlined text-md">add_circle</span>
+                <span>Deposit Fund</span>
+            </a>
+            <a class="flex items-center gap-md px-md py-sm rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-low transition-colors duration-150 ease-out group cursor-pointer" href="withdraw.html">
+                <span class="material-symbols-outlined text-md">outbox</span>
+                <span>Withdraw Fund</span>
+            </a>
+            <!-- Active State -->
+            <a class="flex items-center gap-md px-md py-sm rounded-lg font-label-md text-label-md text-primary font-bold border-r-2 border-primary bg-surface-container-low transition-colors duration-150 ease-out group" href="#">
+                <span class="material-symbols-outlined text-md" style="font-variation-settings: 'FILL' 1;">swap_horiz</span>
+                <span>Transfer Fund</span>
+            </a>
+            <a class="flex items-center gap-md px-md py-sm rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-low transition-colors duration-150 ease-out group cursor-pointer" href="transactions.html">
+                <span class="material-symbols-outlined text-md">receipt_long</span>
+                <span>Transactions Ledger</span>
+            </a>
+            
+            <div class="pt-lg border-t border-outline-variant mt-lg mx-md opacity-30"></div>
+            
+            <a class="flex items-center gap-md px-md py-sm rounded-lg text-error font-label-md text-label-md hover:bg-error-container/20 cursor-pointer mt-auto" onclick="logoutUser()">
+                <span class="material-symbols-outlined text-error">logout</span>
+                Logout
+            </a>
+        </nav>
+        <div class="mt-auto pt-lg border-t border-outline-variant flex items-center gap-md px-sm bg-surface-container-low/30 py-md rounded-lg">
+            <div class="w-10 h-10 bg-surface-container-high rounded-full overflow-hidden flex-shrink-0 border border-outline-variant flex items-center justify-center text-primary font-bold text-lg select-none" id="avatarBadge">
+                MS
+            </div>
+            <div class="flex flex-col overflow-hidden">
+                <span class="font-label-md text-label-md text-on-surface truncate max-w-[120px]" id="sidebarUser">Marcus Sterling</span>
+                <span class="font-body-sm text-body-sm text-on-surface-variant truncate" id="sidebarAccNo">Acc No: 1000</span>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Top Bar Navigation Shell -->
+    <header class="fixed top-0 right-0 left-[240px] h-14 bg-surface flex items-center justify-between px-xl w-full border-b border-outline-variant z-10">
+        <div class="flex items-center gap-md">
+            <div class="relative">
+                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-md">search</span>
+                <input class="h-10 pl-10 pr-md w-64 bg-surface-container-low border border-outline-variant rounded-lg text-body-md focus:border-primary focus:ring-0 transition-colors" placeholder="Search transactions or recipients" type="text" onkeyup="alert('Global transfer ledger search active.')">
+            </div>
+        </div>
+        <div class="flex items-center gap-xl">
+            <div class="flex items-center gap-md">
+                <div class="relative">
+                    <button class="relative w-10 h-10 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors" id="notification-btn">
+                        <span class="material-symbols-outlined">notifications</span>
+                        <span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border-2 border-background hidden" id="notification-badge"></span>
+                    </button>
+                    <!-- Dropdown panel -->
+                    <div class="absolute right-0 mt-2 w-80 bg-surface border border-outline-variant rounded-xl shadow-2xl overflow-hidden hidden z-50 bg-white dark:bg-neutral-900" id="notification-dropdown">
+                        <div class="p-md border-b border-outline-variant flex justify-between items-center bg-surface-container-low dark:bg-neutral-800">
+                            <span class="font-label-md text-label-md text-on-surface font-bold">Notifications</span>
+                            <button class="text-xs text-primary hover:underline font-semibold" id="mark-all-read-btn">Mark all read</button>
+                        </div>
+                        <div class="max-h-64 overflow-y-auto divide-y divide-outline-variant no-scrollbar text-left" id="notification-list">
+                            <!-- Dynamic notifications list -->
+                        </div>
+                        <div class="p-sm text-center border-t border-outline-variant bg-surface-container-low dark:bg-neutral-800">
+                            <button class="text-xs text-on-surface-variant hover:underline font-medium" onclick="clearAllNotifications()">Clear All</button>
+                        </div>
+                    </div>
+                </div>
+                <button class="p-sm text-on-surface-variant hover:text-primary transition-colors" id="theme-toggle">
+                    <span class="material-symbols-outlined">contrast</span>
+                </button>
+                <div class="h-6 w-[1px] bg-outline-variant mx-xs"></div>
+                <button class="flex items-center gap-xs font-label-md text-on-surface px-sm py-xs hover:bg-surface-container-high rounded transition-colors duration-150" onclick="window.location.href='dashboard.html'">
+                    Dashboard
+                    <span class="material-symbols-outlined">arrow_forward</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Canvas -->
+    <main class="ml-[240px] mt-14 p-xxl min-h-screen flex justify-center items-start">
+        <div class="w-full max-w-[480px]">
+            <!-- Header Section -->
+            <div class="mb-xl text-center">
+                <h1 class="text-display-lg font-headline text-on-surface mb-xs" style="font-size: 24px; font-weight: 600;">Transfer Money</h1>
+                <p class="text-body-md text-on-surface-variant">Send funds between accounts or to a recipient</p>
+            </div>
+            
+            <!-- Transfer Card -->
+            <div class="bg-surface border border-outline-variant rounded-xl p-xl bg-white shadow-sm" id="transferCard">
+                <!-- Segmented Control -->
+                <div class="flex p-xs bg-surface-container-low border border-outline-variant rounded-lg mb-xl">
+                    <button class="flex-1 py-sm px-md text-label-md font-label-md rounded bg-white text-primary shadow-sm border border-outline-variant/30 method-tab font-semibold" onclick="setTransferType(this, 'Own Accounts')">Own Accounts</button>
+                    <button class="flex-1 py-sm px-md text-label-md font-label-md text-on-surface-variant hover:text-on-surface transition-colors method-tab font-semibold" onclick="setTransferType(this, 'Another Person')">Another Person</button>
+                    <button class="flex-1 py-sm px-md text-label-md font-label-md text-on-surface-variant hover:text-on-surface transition-colors method-tab font-semibold" onclick="setTransferType(this, 'External Bank')">External Bank</button>
+                </div>
+                
+                <div class="space-y-lg">
+                    <!-- FROM Selector -->
+                    <div class="space-y-sm">
+                        <label class="block text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">From Account</label>
+                        <div class="relative">
+                            <select id="fromAccountSelect" class="w-full h-12 bg-surface border border-outline-variant px-md focus:border-primary focus:ring-0 rounded-lg text-body-md font-medium cursor-pointer" onchange="syncFromDetails()">
+                                <!-- Populated dynamically -->
+                            </select>
+                        </div>
+                        <div class="flex justify-between items-center px-xs">
+                            <span class="text-body-sm text-on-surface-variant">Available balance</span>
+                            <span class="text-numeric-md font-numeric-md text-on-surface font-semibold" id="fromBalanceLabel">$0.00</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Visual Connector -->
+                    <div class="flex justify-center -my-lg relative z-10">
+                        <div class="w-8 h-8 bg-surface border border-outline-variant rounded-full flex items-center justify-center text-outline-variant bg-white">
+                            <span class="material-symbols-outlined text-md">south</span>
+                        </div>
+                    </div>
+                    
+                    <!-- TO Selector -->
+                    <div class="space-y-sm">
+                        <label class="block text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">To Account</label>
+                        <div class="relative" id="toSelectionContainer">
+                            <!-- Populated based on type -->
+                        </div>
+                    </div>
+                    
+                    <!-- Amount Input Section -->
+                    <div class="pt-lg border-t border-outline-variant">
+                        <div class="text-center space-y-md">
+                            <label class="block text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Transfer Amount</label>
+                            <div class="relative inline-block w-full">
+                                <span class="absolute left-0 bottom-4 text-display-xl text-on-surface-variant opacity-50 font-semibold">$</span>
+                                <input class="w-full text-center text-display-xl font-display-xl border-0 border-b border-outline-variant focus:ring-0 focus:border-primary bg-transparent tabular-nums py-sm font-bold" style="font-size: 40px;" type="text" id="amount-input" value="0.00" onfocus="if(this.value==='0.00') this.value=''" onblur="if(this.value==='') this.value='0.00'; else formatAmountBlur(this)" oninput="updateSummary()">
+                            </div>
+                            
+                            <!-- Quick Amount Chips -->
+                            <div class="flex flex-wrap justify-center gap-sm mt-md">
+                                <button class="px-md py-sm bg-surface-container-low border border-outline-variant rounded-full text-label-md font-label-md text-on-surface hover:border-primary transition-colors font-semibold" onclick="setQuickAmount(100)">$100</button>
+                                <button class="px-md py-sm bg-surface-container-low border border-outline-variant rounded-full text-label-md font-label-md text-on-surface hover:border-primary transition-colors font-semibold" onclick="setQuickAmount(500)">$500</button>
+                                <button class="px-md py-sm bg-surface-container-low border border-outline-variant rounded-full text-label-md font-label-md text-on-surface hover:border-primary transition-colors font-semibold" onclick="setQuickAmount(1000)">$1,000</button>
+                                <button class="px-md py-sm bg-surface-container-low border border-outline-variant rounded-full text-label-md font-label-md text-on-surface hover:border-primary transition-colors font-semibold" onclick="setQuickAmount(5000)">$5,000</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Summary Card -->
+                    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden bg-slate-50">
+                        <div class="p-md space-y-sm">
+                            <div class="flex justify-between items-center text-body-md">
+                                <span class="text-on-surface-variant">From</span>
+                                <span class="text-on-surface font-semibold" id="summaryFrom">Checking (---)</span>
+                            </div>
+                            <div class="flex justify-between items-center text-body-md">
+                                <span class="text-on-surface-variant">To</span>
+                                <span class="text-on-surface font-semibold" id="summaryTo">---</span>
+                            </div>
+                            <div class="flex justify-between items-center text-body-md pt-sm border-t border-outline-variant">
+                                <span class="text-on-surface-variant">Amount</span>
+                                <span class="text-on-surface font-semibold" id="summaryAmount">$0.00</span>
+                            </div>
+                            <div class="flex justify-between items-center text-body-md">
+                                <span class="text-on-surface-variant">Transaction Fee</span>
+                                <span class="text-emerald-600 font-bold">Waived</span>
+                            </div>
+                        </div>
+                        <div class="bg-surface-container-low p-md flex justify-between items-center border-t border-outline-variant">
+                            <span class="text-label-md font-label-md text-on-surface font-semibold">Total Debit</span>
+                            <span class="text-numeric-lg font-numeric-lg text-primary font-bold" id="summaryTotalDebit">$0.00</span>
+                        </div>
+                    </div>
+                    
+                    <!-- PIN Confirmation -->
+                    <div class="space-y-md pt-md">
+                        <label class="block text-center text-label-sm font-label-sm text-on-surface-variant font-semibold">Enter 6-digit Transaction PIN</label>
+                        <div class="flex justify-center gap-sm">
+                            <input class="pin-digit w-10 h-12 text-center text-headline border border-outline-variant rounded bg-surface focus:border-primary focus:ring-0 transition-colors font-bold" maxlength="1" type="password">
+                            <input class="pin-digit w-10 h-12 text-center text-headline border border-outline-variant rounded bg-surface focus:border-primary focus:ring-0 transition-colors font-bold" maxlength="1" type="password">
+                            <input class="pin-digit w-10 h-12 text-center text-headline border border-outline-variant rounded bg-surface focus:border-primary focus:ring-0 transition-colors font-bold" maxlength="1" type="password">
+                            <input class="pin-digit w-10 h-12 text-center text-headline border border-outline-variant rounded bg-surface focus:border-primary focus:ring-0 transition-colors font-bold" maxlength="1" type="password">
+                            <input class="pin-digit w-10 h-12 text-center text-headline border border-outline-variant rounded bg-surface focus:border-primary focus:ring-0 transition-colors font-bold" maxlength="1" type="password">
+                            <input class="pin-digit w-10 h-12 text-center text-headline border border-outline-variant rounded bg-surface focus:border-primary focus:ring-0 transition-colors font-bold" maxlength="1" type="password">
+                        </div>
+                    </div>
+                    
+                    <div id="transferError" class="text-error text-body-sm text-center hidden"></div>
+
+                    <!-- Action Button -->
+                    <button class="w-full h-[48px] bg-primary text-on-primary font-label-md text-label-md rounded-lg hover:bg-opacity-95 active:scale-[0.98] transition-all duration-150 ease-out shadow-lg shadow-primary/20 flex items-center justify-center gap-sm mt-xl font-bold" onclick="submitTransfer()">
+                        Confirm Transfer
+                        <span class="material-symbols-outlined text-md">arrow_forward</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="mt-lg text-center">
+                <button class="text-body-sm text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center gap-xs mx-auto font-medium" onclick="alert('Scheduling transfers feature is restricted to gold tier corporate accounts.')">
+                    <span class="material-symbols-outlined text-sm">schedule</span>
+                    Schedule for later
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Session Guard
+        let currentUser = null;
+        function checkSession() {
+            const session = localStorage.getItem("nexbank_current_user");
+            if (!session) {
+                window.location.href = "login.html";
+                return;
+            }
+            currentUser = JSON.parse(session);
+
+            // Fetch actual user values from simulated database
+            const accounts = JSON.parse(localStorage.getItem("nexbank_accounts") || "[]");
+            const actualUser = accounts.find(acc => acc.account_number === currentUser.account_number);
+            if (!actualUser) {
+                localStorage.removeItem("nexbank_current_user");
+                window.location.href = "login.html";
+                return;
+            }
+            currentUser = actualUser;
+        }
+        checkSession();
+
+        function logoutUser() {
+            localStorage.removeItem("nexbank_current_user");
+            window.location.href = "login.html";
+        }
+
+        // State variables
+        let transferType = 'Own Accounts'; // 'Own Accounts', 'Another Person', 'External Bank'
+        const pinInputs = document.querySelectorAll('.pin-digit');
+        const amountInput = document.getElementById("amount-input");
+
+        // Segmented Control Switcher
+        function setTransferType(btn, type) {
+            transferType = type;
+            const tabs = document.querySelectorAll('.method-tab');
+            tabs.forEach(t => {
+                t.className = "flex-1 py-sm px-md text-label-md font-label-md rounded text-on-surface-variant hover:text-on-surface transition-colors method-tab font-semibold";
+            });
+            btn.className = "flex-1 py-sm px-md text-label-md font-label-md rounded bg-white text-primary shadow-sm border border-outline-variant/30 method-tab font-semibold";
+
+            // Repopulate TO selector
+            initToSelector();
+            updateSummary();
+        }
+
+        // Format amount helper
+        function formatAmountBlur(el) {
+            const val = parseFloat(el.value.replace(/,/g, ''));
+            if (!isNaN(val)) {
+                el.value = val.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            }
+            updateSummary();
+        }
+
+        function setQuickAmount(amt) {
+            amountInput.value = amt.toFixed(2);
+            updateSummary();
+        }
+
+        // Initialize FROM Account details
+        function initFromSelector() {
+            const selectEl = document.getElementById("fromAccountSelect");
+            const last4 = currentUser.account_number.toString().slice(-4);
+            selectEl.innerHTML = `<option value="${currentUser.account_number}">Portfolio Card Checking (•••• ${last4})</option>`;
+            syncFromDetails();
+        }
+
+        function syncFromDetails() {
+            const formattedBalance = currentUser.balance.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            document.getElementById("fromBalanceLabel").textContent = `$${formattedBalance}`;
+            updateSummary();
+        }
+
+        // Initialize TO Account choices
+        function initToSelector() {
+            const container = document.getElementById("toSelectionContainer");
+            const accounts = JSON.parse(localStorage.getItem("nexbank_accounts") || "[]");
+            const otherAccounts = accounts.filter(acc => acc.account_number !== currentUser.account_number);
+
+            if (transferType === "Own Accounts") {
+                // Since there is only one main portfolio, we can offer checking card option or placeholder
+                container.innerHTML = `
+                    <select id="toAccountSelect" class="w-full h-12 bg-surface border border-outline-variant px-md focus:border-primary focus:ring-0 rounded-lg text-body-md font-medium cursor-pointer" onchange="updateSummary()">
+                        <option value="Savings">Portfolio Savings Vault</option>
+                    </select>
+                `;
+            } else if (transferType === "Another Person") {
+                // Show drop-down list of other users in the simulated database
+                if (otherAccounts.length === 0) {
+                    container.innerHTML = `
+                        <input id="toAccountInput" class="w-full h-12 bg-surface border border-outline-variant px-md focus:border-primary focus:ring-0 rounded-lg text-body-md font-medium" placeholder="Recipient Account Number (e.g. 1002)" type="number" oninput="updateSummary()">
+                    `;
+                } else {
+                    let opts = otherAccounts.map(acc => {
+                        const last4 = acc.account_number.toString().slice(-4);
+                        return `<option value="${acc.account_number}">${acc.name} (•••• ${last4})</option>`;
+                    }).join('');
+                    
+                    container.innerHTML = `
+                        <select id="toAccountSelect" class="w-full h-12 bg-surface border border-outline-variant px-md focus:border-primary focus:ring-0 rounded-lg text-body-md font-medium cursor-pointer" onchange="updateSummary()">
+                            ${opts}
+                        </select>
+                    `;
+                }
+            } else {
+                // External Bank
+                container.innerHTML = `
+                    <div class="space-y-sm">
+                        <input id="toAccountBank" class="w-full h-10 border border-outline-variant rounded px-md bg-surface text-body-md focus:border-primary outline-none mb-2" placeholder="Bank Name (e.g. Chase)" type="text" oninput="updateSummary()">
+                        <input id="toAccountRouting" class="w-full h-10 border border-outline-variant rounded px-md bg-surface text-body-md focus:border-primary outline-none mb-2" placeholder="Routing Number (9 Digits)" type="number" oninput="updateSummary()">
+                        <input id="toAccountInput" class="w-full h-10 border border-outline-variant rounded px-md bg-surface text-body-md focus:border-primary outline-none" placeholder="Account Number" type="number" oninput="updateSummary()">
+                    </div>
+                `;
+            }
+        }
+
+        // Live Update Summary Card
+        function updateSummary() {
+            // From Account
+            const last4 = currentUser.account_number.toString().slice(-4);
+            document.getElementById("summaryFrom").textContent = `Checking (${last4})`;
+
+            // To Account
+            let toLabel = "---";
+            if (transferType === "Own Accounts") {
+                toLabel = "Savings Vault";
+            } else if (transferType === "Another Person") {
+                const selectEl = document.getElementById("toAccountSelect");
+                if (selectEl) {
+                    toLabel = selectEl.options[selectEl.selectedIndex].text;
+                } else {
+                    const inputEl = document.getElementById("toAccountInput");
+                    toLabel = inputEl.value ? `Acc: ${inputEl.value}` : "---";
+                }
+            } else {
+                // External
+                const bankEl = document.getElementById("toAccountBank");
+                const accEl = document.getElementById("toAccountInput");
+                const bankName = (bankEl && bankEl.value) ? bankEl.value.trim() : "External Bank";
+                const accNum = (accEl && accEl.value) ? accEl.value.trim() : "";
+                toLabel = accNum ? `${bankName} (**** ${accNum.slice(-4)})` : bankName;
+            }
+            document.getElementById("summaryTo").textContent = toLabel;
+
+            // Amount details
+            const amtStr = amountInput.value.replace(/,/g, '');
+            const amt = parseFloat(amtStr) || 0.00;
+            const displayAmt = `$${amt.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+            
+            document.getElementById("summaryAmount").textContent = displayAmt;
+            document.getElementById("summaryTotalDebit").textContent = displayAmt;
+        }
+
+        // Submit transfer logic
+        function submitTransfer() {
+            const errorEl = document.getElementById("transferError");
+            errorEl.classList.add("hidden");
+
+            const amtStr = amountInput.value.replace(/,/g, '');
+            const amt = parseFloat(amtStr);
+            if (isNaN(amt) || amt <= 0) {
+                errorEl.textContent = "Please enter a valid positive transfer amount.";
+                errorEl.classList.remove("hidden");
+                return;
+            }
+            if (amt > currentUser.balance) {
+                errorEl.textContent = "Transfer amount exceeds available balance.";
+                errorEl.classList.remove("hidden");
+                return;
+            }
+
+            // PIN verification
+            const enteredPin = Array.from(pinInputs).map(i => i.value.trim()).join('');
+            const pinNum = parseInt(enteredPin);
+            if (enteredPin.length === 0 || isNaN(pinNum)) {
+                errorEl.textContent = "Please enter your Transaction Security PIN.";
+                errorEl.classList.remove("hidden");
+                return;
+            }
+            if (currentUser.PIN !== pinNum) {
+                errorEl.textContent = "Security PIN verification failed.";
+                errorEl.classList.remove("hidden");
+                // Clear inputs
+                pinInputs.forEach(i => i.value = "");
+                pinInputs[0].focus();
+                return;
+            }
+
+            // Determine recipient details
+            let targetAccNo = 0;
+            let targetName = "";
+            let isExternal = false;
+
+            if (transferType === "Own Accounts") {
+                targetName = "Portfolio Savings Vault";
+            } else if (transferType === "Another Person") {
+                const selectEl = document.getElementById("toAccountSelect");
+                if (selectEl) {
+                    targetAccNo = parseInt(selectEl.value);
+                } else {
+                    targetAccNo = parseInt(document.getElementById("toAccountInput").value);
+                }
+                
+                if (isNaN(targetAccNo) || targetAccNo === currentUser.account_number) {
+                    errorEl.textContent = "Invalid recipient account number.";
+                    errorEl.classList.remove("hidden");
+                    return;
+                }
+
+                // Verify recipient exists in database
+                const accounts = JSON.parse(localStorage.getItem("nexbank_accounts") || "[]");
+                const found = accounts.find(acc => acc.account_number === targetAccNo);
+                if (!found) {
+                    errorEl.textContent = "Recipient account number does not exist.";
+                    errorEl.classList.remove("hidden");
+                    return;
+                }
+                targetName = found.name;
+            } else {
+                isExternal = true;
+                const bankEl = document.getElementById("toAccountBank");
+                const accEl = document.getElementById("toAccountInput");
+                const routingEl = document.getElementById("toAccountRouting");
+
+                const bankName = bankEl ? bankEl.value.trim() : "";
+                const accNum = accEl ? accEl.value.trim() : "";
+                const routingNum = routingEl ? routingEl.value.trim() : "";
+
+                if (!bankName || !accNum || !routingNum) {
+                    errorEl.textContent = "Please complete all external bank routing fields.";
+                    errorEl.classList.remove("hidden");
+                    return;
+                }
+                targetName = `${bankName} (Acc: ${accNum})`;
+            }
+
+            // Execute transaction
+            const accounts = JSON.parse(localStorage.getItem("nexbank_accounts") || "[]");
+            const senderIdx = accounts.findIndex(acc => acc.account_number === currentUser.account_number);
+            
+            if (senderIdx === -1) {
+                errorEl.textContent = "Session invalid. Please login again.";
+                errorEl.classList.remove("hidden");
+                setTimeout(logoutUser, 1500);
+                return;
+            }
+
+            // Deduct sender balance
+            accounts[senderIdx].balance -= amt;
+
+            // Credit recipient if internal transfer
+            if (transferType === "Another Person") {
+                const targetIdx = accounts.findIndex(acc => acc.account_number === targetAccNo);
+                accounts[targetIdx].balance += amt;
+            }
+
+            localStorage.setItem("nexbank_accounts", JSON.stringify(accounts));
+            currentUser.balance = accounts[senderIdx].balance;
+            localStorage.setItem("nexbank_current_user", JSON.stringify(currentUser));
+
+            // Write logs
+            const logs = JSON.parse(localStorage.getItem("nexbank_transactions") || "[]");
+            const now = new Date();
+            const dateStr = now.toDateString() + " " + now.toTimeString().split(' ')[0] + " " + now.getFullYear();
+            
+            if (transferType === "Own Accounts") {
+                const logEntry = `AccNo: ${currentUser.account_number} | TRANSFER_OUT to Savings Vault | Amount: ${amt.toFixed(2)} | Time: ${dateStr}`;
+                logs.push(logEntry);
+            } else if (transferType === "Another Person") {
+                const logOut = `AccNo: ${currentUser.account_number} | TRANSFER_OUT to ${targetAccNo} | Amount: ${amt.toFixed(2)} | Time: ${dateStr}`;
+                const logIn = `AccNo: ${targetAccNo} | TRANSFER_IN from ${currentUser.account_number} | Amount: ${amt.toFixed(2)} | Time: ${dateStr}`;
+                logs.push(logOut);
+                logs.push(logIn);
+            } else {
+                // External
+                const logOut = `AccNo: ${currentUser.account_number} | TRANSFER_OUT to External ${targetName} | Amount: ${amt.toFixed(2)} | Time: ${dateStr}`;
+                logs.push(logOut);
+            }
+            
+            localStorage.setItem("nexbank_transactions", JSON.stringify(logs));
+
+            // Trigger local notification
+            if (typeof window.addNotification === "function") {
+                window.addNotification("Transfer Successful", `Transferred $${amt.toLocaleString('en-US', { minimumFractionDigits: 2 })} to ${targetName}.`);
+            }
+
+            alert(`Transfer of $${amt.toLocaleString('en-US', { minimumFractionDigits: 2 })} to ${targetName} confirmed!`);
+            window.location.href = "dashboard.html";
+        }
+
+        // Initialize UI details
+        function initUI() {
+            // Update greetings & user card information
+            document.getElementById("sidebarUser").textContent = currentUser.name;
+            document.getElementById("sidebarAccNo").textContent = `Acc No: ${currentUser.account_number}`;
+            
+            // Set Avatar Initials
+            const initials = currentUser.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+            document.getElementById("avatarBadge").textContent = initials;
+
+            initFromSelector();
+            initToSelector();
+            updateSummary();
+        }
+
+        // PIN digits focus auto-navigation
+        pinInputs.forEach((input, index) => {
+            input.addEventListener('input', (e) => {
+                if (e.target.value.length === 1 && index < pinInputs.length - 1) {
+                    pinInputs[index + 1].focus();
+                }
+            });
+
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && !e.target.value && index > 0) {
+                    pinInputs[index - 1].focus();
+                }
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initUI();
+
+            // Atmospheric hover border interaction
+            const card = document.getElementById('transferCard');
+            card.addEventListener('mouseenter', () => {
+                card.style.borderColor = '#143de7';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.borderColor = '#c4c5d9';
+            });
+        });
+    </script>
+</body>
+</html>

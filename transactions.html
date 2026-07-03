@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>NexBank | Transaction History</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        body { font-family: 'Inter', sans-serif; background-color: #fbf8ff; }
+        .tabular-nums { font-variant-numeric: tabular-nums; }
+        /* Custom scrollbar for sticky table */
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #e2e1ef; border-radius: 10px; }
+    </style>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#e2e1ef",
+                        "on-surface-variant": "#444656",
+                        "error": "#ba1a1a",
+                        "on-primary-fixed-variant": "#002eca",
+                        "inverse-surface": "#2f303a",
+                        "on-tertiary-fixed": "#370e00",
+                        "tertiary-container": "#c14500",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#f4f2ff",
+                        "on-secondary-fixed-variant": "#344089",
+                        "on-background": "#1a1b24",
+                        "on-surface": "#1a1b24",
+                        "on-secondary-fixed": "#00105b",
+                        "on-secondary": "#ffffff",
+                        "outline-variant": "#c4c5d9",
+                        "on-secondary-container": "#323f87",
+                        "surface-bright": "#fbf8ff",
+                        "secondary-fixed": "#dee0ff",
+                        "on-primary-fixed": "#00105b",
+                        "secondary-fixed-dim": "#bac3ff",
+                        "tertiary-fixed-dim": "#ffb599",
+                        "tertiary": "#983500",
+                        "surface": "#fbf8ff",
+                        "background": "#fbf8ff",
+                        "surface-container-high": "#e8e7f4",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#7f2b00",
+                        "surface-tint": "#2448ef",
+                        "on-error": "#ffffff",
+                        "surface-dim": "#dad9e6",
+                        "on-tertiary-container": "#ffefe9",
+                        "primary-container": "#3b5bff",
+                        "surface-container": "#eeecfa",
+                        "error-container": "#ffdad6",
+                        "secondary": "#4c59a2",
+                        "inverse-on-surface": "#f1effd",
+                        "tertiary-fixed": "#ffdbce",
+                        "primary-fixed": "#dee0ff",
+                        "outline": "#747688",
+                        "surface-variant": "#e2e1ef",
+                        "on-primary-container": "#f2f1ff",
+                        "on-error-container": "#93000a",
+                        "on-tertiary": "#ffffff",
+                        "inverse-primary": "#bac3ff",
+                        "primary": "#143de7",
+                        "secondary-container": "#a2aefe",
+                        "primary-fixed-dim": "#bac3ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "8px",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "8px",
+                        "xl": "32px",
+                        "margin": "24px",
+                        "xxl": "48px",
+                        "gutter": "16px",
+                        "xs": "4px",
+                        "md": "16px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "numeric-lg": ["Inter"],
+                        "headline": ["Inter"],
+                        "numeric-md": ["Inter"],
+                        "display-xl": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "label-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["13px", {"lineHeight": "18px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0", "fontWeight": "400"}],
+                        "numeric-lg": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "headline": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "numeric-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                        "display-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "body-sm": ["13px", {"lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "400"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0", "fontWeight": "400"}],
+                        "display-lg": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0", "fontWeight": "500"}]
+                    }
+                },
+            },
+        }
+    </script>
+    <script src="theme_notifications.js"></script>
+</head>
+<body class="bg-background text-on-background min-h-screen">
+    <!-- SideNavBar (Authority: JSON) -->
+    <aside class="fixed left-0 top-0 h-full w-[240px] bg-surface border-r border-outline-variant flex flex-col py-lg px-md h-full z-50">
+        <div class="mb-xxl">
+            <h1 class="font-headline text-headline text-primary tracking-tight cursor-pointer" onclick="window.location.href='index.html'">NexBank</h1>
+            <p class="font-label-sm text-label-sm text-on-surface-variant">Enterprise Banking</p>
+        </div>
+        <nav class="flex-1 space-y-xs">
+            <!-- Dashboard -->
+            <a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low transition-colors duration-150 ease-out" href="dashboard.html">
+                <span class="material-symbols-outlined">dashboard</span>
+                Dashboard
+            </a>
+            <!-- Transfer -->
+            <a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low transition-colors duration-150 ease-out cursor-pointer" onclick="window.location.href='transfer.html'">
+                <span class="material-symbols-outlined">swap_horiz</span>
+                Transfer Fund
+            </a>
+            <!-- Open Account -->
+            <a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low transition-colors duration-150 ease-out cursor-pointer" onclick="window.location.href='create_account.html'">
+                <span class="material-symbols-outlined">contactless</span>
+                Open New Account
+            </a>
+            <!-- Deposit -->
+            <a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low transition-colors duration-150 ease-out cursor-pointer" onclick="window.location.href='deposit.html'">
+                <span class="material-symbols-outlined">add_circle</span>
+                Deposit Fund
+            </a>
+            <!-- Withdraw -->
+            <a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low transition-colors duration-150 ease-out cursor-pointer" onclick="window.location.href='withdraw.html'">
+                <span class="material-symbols-outlined">outbox</span>
+                Withdraw Fund
+            </a>
+            <!-- Transactions (ACTIVE) -->
+            <a class="flex items-center gap-md px-md py-sm rounded-lg text-primary font-bold border-r-2 border-primary bg-surface-container-low transition-colors duration-150 ease-out" href="#">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">receipt_long</span>
+                Transactions
+            </a>
+            <!-- Settings -->
+            <a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low transition-colors duration-150 ease-out cursor-pointer" onclick="window.location.href='settings.html'">
+                <span class="material-symbols-outlined">settings</span>
+                Settings
+            </a>
+            
+            <div class="pt-lg border-t border-outline-variant mt-lg mx-md opacity-30"></div>
+            
+            <a class="flex items-center gap-md px-md py-sm rounded-lg text-error font-label-md text-label-md hover:bg-error-container/20 cursor-pointer mt-auto" onclick="logoutUser()">
+                <span class="material-symbols-outlined text-error">logout</span>
+                Logout
+            </a>
+        </nav>
+        
+        <div class="mt-auto flex items-center gap-md p-md border-t border-outline-variant bg-surface-container-low/30 py-md rounded-lg">
+            <div class="w-10 h-10 rounded-full bg-surface-container-high border border-outline-variant flex items-center justify-center text-primary font-bold text-lg overflow-hidden select-none" id="avatarBadge">
+                MS
+            </div>
+            <div class="overflow-hidden">
+                <p class="font-label-md text-label-md text-on-surface truncate max-w-[120px]" id="sidebarUser">Marcus Sterling</p>
+                <p class="font-body-sm text-body-sm text-on-surface-variant truncate" id="sidebarAccNo">Acc No: 1000</p>
+            </div>
+        </div>
+    </aside>
+
+    <!-- TopAppBar (Authority: JSON) -->
+    <header class="fixed top-0 right-0 left-[240px] h-14 bg-surface border-b border-outline-variant flex items-center justify-between px-xl w-full z-40">
+        <div class="flex items-center bg-surface-container-low border border-outline-variant rounded-lg px-md w-80 h-9 transition-colors duration-150 hover:border-primary">
+            <span class="material-symbols-outlined text-on-surface-variant text-[20px] mr-sm">search</span>
+            <input class="bg-transparent border-none focus:ring-0 text-body-md w-full placeholder:text-outline p-0 focus:outline-none" placeholder="Search functionality..." type="text" onkeyup="alert('Global ledger search is active in client view.')">
+        </div>
+            <div class="relative">
+                <button class="relative w-10 h-10 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors" id="notification-btn">
+                    <span class="material-symbols-outlined">notifications</span>
+                    <span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border-2 border-background hidden" id="notification-badge"></span>
+                </button>
+                <!-- Dropdown panel -->
+                <div class="absolute right-0 mt-2 w-80 bg-surface border border-outline-variant rounded-xl shadow-2xl overflow-hidden hidden z-50 bg-white dark:bg-neutral-900" id="notification-dropdown">
+                    <div class="p-md border-b border-outline-variant flex justify-between items-center bg-surface-container-low dark:bg-neutral-800">
+                        <span class="font-label-md text-label-md text-on-surface font-bold">Notifications</span>
+                        <button class="text-xs text-primary hover:underline font-semibold" id="mark-all-read-btn">Mark all read</button>
+                    </div>
+                    <div class="max-h-64 overflow-y-auto divide-y divide-outline-variant no-scrollbar text-left" id="notification-list">
+                        <!-- Dynamic notifications list -->
+                    </div>
+                    <div class="p-sm text-center border-t border-outline-variant bg-surface-container-low dark:bg-neutral-800">
+                        <button class="text-xs text-on-surface-variant hover:underline font-medium" onclick="clearAllNotifications()">Clear All</button>
+                    </div>
+                </div>
+            </div>
+            <div class="h-6 w-[1px] bg-outline-variant"></div>
+            <p class="font-label-md text-label-md text-on-surface">Institutional Portal</p>
+        </div>
+    </header>
+
+    <!-- Main Content Canvas -->
+    <main class="ml-[240px] pt-14 p-xl max-w-[1248px]">
+        <!-- Page Header -->
+        <section class="flex items-end justify-between mb-xl mt-md">
+            <div>
+                <h2 class="font-headline text-[24px] font-semibold text-on-surface leading-tight">Transaction History</h2>
+                <p class="font-body-md text-body-md text-on-surface-variant mt-xs">All account activity in one place</p>
+            </div>
+            <button class="h-10 px-lg border border-outline-variant rounded-lg font-label-md text-label-md text-on-surface hover:bg-surface-container-low transition-colors duration-150 flex items-center gap-sm font-semibold" onclick="exportLedger()">
+                <span class="material-symbols-outlined text-[18px]">download</span>
+                Export Ledger
+            </button>
+        </section>
+        
+        <!-- Filter Bar -->
+        <section class="flex flex-wrap gap-md items-center justify-between mb-lg bg-surface p-md rounded-lg border border-outline-variant bg-white">
+            <div class="w-[320px] relative">
+                <span class="absolute left-md top-1/2 -translate-y-1/2 material-symbols-outlined text-outline text-[20px]">search</span>
+                <input id="search-input" class="w-full h-10 pl-11 pr-md bg-surface-bright border border-outline-variant rounded-lg text-body-md focus:border-primary focus:ring-0 outline-none transition-all" placeholder="Search by merchant or reference" type="text" oninput="applyFiltersAndResetPage()">
+            </div>
+            
+            <div class="flex items-center gap-sm">
+                <select id="timeframe-select" class="h-10 px-md bg-surface-bright border border-outline-variant rounded-lg text-body-md text-on-surface focus:border-primary focus:ring-0 appearance-none min-w-[140px] font-medium" onchange="applyFiltersAndResetPage()">
+                    <option>All times</option>
+                    <option>Last 30 days</option>
+                    <option>Last 90 days</option>
+                    <option>Year to date</option>
+                </select>
+                <select id="portfolio-select" class="h-10 px-md bg-surface-bright border border-outline-variant rounded-lg text-body-md text-on-surface focus:border-primary focus:ring-0 appearance-none min-w-[140px] font-medium">
+                    <option>All accounts</option>
+                </select>
+                <select id="type-select" class="h-10 px-md bg-surface-bright border border-outline-variant rounded-lg text-body-md text-on-surface focus:border-primary focus:ring-0 appearance-none min-w-[140px] font-medium" onchange="applyFiltersAndResetPage()">
+                    <option>Type filter</option>
+                    <option>Deposits</option>
+                    <option>Withdrawals</option>
+                    <option>Transfers</option>
+                </select>
+            </div>
+        </section>
+        
+        <!-- Transaction Table -->
+        <div class="bg-surface border border-outline-variant rounded-lg overflow-hidden flex flex-col bg-white">
+            <div class="overflow-x-auto custom-scrollbar">
+                <table class="w-full text-left border-collapse">
+                    <thead class="sticky top-0 bg-surface-container-low z-10 border-b border-outline-variant">
+                        <tr>
+                            <th class="h-12 px-lg font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Date</th>
+                            <th class="h-12 px-lg font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Description</th>
+                            <th class="h-12 px-lg font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Category</th>
+                            <th class="h-12 px-lg font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Account</th>
+                            <th class="h-12 px-lg font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider text-right">Amount</th>
+                            <th class="h-12 px-lg font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-outline-variant" id="transactionTableBody">
+                        <!-- Dynamic transaction rows -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <div id="noTransactionsMsg" class="py-xxl text-center text-on-surface-variant font-body-md hidden bg-white">
+                No ledger actions found matching the filters.
+            </div>
+
+            <!-- Pagination -->
+            <div class="p-lg flex items-center justify-between border-t border-outline-variant bg-surface bg-white" id="paginationFooter">
+                <p class="font-body-sm text-body-sm text-on-surface-variant" id="showingCountLabel">Showing <span class="font-medium text-on-surface">1-10</span> of 10 transactions</p>
+                <div class="flex items-center gap-sm">
+                    <button class="w-10 h-10 flex items-center justify-center border border-outline-variant rounded-lg hover:bg-surface-container-low text-on-surface-variant disabled:opacity-30 disabled:cursor-not-allowed transition-all" id="btnPrevPage" onclick="prevPage()">
+                        <span class="material-symbols-outlined">chevron_left</span>
+                    </button>
+                    <div class="flex items-center px-md h-10 font-label-md text-label-md text-on-surface border border-outline-variant rounded-lg bg-surface-container-low font-semibold" id="pageLabel">
+                        Page 1 of 1
+                    </div>
+                    <button class="w-10 h-10 flex items-center justify-center border border-outline-variant rounded-lg hover:bg-surface-container-low text-on-surface-variant disabled:opacity-30 disabled:cursor-not-allowed transition-all" id="btnNextPage" onclick="nextPage()">
+                        <span class="material-symbols-outlined">chevron_right</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Extra: Interactive Visual Background Decor -->
+        <div class="fixed inset-0 pointer-events-none -z-10 overflow-hidden opacity-[0.03]">
+            <div class="absolute -top-1/4 -right-1/4 w-full h-full rounded-full bg-primary-container blur-[120px]"></div>
+            <div class="absolute -bottom-1/4 -left-1/4 w-full h-full rounded-full bg-secondary-container blur-[120px]"></div>
+        </div>
+    </main>
+
+    <script>
+        // Session Guard
+        let currentUser = null;
+        function checkSession() {
+            const session = localStorage.getItem("nexbank_current_user");
+            if (!session) {
+                window.location.href = "login.html";
+                return;
+            }
+            currentUser = JSON.parse(session);
+
+            // Fetch actual user values from simulated database
+            const accounts = JSON.parse(localStorage.getItem("nexbank_accounts") || "[]");
+            const actualUser = accounts.find(acc => acc.account_number === currentUser.account_number);
+            if (!actualUser) {
+                localStorage.removeItem("nexbank_current_user");
+                window.location.href = "login.html";
+                return;
+            }
+            currentUser = actualUser;
+        }
+        checkSession();
+
+        function logoutUser() {
+            localStorage.removeItem("nexbank_current_user");
+            window.location.href = "login.html";
+        }
+
+        // Transactions data state
+        let allParsedTransactions = [];
+        let filteredTransactions = [];
+        let currentPage = 1;
+        const itemsPerPage = 10;
+
+        // Parse flat log line
+        function parseLog(logStr) {
+            const parts = logStr.split(" | ");
+            if (parts.length < 4) return null;
+            
+            const accNoPart = parts[0].split(": ")[1];
+            const typeDescPart = parts[1];
+            const amountPart = parseFloat(parts[2].split(": ")[1]);
+            const timePart = parts[3].split(": ")[1];
+
+            // Format Date
+            let displayDate = timePart;
+            let rawDate = new Date();
+            try {
+                const d = new Date(timePart);
+                if (!isNaN(d.getTime())) {
+                    rawDate = d;
+                    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                    displayDate = `${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
+                }
+            } catch(e) {}
+
+            // Set variables
+            let type = "Deposit";
+            let desc = typeDescPart;
+            let category = "Liquidity";
+            let sign = "+";
+            let initials = "DP";
+            let status = "Completed";
+
+            if (typeDescPart.includes("WITHDRAW")) {
+                type = "Withdrawal";
+                desc = typeDescPart.replace("WITHDRAW", "Withdrawal");
+                category = "Deduction";
+                sign = "-";
+                initials = "WD";
+            } else if (typeDescPart.includes("TRANSFER_OUT")) {
+                type = "Transfer";
+                desc = typeDescPart.replace("TRANSFER_OUT to", "Transfer to Portfolio ID");
+                category = "Transfer Out";
+                sign = "-";
+                initials = "TX";
+            } else if (typeDescPart.includes("TRANSFER_IN")) {
+                type = "Transfer";
+                desc = typeDescPart.replace("TRANSFER_IN from", "Transfer from Portfolio ID");
+                category = "Transfer In";
+                sign = "+";
+                initials = "RX";
+            } else if (typeDescPart.includes("DEPOSIT")) {
+                type = "Deposit";
+                desc = typeDescPart.replace("DEPOSIT", "Deposit");
+                category = "Liquidity";
+                sign = "+";
+                initials = "DP";
+            }
+
+            return {
+                raw: logStr,
+                accNo: accNoPart,
+                type: type,
+                desc: desc,
+                category: category,
+                amount: amountPart,
+                sign: sign,
+                date: displayDate,
+                rawDate: rawDate,
+                initials: initials,
+                status: status
+            };
+        }
+
+        // Fetch logs from database
+        function loadTransactionsData() {
+            const rawLogs = JSON.parse(localStorage.getItem("nexbank_transactions") || "[]");
+            // Filter only logs belonging to this user
+            const userLogs = rawLogs.filter(log => log.includes(`AccNo: ${currentUser.account_number}`));
+            
+            // Parse & reverse chronological ordering
+            allParsedTransactions = userLogs.map(parseLog).filter(x => x !== null).reverse();
+            filteredTransactions = [...allParsedTransactions];
+        }
+
+        // Filter engine
+        function applyFiltersAndResetPage() {
+            const query = document.getElementById("search-input").value.trim().toLowerCase();
+            const timeframe = document.getElementById("timeframe-select").value;
+            const typeFilter = document.getElementById("type-select").value;
+            
+            const now = new Date();
+
+            filteredTransactions = allParsedTransactions.filter(item => {
+                // Search query matching
+                if (query && !item.desc.toLowerCase().includes(query) && !item.category.toLowerCase().includes(query)) {
+                    return false;
+                }
+
+                // Timeframe filter matching
+                if (timeframe === "Last 30 days") {
+                    const diffTime = Math.abs(now - item.rawDate);
+                    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                    if (diffDays > 30) return false;
+                } else if (timeframe === "Last 90 days") {
+                    const diffTime = Math.abs(now - item.rawDate);
+                    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                    if (diffDays > 90) return false;
+                } else if (timeframe === "Year to date") {
+                    if (item.rawDate.getFullYear() !== now.getFullYear()) return false;
+                }
+
+                // Type filter matching
+                if (typeFilter !== "Type filter") {
+                    if (typeFilter === "Deposits" && item.type !== "Deposit") return false;
+                    if (typeFilter === "Withdrawals" && item.type !== "Withdrawal") return false;
+                    if (typeFilter === "Transfers" && item.type !== "Transfer") return false;
+                }
+
+                return true;
+            });
+
+            currentPage = 1;
+            renderTable();
+        }
+
+        // Pagination controllers
+        function prevPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                renderTable();
+            }
+        }
+
+        function nextPage() {
+            const totalPages = Math.ceil(filteredTransactions.length / itemsPerPage);
+            if (currentPage < totalPages) {
+                currentPage++;
+                renderTable();
+            }
+        }
+
+        // Render rows
+        function renderTable() {
+            const tbody = document.getElementById("transactionTableBody");
+            const noMsg = document.getElementById("noTransactionsMsg");
+            const pagFooter = document.getElementById("paginationFooter");
+            
+            tbody.innerHTML = "";
+            
+            if (filteredTransactions.length === 0) {
+                noMsg.classList.remove("hidden");
+                pagFooter.classList.add("hidden");
+                return;
+            }
+            
+            noMsg.classList.add("hidden");
+            pagFooter.classList.remove("hidden");
+
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = Math.min(startIndex + itemsPerPage, filteredTransactions.length);
+            const paginatedItems = filteredTransactions.slice(startIndex, endIndex);
+
+            paginatedItems.forEach(item => {
+                const tr = document.createElement("tr");
+                tr.className = "h-[56px] hover:bg-surface-container-lowest transition-colors duration-150 cursor-pointer";
+                
+                const isPositive = item.sign === "+";
+                const amountColorClass = isPositive ? "text-emerald-600 font-semibold" : "text-on-background";
+                const avatarColorClass = isPositive ? "bg-primary-container/10 text-primary" : "bg-surface-container-highest text-on-surface";
+                const statusColorClass = item.status === "Pending" ? "bg-orange-400" : (item.status === "Failed" ? "bg-red-500" : "bg-emerald-500");
+
+                tr.innerHTML = `
+                    <td class="px-lg font-body-md text-body-md text-on-surface-variant">${item.date}</td>
+                    <td class="px-lg">
+                        <div class="flex items-center gap-md">
+                            <div class="w-8 h-8 flex items-center justify-center ${avatarColorClass} rounded-lg font-label-md text-label-md font-semibold">${item.initials}</div>
+                            <div>
+                                <p class="font-label-md text-label-md text-on-surface leading-none font-semibold">${item.desc}</p>
+                                <p class="font-body-sm text-body-sm text-outline mt-1 italic">Acc: ${item.accNo}</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="px-lg">
+                        <div class="flex items-center gap-xs font-body-md text-body-md text-on-surface">
+                            <span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+                            ${item.category}
+                        </div>
+                    </td>
+                    <td class="px-lg font-body-md text-body-md text-on-surface">Portfolio checking</td>
+                    <td class="px-lg text-right font-numeric-md text-numeric-md tabular-nums ${amountColorClass}">
+                        ${item.sign}$${item.amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                    </td>
+                    <td class="px-lg">
+                        <div class="flex items-center gap-sm font-label-sm text-label-sm text-on-surface">
+                            <span class="w-1.5 h-1.5 rounded-full ${statusColorClass}"></span>
+                            ${item.status}
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            // Update pagination labels
+            const totalPages = Math.ceil(filteredTransactions.length / itemsPerPage) || 1;
+            document.getElementById("pageLabel").textContent = `Page ${currentPage} of ${totalPages}`;
+            document.getElementById("showingCountLabel").innerHTML = `Showing <span class="font-medium text-on-surface">${startIndex + 1}-${endIndex}</span> of ${filteredTransactions.length} transactions`;
+
+            // Disable buttons
+            document.getElementById("btnPrevPage").disabled = (currentPage === 1);
+            document.getElementById("btnNextPage").disabled = (currentPage === totalPages);
+        }
+
+        // Export data to text file
+        function exportLedger() {
+            if (allParsedTransactions.length === 0) {
+                alert("No transactions found to export.");
+                return;
+            }
+            
+            let txt = `NexBank Transaction Ledger for AccNo: ${currentUser.account_number}\n`;
+            txt += `Printed At: ${new Date().toString()}\n`;
+            txt += `===========================================================\n\n`;
+            
+            allParsedTransactions.forEach(item => {
+                txt += `[${item.date}] | Type: ${item.type} | ${item.desc} | Amount: ${item.sign}$${item.amount.toFixed(2)} | Status: ${item.status}\n`;
+            });
+
+            const blob = new Blob([txt], { type: "text/plain;charset=utf-8" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = `nexbank_ledger_${currentUser.account_number}.txt`;
+            link.click();
+            URL.revokeObjectURL(link.href);
+        }
+
+        // Initialize UI details
+        function initUI() {
+            // Update greetings & user card information
+            document.getElementById("sidebarUser").textContent = currentUser.name;
+            document.getElementById("sidebarAccNo").textContent = `Acc No: ${currentUser.account_number}`;
+            
+            // Set Avatar Initials
+            const initials = currentUser.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+            document.getElementById("avatarBadge").textContent = initials;
+
+            // Fill Accounts filter
+            const portfolioSelect = document.getElementById("portfolio-select");
+            const last4 = currentUser.account_number.toString().slice(-4);
+            portfolioSelect.innerHTML = `
+                <option>All portfolios</option>
+                <option>Checking (****${last4})</option>
+            `;
+
+            loadTransactionsData();
+            renderTable();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initUI();
+        });
+    </script>
+</body>
+</html>

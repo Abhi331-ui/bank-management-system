@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>NexBank - Settings</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        body { font-family: 'Inter', sans-serif; background-color: #fbf8ff; }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #e2e1ef; border-radius: 10px; }
+    </style>
+    <script src="theme_notifications.js"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-variant": "#e2e1ef",
+                      "on-primary-fixed-variant": "#002eca",
+                      "on-primary-container": "#f2f1ff",
+                      "inverse-primary": "#bac3ff",
+                      "inverse-on-surface": "#f1effd",
+                      "error": "#ba1a1a",
+                      "on-error-container": "#93000a",
+                      "on-tertiary-container": "#ffefe9",
+                      "on-surface-variant": "#444656",
+                      "surface-dim": "#dad9e6",
+                      "surface-bright": "#fbf8ff",
+                      "on-primary-fixed": "#00105b",
+                      "surface-container-highest": "#e2e1ef",
+                      "surface-tint": "#2448ef",
+                      "on-surface": "#1a1b24",
+                      "tertiary-container": "#c14500",
+                      "tertiary-fixed": "#ffdbce",
+                      "on-secondary-container": "#323f87",
+                      "on-tertiary": "#ffffff",
+                      "primary": "#143de7",
+                      "surface-container-high": "#e8e7f4",
+                      "secondary-fixed": "#dee0ff",
+                      "primary-fixed-dim": "#bac3ff",
+                      "on-secondary": "#ffffff",
+                      "primary-fixed": "#dee0ff",
+                      "on-secondary-fixed": "#00105b",
+                      "on-tertiary-fixed": "#370e00",
+                      "on-primary": "#ffffff",
+                      "secondary-container": "#a2aefe",
+                      "on-error": "#ffffff",
+                      "on-background": "#1a1b24",
+                      "surface-container-low": "#f4f2ff",
+                      "error-container": "#ffdad6",
+                      "background": "#fbf8ff",
+                      "inverse-surface": "#2f303a",
+                      "tertiary": "#983500",
+                      "surface-container": "#eeecfa",
+                      "secondary-fixed-dim": "#bac3ff",
+                      "outline-variant": "#c4c5d9",
+                      "surface": "#fbf8ff",
+                      "secondary": "#4c59a2",
+                      "surface-container-lowest": "#ffffff",
+                      "tertiary-fixed-dim": "#ffb599",
+                      "outline": "#747688",
+                      "on-secondary-fixed-variant": "#344089",
+                      "primary-container": "#3b5bff",
+                      "on-tertiary-fixed-variant": "#7f2b00"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xl": "32px",
+                      "margin": "24px",
+                      "md": "16px",
+                      "xxl": "48px",
+                      "gutter": "16px",
+                      "xs": "4px",
+                      "lg": "24px",
+                      "sm": "8px"
+              },
+              "fontFamily": {
+                      "label-md": ["Inter"],
+                      "display-lg": ["Inter"],
+                      "body-sm": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "headline": ["Inter"],
+                      "display-xl": ["Inter"],
+                      "numeric-md": ["Inter"],
+                      "numeric-lg": ["Inter"],
+                      "body-md": ["Inter"],
+                      "body-lg": ["Inter"]
+              },
+              "fontSize": {
+                      "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0", "fontWeight": "500"}],
+                      "display-lg": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "body-sm": ["13px", {"lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "400"}],
+                      "label-sm": ["13px", {"lineHeight": "18px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                      "headline": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "display-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                      "numeric-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                      "numeric-lg": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0", "fontWeight": "400"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface selection:bg-primary-container selection:text-on-primary-container">
+    <!-- SideNavBar Shell -->
+    <aside class="fixed left-0 top-0 h-full flex flex-col w-64 border-r border-outline-variant bg-background z-50">
+        <!-- Brand Header -->
+        <div class="px-md py-lg flex flex-col gap-xs">
+            <h1 class="font-headline text-headline text-primary tracking-tight cursor-pointer" onclick="window.location.href='index.html'">NexBank</h1>
+            <p class="font-label-sm text-label-sm text-outline">Enterprise Banking</p>
+        </div>
+        <!-- Navigation Links -->
+        <nav class="flex-1 px-sm mt-md space-y-xs">
+            <a class="flex items-center gap-sm px-md py-sm text-on-surface-variant hover:bg-surface-container-lowest transition-colors duration-150 rounded-lg cursor-pointer" href="dashboard.html">
+                <span class="material-symbols-outlined text-[20px]">dashboard</span>
+                <span class="font-body-md text-body-md">Dashboard</span>
+            </a>
+            <a class="flex items-center gap-sm px-md py-sm text-on-surface-variant hover:bg-surface-container-lowest transition-colors duration-150 rounded-lg cursor-pointer" href="transfer.html">
+                <span class="material-symbols-outlined text-[20px]">swap_horiz</span>
+                <span class="font-body-md text-body-md">Transfer Fund</span>
+            </a>
+            <a class="flex items-center gap-sm px-md py-sm text-on-surface-variant hover:bg-surface-container-lowest transition-colors duration-150 rounded-lg cursor-pointer" href="create_account.html">
+                <span class="material-symbols-outlined text-[20px]">contactless</span>
+                <span class="font-body-md text-body-md">Open New Account</span>
+            </a>
+            <a class="flex items-center gap-sm px-md py-sm text-on-surface-variant hover:bg-surface-container-lowest transition-colors duration-150 rounded-lg cursor-pointer" href="deposit.html">
+                <span class="material-symbols-outlined text-[20px]">add_circle</span>
+                <span class="font-body-md text-body-md">Deposit Fund</span>
+            </a>
+            <a class="flex items-center gap-sm px-md py-sm text-on-surface-variant hover:bg-surface-container-lowest transition-colors duration-150 rounded-lg cursor-pointer" href="withdraw.html">
+                <span class="material-symbols-outlined text-[20px]">outbox</span>
+                <span class="font-body-md text-body-md">Withdraw Fund</span>
+            </a>
+            <a class="flex items-center gap-sm px-md py-sm text-on-surface-variant hover:bg-surface-container-lowest transition-colors duration-150 rounded-lg cursor-pointer" href="transactions.html">
+                <span class="material-symbols-outlined text-[20px]">receipt_long</span>
+                <span class="font-body-md text-body-md">Transactions Ledger</span>
+            </a>
+            <!-- Active State: Settings -->
+            <a class="flex items-center gap-sm px-md py-sm bg-surface-container-low text-primary font-bold border-r-2 border-primary rounded-lg" href="#">
+                <span class="material-symbols-outlined text-[20px]">settings</span>
+                <span class="font-body-md text-body-md">Settings</span>
+            </a>
+            
+            <div class="pt-lg border-t border-outline-variant mt-lg mx-md opacity-30"></div>
+            
+            <a class="flex items-center gap-md px-md py-sm rounded-lg text-error font-label-md text-label-md hover:bg-error-container/20 cursor-pointer mt-auto" onclick="logoutUser()">
+                <span class="material-symbols-outlined text-error">logout</span>
+                Logout
+            </a>
+        </nav>
+        
+        <!-- User Profile Anchor -->
+        <div class="p-md border-t border-outline-variant flex items-center gap-sm bg-surface-container-low/30 rounded-lg py-md">
+            <div class="w-10 h-10 bg-surface-container-high rounded-full overflow-hidden flex-shrink-0 border border-outline-variant flex items-center justify-center text-primary font-bold text-lg select-none" id="avatarBadge">
+                MS
+            </div>
+            <div class="flex flex-col overflow-hidden">
+                <span class="font-label-md text-label-md text-on-surface truncate max-w-[120px]" id="sidebarUser">M. Executive</span>
+                <span class="font-label-sm text-label-sm text-outline truncate" id="sidebarAccNo">Tier 1 Admin</span>
+            </div>
+        </div>
+    </aside>
+
+    <!-- TopNavBar Shell -->
+    <header class="sticky top-0 z-40 h-16 w-full border-b border-outline-variant bg-background ml-64 flex items-center justify-between px-margin" style="width: calc(100% - 16rem);">
+        <div class="flex items-center gap-md">
+            <h2 class="font-headline text-headline text-on-surface">Account Settings</h2>
+        </div>
+        <div class="flex items-center gap-lg">
+            <div class="relative hidden lg:block">
+                <span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-outline text-[20px]">search</span>
+                <input class="h-10 w-64 bg-surface-container border border-outline-variant rounded-none pl-10 pr-md font-body-md text-body-md focus:border-primary focus:ring-0 transition-colors" placeholder="Search parameters..." type="text"/>
+            </div>
+            <div class="relative">
+                <button class="relative w-10 h-10 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors" id="notification-btn">
+                    <span class="material-symbols-outlined">notifications</span>
+                    <span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border-2 border-background hidden" id="notification-badge"></span>
+                </button>
+                <!-- Dropdown panel -->
+                <div class="absolute right-0 mt-2 w-80 bg-surface border border-outline-variant rounded-xl shadow-2xl overflow-hidden hidden z-50 bg-white dark:bg-neutral-900" id="notification-dropdown">
+                    <div class="p-md border-b border-outline-variant flex justify-between items-center bg-surface-container-low dark:bg-neutral-800">
+                        <span class="font-label-md text-label-md text-on-surface font-bold">Notifications</span>
+                        <button class="text-xs text-primary hover:underline font-semibold" id="mark-all-read-btn">Mark all read</button>
+                    </div>
+                    <div class="max-h-64 overflow-y-auto divide-y divide-outline-variant no-scrollbar text-left" id="notification-list">
+                        <!-- Dynamic notifications list -->
+                    </div>
+                    <div class="p-sm text-center border-t border-outline-variant bg-surface-container-low dark:bg-neutral-800">
+                        <button class="text-xs text-on-surface-variant hover:underline font-medium" onclick="clearAllNotifications()">Clear All</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Canvas -->
+    <main class="ml-64 p-margin min-h-screen">
+        <div class="max-w-5xl mx-auto">
+            <!-- Header Section -->
+            <div class="mb-xl">
+                <h3 class="font-display-lg text-display-lg text-on-surface">Profile</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant">Manage your personal banking identity and notification preferences.</p>
+            </div>
+            
+            <!-- Bento Layout / 2-Column Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-xl">
+                <!-- Sidebar Contextual Nav -->
+                <div class="md:col-span-3 space-y-xs">
+                    <button class="w-full flex items-center justify-between px-md py-sm bg-surface-container-highest text-primary font-bold border-l-2 border-primary rounded-lg text-left" id="tab-personal">
+                        <span class="font-label-md text-label-md">Personal Info</span>
+                        <span class="material-symbols-outlined text-[18px]">chevron_right</span>
+                    </button>
+                    <button class="w-full flex items-center justify-between px-md py-sm text-on-surface-variant hover:bg-surface-container transition-colors duration-150 rounded-lg text-left" onclick="alert('Security preferences: Set multifactor auth under Settings.')">
+                        <span class="font-label-md text-label-md">Security</span>
+                        <span class="material-symbols-outlined text-[18px]">lock</span>
+                    </button>
+                    <button class="w-full flex items-center justify-between px-md py-sm text-on-surface-variant hover:bg-surface-container transition-colors duration-150 rounded-lg text-left" onclick="alert('System preference configurations loaded.')">
+                        <span class="font-label-md text-label-md">Preferences</span>
+                        <span class="material-symbols-outlined text-[18px]">tune</span>
+                    </button>
+                    <button class="w-full flex items-center justify-between px-md py-sm text-on-surface-variant hover:bg-surface-container transition-colors duration-150 rounded-lg text-left" onclick="alert('AES-256 data protection shields active.')">
+                        <span class="font-label-md text-label-md">Data &amp; Privacy</span>
+                        <span class="material-symbols-outlined text-[18px]">shield</span>
+                    </button>
+                </div>
+                
+                <!-- Profile Form Content -->
+                <div class="md:col-span-9 bg-surface-container-lowest border border-outline-variant p-xl bg-white shadow-sm rounded-xl">
+                    <!-- Avatar Management -->
+                    <div class="flex items-center gap-lg pb-xl border-b border-outline-variant mb-xl">
+                        <div class="relative group">
+                            <div class="w-16 h-16 rounded-full overflow-hidden border border-outline-variant flex items-center justify-center bg-primary-container text-white font-bold text-2xl select-none" id="profileBadge">
+                                MS
+                            </div>
+                        </div>
+                        <div class="space-y-xs">
+                            <div class="flex items-center gap-md">
+                                <button class="font-label-md text-label-md text-primary hover:underline font-semibold" onclick="alert('Photo upload integration active for corporate portfolios.')">Change Photo</button>
+                                <button class="font-label-md text-label-md text-error hover:underline font-semibold" onclick="alert('Profile avatar cleared to placeholder initials.')">Remove</button>
+                            </div>
+                            <p class="font-body-sm text-body-sm text-outline">JPG, GIF or PNG. Max size of 800K</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Input Fields -->
+                    <form class="space-y-lg" id="profileForm" onsubmit="saveProfileChanges(event)">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+                            <div class="space-y-sm">
+                                <label class="font-label-md text-label-md text-on-surface-variant block font-semibold">Legal Full Name</label>
+                                <input id="profileName" class="w-full h-10 border border-outline-variant bg-transparent px-md font-body-md text-body-md focus:border-primary focus:ring-0 transition-colors rounded-lg font-medium" type="text" value="NexBank Executive Profile"/>
+                            </div>
+                            <div class="space-y-sm">
+                                <label class="font-label-md text-label-md text-on-surface-variant block font-semibold">Display ID</label>
+                                <input id="profileID" class="w-full h-10 border border-outline-variant bg-surface-container font-body-md text-body-md text-outline cursor-not-allowed rounded-lg font-semibold" readonly="" type="text" value="NX-44029-EP"/>
+                            </div>
+                        </div>
+                        <div class="space-y-sm">
+                            <label class="font-label-md text-label-md text-on-surface-variant block font-semibold">Email Address</label>
+                            <div class="flex gap-sm">
+                                <div class="relative flex-1">
+                                    <input id="profileEmail" class="w-full h-10 border border-outline-variant bg-transparent px-md pr-[80px] font-body-md text-body-md focus:border-primary focus:ring-0 transition-colors rounded-lg" type="email" value="executive.office@nexbank.com"/>
+                                    <div class="absolute right-md top-1/2 -translate-y-1/2 flex items-center gap-xs">
+                                        <span class="w-1.5 h-1.5 bg-[#10b981] rounded-full"></span>
+                                        <span class="font-label-sm text-label-sm text-[#10b981] font-semibold">Verified</span>
+                                    </div>
+                                </div>
+                                <button class="px-md h-10 border border-outline-variant font-label-md text-label-md hover:bg-surface-container transition-colors rounded-lg font-semibold" type="button" onclick="alert('Verification link sent.')">Modify</button>
+                            </div>
+                        </div>
+                        <div class="space-y-sm">
+                            <label class="font-label-md text-label-md text-on-surface-variant block font-semibold">Mobile Phone</label>
+                            <div class="flex gap-sm">
+                                <input id="profileMobile" class="flex-1 h-10 border border-outline-variant bg-transparent px-md font-body-md text-body-md focus:border-primary focus:ring-0 transition-colors rounded-lg" type="tel" value="+1 (555) 000-1234"/>
+                                <div class="flex items-center px-md gap-xs border border-outline-variant bg-surface-container-low rounded-lg">
+                                    <span class="w-1.5 h-1.5 bg-[#f59e0b] rounded-full"></span>
+                                    <span class="font-label-sm text-label-sm text-outline font-semibold">Pending SMS</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-y-sm">
+                            <label class="font-label-md text-label-md text-on-surface-variant block font-semibold">Professional Bio</label>
+                            <textarea id="profileBio" class="w-full border border-outline-variant bg-transparent p-md font-body-md text-body-md focus:border-primary focus:ring-0 transition-colors resize-none rounded-lg" rows="4">Lead operations for the Enterprise Banking division at NexBank.</textarea>
+                        </div>
+                        
+                        <!-- Submit Logic -->
+                        <div class="pt-xl mt-xl border-t border-outline-variant flex items-center justify-between">
+                            <div class="flex items-center gap-xs text-outline font-medium">
+                                <span class="material-symbols-outlined text-[16px]">info</span>
+                                <span class="font-body-sm text-body-sm">Last updated: Today</span>
+                            </div>
+                            <div class="flex gap-md">
+                                <button class="px-xl h-10 border border-outline-variant font-label-md text-label-md hover:bg-surface-container transition-colors rounded-lg font-semibold" type="button" onclick="resetFormToOriginal()">Cancel</button>
+                                <button class="px-xl h-10 bg-primary/40 text-white font-label-md text-label-md cursor-not-allowed transition-all duration-150 rounded-lg font-bold" disabled="" type="submit" id="saveBtn">Save Changes</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Danger Zone -->
+            <div class="mt-xxl border border-error/20 bg-error/5 p-xl flex items-center justify-between rounded-xl">
+                <div class="space-y-xs">
+                    <h4 class="font-headline text-headline text-error font-semibold">Deactivate Account</h4>
+                    <p class="font-body-md text-body-md text-on-surface-variant">Temporarily disable your access to the Enterprise Dashboard. All pending transactions will still process.</p>
+                </div>
+                <button class="px-xl h-10 border border-error text-error font-label-md text-label-md hover:bg-error hover:text-white transition-all duration-150 rounded-lg font-bold" onclick="deactivatePortfolio()">Deactivate</button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Session Guard
+        let currentUser = null;
+        function checkSession() {
+            const session = localStorage.getItem("nexbank_current_user");
+            if (!session) {
+                window.location.href = "login.html";
+                return;
+            }
+            currentUser = JSON.parse(session);
+
+            // Fetch actual user values from simulated database
+            const accounts = JSON.parse(localStorage.getItem("nexbank_accounts") || "[]");
+            const actualUser = accounts.find(acc => acc.account_number === currentUser.account_number);
+            if (!actualUser) {
+                localStorage.removeItem("nexbank_current_user");
+                window.location.href = "login.html";
+                return;
+            }
+            currentUser = actualUser;
+        }
+        checkSession();
+
+        function logoutUser() {
+            localStorage.removeItem("nexbank_current_user");
+            window.location.href = "login.html";
+        }
+
+        // Form Dirty state trackers
+        let originalValues = {};
+
+        function initUI() {
+            // Sidebar credentials
+            document.getElementById("sidebarUser").textContent = currentUser.name;
+            document.getElementById("sidebarAccNo").textContent = `Acc No: ${currentUser.account_number}`;
+            
+            const initials = currentUser.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+            document.getElementById("avatarBadge").textContent = initials;
+            document.getElementById("profileBadge").textContent = initials;
+
+            // Form inputs mapping
+            document.getElementById("profileName").value = currentUser.name;
+            document.getElementById("profileID").value = `Acc No: ${currentUser.account_number}`;
+            
+            // Sync optional email, bio, and phone parameters
+            document.getElementById("profileEmail").value = currentUser.email || `${currentUser.name.toLowerCase().replace(/ /g, '.')}@nexbank.com`;
+            document.getElementById("profileMobile").value = currentUser.mobile || "+1 (555) 000-1234";
+            document.getElementById("profileBio").value = currentUser.bio || `Executive client of the NexBank Enterprise Banking platform, managing account portfolio ${currentUser.account_number}.`;
+
+            // Cache original values
+            originalValues = {
+                name: document.getElementById("profileName").value,
+                email: document.getElementById("profileEmail").value,
+                mobile: document.getElementById("profileMobile").value,
+                bio: document.getElementById("profileBio").value
+            };
+        }
+
+        // Save profile updates to storage
+        function saveProfileChanges(e) {
+            e.preventDefault();
+            const newName = document.getElementById("profileName").value.trim();
+            const newEmail = document.getElementById("profileEmail").value.trim();
+            const newMobile = document.getElementById("profileMobile").value.trim();
+            const newBio = document.getElementById("profileBio").value.trim();
+
+            if (!newName) {
+                alert("Legal Name cannot be blank.");
+                return;
+            }
+
+            const accounts = JSON.parse(localStorage.getItem("nexbank_accounts") || "[]");
+            const idx = accounts.findIndex(acc => acc.account_number === currentUser.account_number);
+
+            if (idx === -1) {
+                alert("Database synchronization failed.");
+                return;
+            }
+
+            // Write properties
+            accounts[idx].name = newName;
+            accounts[idx].email = newEmail;
+            accounts[idx].mobile = newMobile;
+            accounts[idx].bio = newBio;
+
+            localStorage.setItem("nexbank_accounts", JSON.stringify(accounts));
+            currentUser = accounts[idx];
+            localStorage.setItem("nexbank_current_user", JSON.stringify(currentUser));
+
+            // Trigger local notification
+            if (typeof window.addNotification === "function") {
+                window.addNotification("Profile Updated", "Your institutional profile information was successfully updated.");
+            }
+
+            alert("Profile settings updated successfully!");
+            initUI();
+            resetButtonState();
+        }
+
+        function resetFormToOriginal() {
+            document.getElementById("profileName").value = originalValues.name;
+            document.getElementById("profileEmail").value = originalValues.email;
+            document.getElementById("profileMobile").value = originalValues.mobile;
+            document.getElementById("profileBio").value = originalValues.bio;
+            resetButtonState();
+        }
+
+        function resetButtonState() {
+            const saveBtn = document.getElementById("saveBtn");
+            saveBtn.disabled = true;
+            saveBtn.className = "px-xl h-10 bg-primary/40 text-white font-label-md text-label-md cursor-not-allowed transition-all duration-150 rounded-lg font-bold";
+        }
+
+        // Account deletion / deactivation
+        function deactivatePortfolio() {
+            const check = confirm(`WARNING: Are you sure you want to deactivate and remove your account portfolio (Acc No: ${currentUser.account_number})?\nThis action is irreversible.`);
+            if (check) {
+                const accounts = JSON.parse(localStorage.getItem("nexbank_accounts") || "[]");
+                const cleanAccounts = accounts.filter(acc => acc.account_number !== currentUser.account_number);
+                localStorage.setItem("nexbank_accounts", JSON.stringify(cleanAccounts));
+                
+                // Clear session and return to login
+                alert("Account portfolio has been closed. Redirecting...");
+                logoutUser();
+            }
+        }
+
+        // Form Dirty check triggers
+        function setupFormTrackers() {
+            const inputs = document.querySelectorAll('#profileForm input, #profileForm textarea');
+            const saveBtn = document.getElementById("saveBtn");
+
+            inputs.forEach(input => {
+                input.addEventListener('input', () => {
+                    let isDirty = false;
+                    if (document.getElementById("profileName").value !== originalValues.name) isDirty = true;
+                    if (document.getElementById("profileEmail").value !== originalValues.email) isDirty = true;
+                    if (document.getElementById("profileMobile").value !== originalValues.mobile) isDirty = true;
+                    if (document.getElementById("profileBio").value !== originalValues.bio) isDirty = true;
+
+                    if (isDirty) {
+                        saveBtn.disabled = false;
+                        saveBtn.className = "px-xl h-10 bg-primary text-white font-label-md text-label-md hover:bg-opacity-95 shadow-lg shadow-primary/20 transition-all duration-150 rounded-lg font-bold";
+                    } else {
+                        resetButtonState();
+                    }
+                });
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initUI();
+            setupFormTrackers();
+        });
+    </script>
+</body>
+</html>

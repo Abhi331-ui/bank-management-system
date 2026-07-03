@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>NexBank | Dashboard</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet">
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary": "#ffffff",
+                        "primary-container": "#3b5bff",
+                        "on-secondary": "#ffffff",
+                        "inverse-on-surface": "#f1effd",
+                        "surface-container-highest": "#e2e1ef",
+                        "error-container": "#ffdad6",
+                        "primary-fixed-dim": "#bac3ff",
+                        "surface-bright": "#fbf8ff",
+                        "surface-container-low": "#f4f2ff",
+                        "on-secondary-fixed": "#00105b",
+                        "on-surface": "#1a1b24",
+                        "error": "#ba1a1a",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#bac3ff",
+                        "on-primary-fixed": "#00105b",
+                        "on-surface-variant": "#444656",
+                        "on-primary": "#ffffff",
+                        "surface-container-high": "#e8e7f4",
+                        "on-error-container": "#93000a",
+                        "surface-dim": "#dad9e6",
+                        "surface-container-lowest": "#ffffff",
+                        "primary": "#143de7",
+                        "background": "#fbf8ff",
+                        "on-background": "#1a1b24",
+                        "on-tertiary-fixed": "#370e00",
+                        "on-primary-fixed-variant": "#002eca",
+                        "on-secondary-fixed-variant": "#344089",
+                        "on-tertiary-container": "#ffefe9",
+                        "surface-tint": "#2448ef",
+                        "primary-fixed": "#dee0ff",
+                        "secondary-fixed-dim": "#bac3ff",
+                        "outline": "#747688",
+                        "secondary": "#4c59a2",
+                        "tertiary-container": "#c14500",
+                        "tertiary-fixed-dim": "#ffb599",
+                        "on-tertiary-fixed-variant": "#7f2b00",
+                        "outline-variant": "#c4c5d9",
+                        "secondary-container": "#a2aefe",
+                        "inverse-surface": "#2f303a",
+                        "surface": "#fbf8ff",
+                        "tertiary": "#983500",
+                        "on-secondary-container": "#323f87",
+                        "surface-container": "#eeecfa",
+                        "secondary-fixed": "#dee0ff",
+                        "surface-variant": "#e2e1ef",
+                        "tertiary-fixed": "#ffdbce",
+                        "on-primary-container": "#f2f1ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "32px",
+                        "md": "16px",
+                        "lg": "24px",
+                        "gutter": "16px",
+                        "margin": "24px",
+                        "xxl": "48px",
+                        "xs": "4px",
+                        "sm": "8px"
+                    },
+                    "fontFamily": {
+                        "numeric-md": ["Inter"],
+                        "numeric-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "display-xl": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "headline": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "numeric-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                        "numeric-lg": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "label-sm": ["13px", {"lineHeight": "18px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0", "fontWeight": "500"}],
+                        "display-lg": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "display-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0", "fontWeight": "400"}],
+                        "body-sm": ["13px", {"lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "400"}],
+                        "headline": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #fbf8ff; -webkit-font-smoothing: antialiased; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; display: inline-block; vertical-align: middle; }
+        .tabular-nums { font-variant-numeric: tabular-nums; }
+        .animate-on-load { opacity: 0; transform: translateY(8px); animation: fadeInUp 0.5s ease-out forwards; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        .chart-container { position: relative; height: 180px; width: 100%; }
+        .sidebar-active { position: relative; }
+        .sidebar-active::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background-color: #143de7; }
+        /* Modal entry transition styling */
+        .modal-active {
+            opacity: 1 !important;
+            pointer-events: auto !important;
+            transform: scale(1) !important;
+        }
+    </style>
+    <script src="theme_notifications.js"></script>
+</head>
+<body class="bg-background text-on-surface">
+
+    <!-- Sidebar Shell -->
+    <aside class="fixed left-0 top-0 h-full w-64 bg-background border-r border-outline-variant flex flex-col z-50">
+        <div class="px-lg py-xl">
+            <span class="font-headline text-headline text-primary tracking-tight cursor-pointer" onclick="window.location.href='index.html'">NexBank</span>
+            <p class="font-label-sm text-label-sm text-on-surface-variant opacity-70">Enterprise Banking</p>
+        </div>
+        <nav class="flex-1 flex flex-col gap-xs overflow-y-auto">
+            <a class="flex items-center gap-sm px-md py-sm bg-surface-container-low text-primary font-bold sidebar-active transition-all duration-150" href="#">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+                <span class="font-body-md text-body-md">Dashboard</span>
+            </a>
+            <a class="flex items-center gap-sm px-md py-sm text-on-surface-variant hover:bg-surface-container-lowest transition-colors duration-150 cursor-pointer" onclick="window.location.href='transfer.html'">
+                <span class="material-symbols-outlined">swap_horiz</span>
+                <span class="font-body-md text-body-md">Transfer Fund</span>
+            </a>
+            <a class="flex items-center gap-sm px-md py-sm text-on-surface-variant hover:bg-surface-container-lowest transition-colors duration-150 cursor-pointer" onclick="window.location.href='transactions.html'">
+                <span class="material-symbols-outlined">receipt_long</span>
+                <span class="font-body-md text-body-md">Transactions Ledger</span>
+            </a>
+            <a class="flex items-center gap-sm px-md py-sm text-on-surface-variant hover:bg-surface-container-lowest transition-colors duration-150 cursor-pointer" onclick="window.location.href='create_account.html'">
+                <span class="material-symbols-outlined">contactless</span>
+                <span class="font-body-md text-body-md">Open New Account</span>
+            </a>
+            <a class="flex items-center gap-sm px-md py-sm text-on-surface-variant hover:bg-surface-container-lowest transition-colors duration-150 cursor-pointer" onclick="window.location.href='settings.html'">
+                <span class="material-symbols-outlined">settings</span>
+                <span class="font-body-md text-body-md">Settings</span>
+            </a>
+            <a class="flex items-center gap-sm px-md py-sm text-on-surface-variant hover:bg-surface-container-lowest transition-colors duration-150 cursor-pointer" onclick="window.location.href='index.html'">
+                <span class="material-symbols-outlined">account_balance</span>
+                <span class="font-body-md text-body-md">Main Website</span>
+            </a>
+            
+            <a class="flex items-center gap-sm px-md py-sm text-error hover:bg-error-container/20 transition-colors duration-150 mt-auto mb-md cursor-pointer" onclick="logoutUser()">
+                <span class="material-symbols-outlined text-error">logout</span>
+                <span class="font-body-md text-body-md">Logout</span>
+            </a>
+        </nav>
+        
+        <!-- Sidebar User Badge -->
+        <div class="px-md py-lg border-t border-outline-variant flex items-center gap-md bg-surface-container-low/40">
+            <div class="w-10 h-10 bg-surface-container-high rounded-full overflow-hidden flex-shrink-0 border border-outline-variant flex items-center justify-center text-primary font-bold text-lg select-none" id="avatarBadge">
+                MS
+            </div>
+            <div class="flex flex-col min-w-0">
+                <span class="font-label-md text-label-md font-bold truncate" id="sidebarUser">Marcus Sterling</span>
+                <span class="font-label-sm text-label-sm text-on-surface-variant truncate" id="sidebarAccNo">Acc No: 1000</span>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content Canvas -->
+    <main class="ml-64 min-h-screen">
+        <!-- Top Bar -->
+        <header class="sticky top-0 z-40 bg-background/80 backdrop-blur-md border-b border-outline-variant h-16 px-margin flex items-center justify-between">
+            <div class="flex flex-col">
+                <h1 class="font-headline text-headline text-on-surface">Dashboard</h1>
+                <p class="font-body-sm text-body-sm text-on-surface-variant" id="greetingUser">Welcome back, Marcus</p>
+            </div>
+            <div class="flex items-center gap-lg">
+                <div class="relative w-80 hidden md:block">
+                    <span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-outline">search</span>
+                    <input class="w-full h-10 pl-10 pr-md bg-surface-container-lowest border border-outline-variant rounded-lg font-body-md text-body-md focus:outline-none focus:border-primary transition-colors" placeholder="Search transactions, accounts..." type="text">
+                </div>
+                <div class="flex items-center gap-md">
+                    <div class="relative">
+                        <button class="relative w-10 h-10 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors" id="notification-btn">
+                            <span class="material-symbols-outlined">notifications</span>
+                            <span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border-2 border-background hidden" id="notification-badge"></span>
+                        </button>
+                        <!-- Dropdown panel -->
+                        <div class="absolute right-0 mt-2 w-80 bg-surface border border-outline-variant rounded-xl shadow-2xl overflow-hidden hidden z-50 bg-white dark:bg-neutral-900" id="notification-dropdown">
+                            <div class="p-md border-b border-outline-variant flex justify-between items-center bg-surface-container-low dark:bg-neutral-800">
+                                <span class="font-label-md text-label-md text-on-surface font-bold">Notifications</span>
+                                <button class="text-xs text-primary hover:underline font-semibold" id="mark-all-read-btn">Mark all read</button>
+                            </div>
+                            <div class="max-h-64 overflow-y-auto divide-y divide-outline-variant no-scrollbar text-left" id="notification-list">
+                                <!-- Dynamic notifications list -->
+                            </div>
+                            <div class="p-sm text-center border-t border-outline-variant bg-surface-container-low dark:bg-neutral-800">
+                                <button class="text-xs text-on-surface-variant hover:underline font-medium" onclick="clearAllNotifications()">Clear All</button>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="w-10 h-10 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors" id="theme-toggle">
+                        <span class="material-symbols-outlined">dark_mode</span>
+                    </button>
+                    <button class="w-10 h-10 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors" onclick="alert('Help line: Contact support@nexbank.com for operational assistance.')">
+                        <span class="material-symbols-outlined">help</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+        
+        <div class="max-w-[1200px] mx-auto p-margin space-y-xl">
+            <!-- Balance Overview -->
+            <section class="grid grid-cols-1 md:grid-cols-3 gap-lg">
+                <div class="animate-on-load delay-1 bg-surface-container-lowest border border-outline-variant p-lg rounded-xl shadow-sm">
+                    <div class="flex items-center justify-between mb-sm">
+                        <span class="font-label-md text-label-md text-on-surface-variant">Total Balance</span>
+                        <span class="material-symbols-outlined text-primary">account_balance_wallet</span>
+                    </div>
+                    <div class="font-display-lg text-display-lg tabular-nums text-on-background" id="total-balance">$0.00</div>
+                    <div class="mt-md flex items-center gap-xs">
+                        <span class="material-symbols-outlined text-primary-container text-[16px] text-primary">trending_up</span>
+                        <span class="font-label-sm text-label-sm text-primary font-bold">+2.4% vs last month</span>
+                    </div>
+                </div>
+                <div class="animate-on-load delay-2 bg-surface-container-lowest border border-outline-variant p-lg rounded-xl shadow-sm">
+                    <div class="flex items-center justify-between mb-sm">
+                        <span class="font-label-md text-label-md text-on-surface-variant">Available Balance</span>
+                        <span class="material-symbols-outlined text-secondary">payments</span>
+                    </div>
+                    <div class="font-display-lg text-display-lg tabular-nums text-on-background" id="available-balance">$0.00</div>
+                    <p class="font-label-sm text-label-sm text-on-surface-variant mt-md">Instant access via NexCard</p>
+                </div>
+                <div class="animate-on-load delay-3 bg-surface-container-lowest border border-outline-variant p-lg rounded-xl shadow-sm">
+                    <div class="flex items-center justify-between mb-sm">
+                        <span class="font-label-md text-label-md text-on-surface-variant">Pending Transactions</span>
+                        <span class="material-symbols-outlined text-outline">schedule</span>
+                    </div>
+                    <div class="font-display-lg text-display-lg tabular-nums text-on-surface-variant" id="pending-balance">-$0.00</div>
+                    <p class="font-label-sm text-label-sm text-on-surface-variant mt-md">System settlement in progress</p>
+                </div>
+            </section>
+            
+            <!-- Two-Column Content -->
+            <section class="grid grid-cols-1 lg:grid-cols-12 gap-lg">
+                <!-- Activity Overview (Left 65%) -->
+                <div class="lg:col-span-8 animate-on-load delay-3 bg-surface-container-lowest border border-outline-variant p-lg rounded-xl flex flex-col h-full shadow-sm">
+                    <div class="flex items-center justify-between mb-xl">
+                        <div class="flex flex-col">
+                            <h2 class="font-headline text-headline">Activity Overview</h2>
+                            <p class="font-body-sm text-body-sm text-on-surface-variant">Wealth accumulation &amp; net flow</p>
+                        </div>
+                        <div class="flex bg-surface-container border border-outline-variant p-xs rounded-lg">
+                            <button class="px-md py-xs font-label-sm text-label-sm bg-surface-container-lowest border border-outline-variant rounded-md font-bold shadow-sm">30D</button>
+                            <button class="px-md py-xs font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors">90D</button>
+                            <button class="px-md py-xs font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors">1Y</button>
+                        </div>
+                    </div>
+                    <div class="chart-container flex-1">
+                        <!-- Simplified Clean Line Chart Representation -->
+                        <svg class="w-full h-full" viewBox="0 0 800 180">
+                            <defs>
+                                <linearGradient id="chartGradient" x1="0" x2="0" y1="0" y2="1">
+                                    <stop offset="0%" stop-color="#3B5BFF" stop-opacity="0.1"></stop>
+                                    <stop offset="100%" stop-color="#3B5BFF" stop-opacity="0"></stop>
+                                </linearGradient>
+                            </defs>
+                            <path d="M0,150 L50,140 L100,145 L150,120 L200,125 L250,90 L300,95 L350,70 L400,75 L450,40 L500,45 L550,20 L600,25 L650,10 L700,15 L800,5" fill="none" stroke="#3B5BFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path>
+                            <path d="M0,150 L50,140 L100,145 L150,120 L200,125 L250,90 L300,95 L350,70 L400,75 L450,40 L500,45 L550,20 L600,25 L650,10 L700,15 L800,5 V180 H0 Z" fill="url(#chartGradient)"></path>
+                        </svg>
+                        <div class="flex justify-between mt-sm">
+                            <span class="font-label-sm text-label-sm text-on-surface-variant opacity-50">JUL 01</span>
+                            <span class="font-label-sm text-label-sm text-on-surface-variant opacity-50">JUL 15</span>
+                            <span class="font-label-sm text-label-sm text-on-surface-variant opacity-50">JUL 30</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Recent Transactions (Right 35%) -->
+                <div class="lg:col-span-4 animate-on-load delay-4 bg-surface-container-lowest border border-outline-variant p-lg rounded-xl flex flex-col h-full shadow-sm">
+                    <div class="flex items-center justify-between mb-xl">
+                        <h2 class="font-headline text-headline">Recent Transactions</h2>
+                        <span class="bg-surface-container text-primary font-label-sm text-label-sm px-sm py-xs rounded-full cursor-pointer hover:bg-primary-container/20 transition-all font-semibold" onclick="window.location.href='transactions.html'">View All</span>
+                    </div>
+                    
+                    <div class="space-y-xs flex-1 overflow-y-auto max-h-[300px] pr-sm" id="recentTransactionsList">
+                        <!-- Dynamic transaction list elements -->
+                    </div>
+                    <div id="noTransactionsMsg" class="py-xl text-center text-on-surface-variant font-body-md hidden">
+                        No ledger actions found for this account.
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Secondary Row -->
+            <section class="grid grid-cols-1 lg:grid-cols-3 gap-lg animate-on-load delay-4">
+                <!-- Quick Actions -->
+                <div class="bg-surface-container-lowest border border-outline-variant p-lg rounded-xl shadow-sm">
+                    <h3 class="font-label-md text-label-md font-bold mb-md uppercase tracking-wider text-on-surface-variant">Operations</h3>
+                    <div class="grid grid-cols-2 gap-sm">
+                        <button class="flex flex-col items-center justify-center h-24 border border-outline-variant rounded-lg hover:border-primary hover:text-primary transition-all group bg-white" onclick="window.location.href='deposit.html'">
+                            <span class="material-symbols-outlined text-primary mb-sm">add_circle</span>
+                            <span class="font-body-sm text-body-sm group-hover:text-primary transition-colors">Deposit</span>
+                        </button>
+                        <button class="flex flex-col items-center justify-center h-24 border border-outline-variant rounded-lg hover:border-primary hover:text-primary transition-all group bg-white" onclick="window.location.href='withdraw.html'">
+                            <span class="material-symbols-outlined text-primary mb-sm">outbox</span>
+                            <span class="font-body-sm text-body-sm group-hover:text-primary transition-colors">Withdraw</span>
+                        </button>
+                        <button class="flex flex-col items-center justify-center h-24 border border-outline-variant rounded-lg hover:border-primary hover:text-primary transition-all group bg-white" onclick="window.location.href='transfer.html'">
+                            <span class="material-symbols-outlined text-primary mb-sm">sync_alt</span>
+                            <span class="font-body-sm text-body-sm group-hover:text-primary transition-colors">Transfer</span>
+                        </button>
+                        <button class="flex flex-col items-center justify-center h-24 border border-outline-variant rounded-lg hover:border-primary hover:text-primary transition-all group bg-white" onclick="window.location.href='create_account.html'">
+                            <span class="material-symbols-outlined text-primary mb-sm">contactless</span>
+                            <span class="font-body-sm text-body-sm group-hover:text-primary transition-colors">Open Account</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Account Health Checklist -->
+                <div class="bg-surface-container-lowest border border-outline-variant p-lg rounded-xl shadow-sm">
+                    <div class="flex items-center justify-between mb-md">
+                        <h3 class="font-label-md text-label-md font-bold uppercase tracking-wider text-on-surface-variant">Account Health</h3>
+                        <span class="font-numeric-md text-numeric-md text-primary" id="healthProgress">85%</span>
+                    </div>
+                    <div class="w-full h-1 bg-surface-container rounded-full overflow-hidden mb-lg">
+                        <div class="w-[85%] h-full bg-primary" id="healthProgressBar"></div>
+                    </div>
+                    <ul class="space-y-md">
+                        <li class="flex items-center gap-md text-on-surface">
+                            <span class="material-symbols-outlined text-emerald-600 text-body-lg" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                            <span class="font-body-md text-body-md">2FA Protection Enabled</span>
+                        </li>
+                        <li class="flex items-center gap-md text-on-surface" id="healthCheckVerified">
+                            <span class="material-symbols-outlined text-emerald-600 text-body-lg" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                            <span class="font-body-md text-body-md">Identity Verified</span>
+                        </li>
+                        <li class="flex items-center gap-md text-on-surface-variant opacity-60">
+                            <span class="material-symbols-outlined text-body-lg">circle</span>
+                            <span class="font-body-md text-body-md">Setup Backup Phone</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Monthly Report Summary -->
+                <div class="bg-primary text-white p-lg rounded-xl relative overflow-hidden shadow-lg shadow-primary/20">
+                    <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(circle at 1px 1px, #fff 1px, transparent 0); background-size: 24px 24px;"></div>
+                    <div class="relative z-10 flex flex-col h-full">
+                        <div class="flex items-start justify-between">
+                            <div>
+                                <h3 class="font-label-md text-label-md font-bold uppercase tracking-wider opacity-80">Monthly Report</h3>
+                                <p class="font-headline text-headline mt-xs">July 2026</p>
+                            </div>
+                            <span class="material-symbols-outlined text-[32px]">analytics</span>
+                        </div>
+                        <div class="mt-auto">
+                            <p class="font-body-sm text-body-sm opacity-80 mb-sm">Total savings increased by</p>
+                            <div class="flex items-end gap-sm">
+                                <span class="font-display-xl text-display-xl tabular-nums leading-none">$4,290.00</span>
+                                <span class="font-label-sm text-label-sm bg-white/20 px-xs py-[2px] rounded mb-1">+12.4%</span>
+                            </div>
+                            <button class="w-full mt-lg h-10 bg-white text-primary font-bold rounded-lg hover:bg-surface-container-lowest transition-colors" onclick="alert('Generating and downloading your secure financial audit file...')">Download PDF</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Modals Container -->
+
+    <!-- Deposit Modal -->
+    <div id="depositModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300">
+        <div class="bg-white max-w-sm w-full rounded-xl border border-outline-variant p-xl shadow-2xl scale-95 transition-all duration-300 relative mx-margin">
+            <button class="absolute top-md right-md text-outline hover:text-on-background" onclick="closeDepositModal()">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+            <h3 class="font-headline text-headline text-on-background mb-sm">Make Operational Deposit</h3>
+            <p class="font-body-sm text-on-surface-variant mb-lg">Add funds directly to your institutional ledger.</p>
+            
+            <div class="space-y-md">
+                <div>
+                    <label class="block font-label-sm text-on-surface mb-xs" for="depositAmount">Amount (USD)</label>
+                    <input type="number" id="depositAmount" class="w-full h-10 border border-outline-variant rounded-lg px-md font-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none" placeholder="Enter amount">
+                </div>
+            </div>
+            <div id="depositError" class="text-error font-body-sm mt-md hidden"></div>
+            <div class="flex justify-end gap-md mt-xl">
+                <button class="border border-outline px-lg h-10 rounded-lg font-label-md text-label-md text-on-surface hover:bg-surface-container transition-all" onclick="closeDepositModal()">Cancel</button>
+                <button class="bg-primary text-on-primary px-lg h-10 rounded-lg font-label-md text-label-md hover:bg-opacity-90 transition-all shadow-md shadow-primary/20" onclick="submitDeposit()">Confirm Deposit</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Withdraw Modal -->
+    <div id="withdrawModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300">
+        <div class="bg-white max-w-sm w-full rounded-xl border border-outline-variant p-xl shadow-2xl scale-95 transition-all duration-300 relative mx-margin">
+            <button class="absolute top-md right-md text-outline hover:text-on-background" onclick="closeWithdrawModal()">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+            <h3 class="font-headline text-headline text-on-background mb-sm">Request Withdrawal</h3>
+            <p class="font-body-sm text-on-surface-variant mb-lg">Deduct and settle operations liquidity.</p>
+            
+            <div class="space-y-md">
+                <div>
+                    <label class="block font-label-sm text-on-surface mb-xs" for="withdrawAmount">Amount (USD)</label>
+                    <input type="number" id="withdrawAmount" class="w-full h-10 border border-outline-variant rounded-lg px-md font-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none" placeholder="Enter amount">
+                </div>
+            </div>
+            <div id="withdrawError" class="text-error font-body-sm mt-md hidden"></div>
+            <div class="flex justify-end gap-md mt-xl">
+                <button class="border border-outline px-lg h-10 rounded-lg font-label-md text-label-md text-on-surface hover:bg-surface-container transition-all" onclick="closeWithdrawModal()">Cancel</button>
+                <button class="bg-primary text-on-primary px-lg h-10 rounded-lg font-label-md text-label-md hover:bg-opacity-90 transition-all shadow-md shadow-primary/20" onclick="submitWithdraw()">Confirm Withdrawal</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Transfer Fund Modal -->
+    <div id="transferModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300">
+        <div class="bg-white max-w-md w-full rounded-xl border border-outline-variant p-xl shadow-2xl scale-95 transition-all duration-300 relative mx-margin">
+            <button class="absolute top-md right-md text-outline hover:text-on-background" onclick="closeTransferModal()">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+            <h3 class="font-headline text-headline text-on-background mb-sm">Secure Intra-Bank Transfer</h3>
+            <p class="font-body-sm text-on-surface-variant mb-lg">Execute instant transfers to another active portfolio.</p>
+            
+            <div class="space-y-md">
+                <div>
+                    <label class="block font-label-sm text-on-surface mb-xs" for="transferTarget">Recipient Account Number</label>
+                    <input type="number" id="transferTarget" class="w-full h-10 border border-outline-variant rounded-lg px-md font-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none" placeholder="Recipient Acc ID (e.g. 1001)">
+                </div>
+                <div>
+                    <label class="block font-label-sm text-on-surface mb-xs" for="transferAmount">Amount (USD)</label>
+                    <input type="number" id="transferAmount" class="w-full h-10 border border-outline-variant rounded-lg px-md font-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none" placeholder="Enter amount">
+                </div>
+            </div>
+            <div id="transferError" class="text-error font-body-sm mt-md hidden"></div>
+            <div class="flex justify-end gap-md mt-xl">
+                <button class="border border-outline px-lg h-10 rounded-lg font-label-md text-label-md text-on-surface hover:bg-surface-container transition-all" onclick="closeTransferModal()">Cancel</button>
+                <button class="bg-primary text-on-primary px-lg h-10 rounded-lg font-label-md text-label-md hover:bg-opacity-90 transition-all shadow-md shadow-primary/20" onclick="submitTransfer()">Initiate Transfer</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Active Banking Dashboard Scripting -->
+    <script>
+        // Session Guard
+        let currentUser = null;
+        function checkSession() {
+            const session = localStorage.getItem("nexbank_current_user");
+            if (!session) {
+                window.location.href = "login.html";
+                return;
+            }
+            currentUser = JSON.parse(session);
+
+            // Fetch actual user values from simulated database
+            const accounts = JSON.parse(localStorage.getItem("nexbank_accounts") || "[]");
+            const actualUser = accounts.find(acc => acc.account_number === currentUser.account_number);
+            if (!actualUser) {
+                localStorage.removeItem("nexbank_current_user");
+                window.location.href = "login.html";
+                return;
+            }
+            currentUser = actualUser;
+        }
+        checkSession();
+
+        function logoutUser() {
+            localStorage.removeItem("nexbank_current_user");
+            window.location.href = "login.html";
+        }
+
+        // Database Setters & Getters
+        function getDBAccounts() {
+            return JSON.parse(localStorage.getItem("nexbank_accounts") || "[]");
+        }
+
+        function setDBAccounts(accounts) {
+            localStorage.setItem("nexbank_accounts", JSON.stringify(accounts));
+        }
+
+        function getDBLogs() {
+            return JSON.parse(localStorage.getItem("nexbank_transactions") || "[]");
+        }
+
+        function setDBLogs(logs) {
+            localStorage.setItem("nexbank_transactions", JSON.stringify(logs));
+        }
+
+        function logTransactionJS(accNo, type, amount) {
+            const logs = getDBLogs();
+            const now = new Date();
+            const dateStr = now.toDateString() + " " + now.toTimeString().split(' ')[0] + " " + now.getFullYear();
+            const logEntry = `AccNo: ${accNo} | ${type} | Amount: ${amount.toFixed(2)} | Time: ${dateStr}`;
+            logs.push(logEntry);
+            setDBLogs(logs);
+        }
+
+        // Modals Controls
+        function openDepositModal() {
+            document.getElementById("depositModal").classList.add("modal-active");
+            document.getElementById("depositAmount").value = "";
+            document.getElementById("depositError").classList.add("hidden");
+        }
+        function closeDepositModal() {
+            document.getElementById("depositModal").classList.remove("modal-active");
+        }
+
+        function openWithdrawModal() {
+            document.getElementById("withdrawModal").classList.add("modal-active");
+            document.getElementById("withdrawAmount").value = "";
+            document.getElementById("withdrawError").classList.add("hidden");
+        }
+        function closeWithdrawModal() {
+            document.getElementById("withdrawModal").classList.remove("modal-active");
+        }
+
+        function openTransferModal() {
+            document.getElementById("transferModal").classList.add("modal-active");
+            document.getElementById("transferTarget").value = "";
+            document.getElementById("transferAmount").value = "";
+            document.getElementById("transferError").classList.add("hidden");
+        }
+        function closeTransferModal() {
+            document.getElementById("transferModal").classList.remove("modal-active");
+        }
+
+        // Submits
+        function submitDeposit() {
+            const amt = parseFloat(document.getElementById("depositAmount").value);
+            const errorEl = document.getElementById("depositError");
+            if (isNaN(amt) || amt <= 0) {
+                errorEl.textContent = "Invalid amount. Enter a positive number.";
+                errorEl.classList.remove("hidden");
+                return;
+            }
+
+            const accounts = getDBAccounts();
+            const idx = accounts.findIndex(acc => acc.account_number === currentUser.account_number);
+            accounts[idx].balance += amt;
+            setDBAccounts(accounts);
+            currentUser.balance = accounts[idx].balance;
+            localStorage.setItem("nexbank_current_user", JSON.stringify(currentUser));
+
+            logTransactionJS(currentUser.account_number, "DEPOSIT", amt);
+            closeDepositModal();
+            refreshDashboardUI(true);
+        }
+
+        function submitWithdraw() {
+            const amt = parseFloat(document.getElementById("withdrawAmount").value);
+            const errorEl = document.getElementById("withdrawError");
+            if (isNaN(amt) || amt <= 0) {
+                errorEl.textContent = "Invalid amount. Enter a positive number.";
+                errorEl.classList.remove("hidden");
+                return;
+            }
+            if (amt > currentUser.balance) {
+                errorEl.textContent = "Insufficient Balance.";
+                errorEl.classList.remove("hidden");
+                return;
+            }
+
+            const accounts = getDBAccounts();
+            const idx = accounts.findIndex(acc => acc.account_number === currentUser.account_number);
+            accounts[idx].balance -= amt;
+            setDBAccounts(accounts);
+            currentUser.balance = accounts[idx].balance;
+            localStorage.setItem("nexbank_current_user", JSON.stringify(currentUser));
+
+            logTransactionJS(currentUser.account_number, "WITHDRAW", amt);
+            closeWithdrawModal();
+            refreshDashboardUI(true);
+        }
+
+        function submitTransfer() {
+            const targetAccNo = parseInt(document.getElementById("transferTarget").value);
+            const amt = parseFloat(document.getElementById("transferAmount").value);
+            const errorEl = document.getElementById("transferError");
+
+            if (isNaN(targetAccNo) || targetAccNo === currentUser.account_number) {
+                errorEl.textContent = "Invalid Recipient Account.";
+                errorEl.classList.remove("hidden");
+                return;
+            }
+            if (isNaN(amt) || amt <= 0) {
+                errorEl.textContent = "Invalid amount. Enter a positive number.";
+                errorEl.classList.remove("hidden");
+                return;
+            }
+            if (amt > currentUser.balance) {
+                errorEl.textContent = "Insufficient Balance.";
+                errorEl.classList.remove("hidden");
+                return;
+            }
+
+            const accounts = getDBAccounts();
+            const targetIdx = accounts.findIndex(acc => acc.account_number === targetAccNo);
+            if (targetIdx === -1) {
+                errorEl.textContent = "Recipient account number does not exist.";
+                errorEl.classList.remove("hidden");
+                return;
+            }
+
+            // Transfer Funds
+            const senderIdx = accounts.findIndex(acc => acc.account_number === currentUser.account_number);
+            accounts[senderIdx].balance -= amt;
+            accounts[targetIdx].balance += amt;
+            setDBAccounts(accounts);
+
+            currentUser.balance = accounts[senderIdx].balance;
+            localStorage.setItem("nexbank_current_user", JSON.stringify(currentUser));
+
+            // Log details for both portfolios
+            logTransactionJS(currentUser.account_number, `TRANSFER_OUT to ${targetAccNo}`, amt);
+            logTransactionJS(targetAccNo, `TRANSFER_IN from ${currentUser.account_number}`, amt);
+
+            closeTransferModal();
+            refreshDashboardUI(true);
+        }
+
+        // UI Renders & Animating Values
+        function animateValue(obj, start, end, duration, prefix = '$', suffix = '') {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const current = start + progress * (end - start);
+                obj.innerHTML = prefix + current.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + suffix;
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                } else {
+                    obj.innerHTML = prefix + end.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + suffix;
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        function refreshDashboardUI(animated = false) {
+            // Update greetings & user card information
+            document.getElementById("greetingUser").textContent = `Welcome back, ${currentUser.name}`;
+            document.getElementById("sidebarUser").textContent = currentUser.name;
+            document.getElementById("sidebarAccNo").textContent = `Acc No: ${currentUser.account_number}`;
+            
+            // Set Avatar Initials
+            const initials = currentUser.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+            document.getElementById("avatarBadge").textContent = initials;
+
+            // Render stats cards
+            if (animated) {
+                animateValue(document.getElementById('total-balance'), 0, currentUser.balance, 1000);
+                animateValue(document.getElementById('available-balance'), 0, currentUser.balance, 1000);
+            } else {
+                document.getElementById('total-balance').textContent = `$${currentUser.balance.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+                document.getElementById('available-balance').textContent = `$${currentUser.balance.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+            }
+
+            // Render ledger transaction feed
+            const logs = getDBLogs();
+            const userLogs = logs.filter(log => log.includes(`AccNo: ${currentUser.account_number}`));
+            const listEl = document.getElementById("recentTransactionsList");
+            const noTransactions = document.getElementById("noTransactionsMsg");
+            
+            listEl.innerHTML = "";
+            if (userLogs.length === 0) {
+                noTransactions.classList.remove("hidden");
+            } else {
+                noTransactions.classList.add("hidden");
+                // Limit to last 5 logs, latest first
+                userLogs.reverse().slice(0, 5).forEach((log, index) => {
+                    const parts = log.split(" | ");
+                    const type = parts[1];
+                    const amt = parseFloat(parts[2].split(": ")[1]);
+                    
+                    const isDeposit = type === "DEPOSIT" || type.includes("TRANSFER_IN");
+                    const iconName = type.includes("TRANSFER") ? "swap_horiz" : (isDeposit ? "trending_up" : "outbox");
+                    const colorClass = isDeposit ? "text-emerald-600" : "text-primary";
+                    const isTransfer = type.includes("TRANSFER");
+                    const titleText = isTransfer ? (type.includes("IN") ? "Received Funds" : "Sent Funds") : (isDeposit ? "Liquidity Deposit" : "Liquidity Deduction");
+
+                    const transRow = document.createElement("div");
+                    transRow.className = "h-14 flex items-center justify-between border-b border-outline-variant";
+                    transRow.innerHTML = `
+                        <div class="flex items-center gap-md min-w-0">
+                            <div class="w-10 h-10 rounded bg-surface-container flex items-center justify-center ${colorClass} flex-shrink-0">
+                                <span class="material-symbols-outlined">${iconName}</span>
+                            </div>
+                            <div class="min-w-0">
+                                <p class="font-body-md text-body-md font-bold truncate">${titleText}</p>
+                                <p class="font-body-sm text-body-sm text-on-surface-variant truncate">${type}</p>
+                            </div>
+                        </div>
+                        <span class="font-numeric-md text-numeric-md tabular-nums ${isDeposit ? 'text-emerald-600' : 'text-on-background'}">
+                            ${isDeposit ? '+' : '-'}$${amt.toLocaleString('en-US', { minimumFractionDigits: 2 })}
+                        </span>
+                    `;
+                    listEl.appendChild(transRow);
+                });
+            }
+        }
+
+        // On document load
+        document.addEventListener('DOMContentLoaded', () => {
+            refreshDashboardUI(true);
+        });
+    </script>
+</body>
+</html>

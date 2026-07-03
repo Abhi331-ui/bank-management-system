@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Login | NexBank</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+    <script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                "surface-container": "#eeecfa",
+                "on-surface-variant": "#444656",
+                "surface-container-high": "#e8e7f4",
+                "tertiary-fixed-dim": "#ffb599",
+                "primary": "#143de7",
+                "tertiary-container": "#c14500",
+                "tertiary": "#983500",
+                "on-primary-fixed": "#00105b",
+                "error-container": "#ffdad6",
+                "surface-container-highest": "#e2e1ef",
+                "surface-container-lowest": "#ffffff",
+                "surface-variant": "#e2e1ef",
+                "on-error": "#ffffff",
+                "inverse-on-surface": "#f1effd",
+                "primary-container": "#3b5bff",
+                "outline-variant": "#c4c5d9",
+                "secondary-container": "#a2aefe",
+                "surface-dim": "#dad9e6",
+                "background": "#fbf8ff",
+                "outline": "#747688",
+                "on-primary-container": "#f2f1ff",
+                "on-background": "#1a1b24",
+                "surface-bright": "#fbf8ff",
+                "on-tertiary-fixed": "#370e00",
+                "error": "#ba1a1a",
+                "on-primary": "#ffffff",
+                "on-secondary": "#ffffff",
+                "secondary-fixed-dim": "#bac3ff",
+                "inverse-primary": "#bac3ff",
+                "primary-fixed-dim": "#bac3ff",
+                "surface-tint": "#2448ef",
+                "on-tertiary-container": "#ffefe9",
+                "on-surface": "#1a1b24",
+                "on-primary-fixed-variant": "#002eca",
+                "surface": "#fbf8ff",
+                "primary-fixed": "#dee0ff",
+                "inverse-surface": "#2f303a",
+                "secondary-fixed": "#dee0ff",
+                "on-secondary-container": "#323f87",
+                "tertiary-fixed": "#ffdbce",
+                "secondary": "#4c59a2",
+                "on-tertiary-fixed-variant": "#7f2b00",
+                "surface-container-low": "#f4f2ff",
+                "on-tertiary": "#ffffff",
+                "on-secondary-fixed": "#00105b",
+                "on-error-container": "#93000a",
+                "on-secondary-fixed-variant": "#344089"
+              },
+              "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+              },
+              "spacing": {
+                "xs": "4px",
+                "lg": "24px",
+                "sm": "8px",
+                "margin": "24px",
+                "gutter": "16px",
+                "xxl": "48px",
+                "xl": "32px",
+                "md": "16px"
+              },
+              "fontFamily": {
+                "label-sm": ["Inter"],
+                "display-lg": ["Inter"],
+                "body-md": ["Inter"],
+                "display-xl": ["Inter"],
+                "body-lg": ["Inter"],
+                "headline": ["Inter"],
+                "numeric-md": ["Inter"],
+                "numeric-lg": ["Inter"],
+                "label-md": ["Inter"],
+                "body-sm": ["Inter"]
+              },
+              "fontSize": {
+                "label-sm": ["13px", {"lineHeight": "18px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                "display-lg": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0", "fontWeight": "400"}],
+                "display-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0", "fontWeight": "400"}],
+                "headline": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                "numeric-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                "numeric-lg": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0", "fontWeight": "500"}],
+                "body-sm": ["13px", {"lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+    <style>
+        body {
+          font-family: 'Inter', sans-serif;
+          background-color: #FAFAFA;
+          margin: 0;
+          padding: 0;
+          -webkit-font-smoothing: antialiased;
+        }
+        .material-symbols-outlined {
+          font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Quiet Precision Focus State */
+        .input-field:focus-within {
+          border-color: #3B5BFF !important;
+          outline: none;
+        }
+        .input-field input:focus {
+          outline: none;
+          box-shadow: none;
+        }
+    </style>
+    <script src="theme_notifications.js"></script>
+</head>
+<body class="text-on-background min-h-screen flex flex-col items-center justify-center relative overflow-x-hidden">
+
+    <!-- Top AppBar Anchor (Minimalist / Absolute) -->
+    <header class="absolute top-0 left-0 w-full flex items-center h-16 px-margin">
+        <a href="index.html" class="font-headline text-[20px] font-semibold text-on-background flex items-center gap-2 cursor-pointer hover:text-primary transition-colors">
+            <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">account_balance</span>
+            NexBank
+        </a>
+    </header>
+
+    <!-- Login Container (Centered 400px Column) -->
+    <main class="w-full max-w-[400px] px-margin flex flex-col items-center text-center">
+        <!-- Wordmark Logo (32px height) -->
+        <div class="mb-xl flex flex-col items-center">
+            <div class="h-[32px] flex items-center justify-center">
+                <span class="font-headline text-[32px] font-bold text-on-background tracking-tight">NexBank</span>
+            </div>
+        </div>
+        
+        <!-- Heading Section -->
+        <section class="mb-xl">
+            <h1 class="font-headline text-[24px] font-semibold text-on-background mb-sm leading-tight">Log in to NexBank</h1>
+            <p class="font-body-md text-on-surface-variant text-[14px]">Enter your institutional credentials to continue</p>
+        </section>
+        
+        <!-- Form Section -->
+        <form class="w-full flex flex-col space-y-md text-left" onsubmit="submitForm(event)">
+            <!-- Account Number Field (Initially Focused) -->
+            <div class="flex flex-col space-y-xs group">
+                <label class="font-label-md text-on-surface-variant text-[14px]" for="accNo">Account Number</label>
+                <div class="input-field flex items-center h-[40px] px-md border border-outline-variant rounded-lg bg-white transition-colors duration-150 border-primary">
+                    <input autofocus class="w-full bg-transparent border-none p-0 font-body-md text-on-background placeholder:text-outline focus:ring-0 text-[14px]" id="accNo" name="accNo" placeholder="Enter Account Number (e.g. 1001)" type="number" required>
+                </div>
+            </div>
+            
+            <!-- PIN Field -->
+            <div class="flex flex-col space-y-xs group">
+                <label class="font-label-md text-on-surface-variant text-[14px]" for="pin">Security PIN</label>
+                <div class="input-field flex items-center h-[40px] px-md border border-outline-variant rounded-lg bg-white transition-colors duration-150">
+                    <input class="w-full bg-transparent border-none p-0 font-body-md text-on-background placeholder:text-outline focus:ring-0 text-[14px]" id="pin" name="pin" placeholder="••••" type="password" required>
+                    <button class="font-label-sm text-on-surface-variant text-[13px] hover:text-primary transition-colors duration-150 ml-sm whitespace-nowrap" type="button" id="showToggle">Show</button>
+                </div>
+            </div>
+            
+            <!-- Forgot PIN -->
+            <div class="flex justify-end mt-sm">
+                <a class="font-label-sm text-[#3B5BFF] text-[13px] hover:underline transition-all duration-150" href="#" onclick="alert('Please contact your administrator or refer to system control panel inside the Admin Portal.')">Forgot PIN?</a>
+            </div>
+            
+            <!-- Error message container -->
+            <div id="loginError" class="text-error font-body-sm text-left hidden"></div>
+            
+            <!-- Login Button -->
+            <button class="w-full h-[40px] bg-[#3B5BFF] text-white font-label-md rounded-lg hover:brightness-110 active:scale-[0.98] transition-all duration-150 mt-lg flex items-center justify-center font-semibold" type="submit">
+                Log in
+            </button>
+            
+            <!-- Divider -->
+            <div class="relative py-xl flex items-center">
+                <div class="flex-grow border-t border-outline-variant"></div>
+                <span class="flex-shrink mx-md font-label-sm text-on-surface-variant text-[13px]">or</span>
+                <div class="flex-grow border-t border-outline-variant"></div>
+            </div>
+            
+            <!-- SSO Button -->
+            <button class="w-full h-[40px] border border-outline-variant bg-white text-on-background font-label-md rounded-lg hover:bg-surface-container-low active:scale-[0.98] transition-all duration-150 flex items-center justify-center gap-sm" type="button" onclick="alert('Institutional SSO login integration active for enterprise partners. Please log in with account ID.')">
+                <span class="material-symbols-outlined text-[18px]">key</span>
+                Continue with SSO
+            </button>
+        </form>
+        
+        <!-- Footer Text -->
+        <footer class="mt-xxl">
+            <p class="font-body-sm text-on-surface-variant text-[14px]">
+                Don't have an account? 
+                <a class="text-[#3B5BFF] font-semibold hover:underline" href="create_account.html">Sign up</a>
+            </p>
+        </footer>
+    </main>
+
+    <!-- Legal Footer (Simplified Alignment with Design System Footer) -->
+    <div class="absolute bottom-0 w-full py-xl px-margin flex flex-col md:flex-row justify-between items-center text-on-surface-variant font-body-sm text-[13px]">
+        <div class="mb-sm md:mb-0">
+            © 2026 NexBank. High-security institutional banking.
+        </div>
+        <div class="flex gap-md">
+            <a class="hover:text-primary transition-colors duration-150" href="#">Privacy Policy</a>
+            <a class="hover:text-primary transition-colors duration-150" href="#">Security</a>
+            <a class="hover:text-primary transition-colors duration-150" href="#">Terms of Service</a>
+            <a class="hover:text-primary transition-colors duration-150" href="#">Support</a>
+        </div>
+    </div>
+
+    <script>
+        // Default portfolios if localStorage is empty to ensure smooth testing
+        const DEFAULT_ACCOUNTS = [
+            { account_number: 1001, name: "Jane Doe", balance: 50000.0, PIN: 1234 },
+            { account_number: 1002, name: "Apex Capital LLC", balance: 750000.0, PIN: 9988 }
+        ];
+
+        function initAccounts() {
+            if (!localStorage.getItem("nexbank_accounts")) {
+                localStorage.setItem("nexbank_accounts", JSON.stringify(DEFAULT_ACCOUNTS));
+            }
+        }
+        initAccounts();
+
+        // Micro-interactions for the form fields
+        document.querySelectorAll('.input-field input').forEach(input => {
+          input.addEventListener('focus', () => {
+            input.parentElement.classList.add('border-primary');
+            input.parentElement.classList.remove('border-outline-variant');
+          });
+          input.addEventListener('blur', () => {
+            if (input.id !== 'accNo') {
+              input.parentElement.classList.remove('border-primary');
+              input.parentElement.classList.add('border-outline-variant');
+            }
+          });
+        });
+
+        // Password toggle logic
+        const showBtn = document.getElementById('showToggle');
+        const passInput = document.getElementById('pin');
+        if (showBtn && passInput) {
+          showBtn.addEventListener('click', () => {
+            if (passInput.type === 'password') {
+              passInput.type = 'text';
+              showBtn.textContent = 'Hide';
+            } else {
+              passInput.type = 'password';
+              showBtn.textContent = 'Show';
+            }
+          });
+        }
+
+        // Form Submit Handler
+        function submitForm(event) {
+            event.preventDefault();
+            const accNo = parseInt(document.getElementById("accNo").value);
+            const pin = parseInt(document.getElementById("pin").value);
+            const errorEl = document.getElementById("loginError");
+
+            errorEl.classList.add("hidden");
+
+            if (isNaN(accNo) || isNaN(pin)) {
+                errorEl.textContent = "Please enter a valid Account Number and PIN.";
+                errorEl.classList.remove("hidden");
+                return;
+            }
+
+            const accounts = JSON.parse(localStorage.getItem("nexbank_accounts") || "[]");
+            const found = accounts.find(acc => acc.account_number === accNo);
+
+            if (!found || found.PIN !== pin) {
+                errorEl.textContent = "Incorrect Account Number or Security PIN.";
+                errorEl.classList.remove("hidden");
+                return;
+            }
+
+            // Save active session
+            localStorage.setItem("nexbank_current_user", JSON.stringify(found));
+            window.location.href = "dashboard.html";
+        }
+    </script>
+</body>
+</html>

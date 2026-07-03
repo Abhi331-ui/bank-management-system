@@ -1,0 +1,15 @@
+# Dependency directories
+node_modules/
+
+# OS Metadata
+.DS_Store
+Thumbs.db
+
+# Executables and build outputs
+*.exe
+*.o
+*.obj
+
+# Local database and temp files
+temp.dat
+*.log

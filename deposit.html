@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexBank | Deposit Money</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        try{
+            tailwind.config = {
+                darkMode: "class",
+                theme: {
+                    extend: {
+                        "colors": {
+                            "on-error": "#ffffff",
+                            "on-primary-fixed": "#00105b",
+                            "on-error-container": "#93000a",
+                            "surface-variant": "#e2e1ef",
+                            "surface-dim": "#dad9e6",
+                            "on-tertiary-fixed": "#370e00",
+                            "on-background": "#1a1b24",
+                            "on-tertiary-fixed-variant": "#7f2b00",
+                            "inverse-on-surface": "#f1effd",
+                            "surface-container-highest": "#e2e1ef",
+                            "on-tertiary": "#ffffff",
+                            "surface": "#fbf8ff",
+                            "primary-container": "#3b5bff",
+                            "on-tertiary-container": "#ffefe9",
+                            "tertiary-container": "#c14500",
+                            "secondary-container": "#a2aefe",
+                            "secondary": "#4c59a2",
+                            "on-primary-container": "#f2f1ff",
+                            "error": "#ba1a1a",
+                            "outline-variant": "#c4c5d9",
+                            "inverse-primary": "#bac3ff",
+                            "surface-container-lowest": "#ffffff",
+                            "surface-container-low": "#f4f2ff",
+                            "error-container": "#ffdad6",
+                            "tertiary": "#983500",
+                            "surface-container": "#eeecfa",
+                            "on-primary-fixed-variant": "#002eca",
+                            "on-secondary-fixed-variant": "#344089",
+                            "primary-fixed": "#dee0ff",
+                            "on-secondary": "#ffffff",
+                            "secondary-fixed-dim": "#bac3ff",
+                            "on-surface": "#1a1b24",
+                            "background": "#fbf8ff",
+                            "inverse-surface": "#2f303a",
+                            "surface-container-high": "#e8e7f4",
+                            "on-surface-variant": "#444656",
+                            "outline": "#747688",
+                            "surface-tint": "#2448ef",
+                            "primary-fixed-dim": "#bac3ff",
+                            "secondary-fixed": "#dee0ff",
+                            "on-secondary-fixed": "#00105b",
+                            "on-secondary-container": "#323f87",
+                            "tertiary-fixed": "#ffdbce",
+                            "tertiary-fixed-dim": "#ffb599",
+                            "primary": "#143de7",
+                            "surface-bright": "#fbf8ff",
+                            "on-primary": "#ffffff"
+                        },
+                        "borderRadius": {
+                            "DEFAULT": "0.25rem",
+                            "lg": "0.5rem",
+                            "xl": "0.75rem",
+                            "full": "9999px"
+                        },
+                        "spacing": {
+                            "xs": "4px",
+                            "sm": "8px",
+                            "xl": "32px",
+                            "gutter": "16px",
+                            "margin": "24px",
+                            "md": "16px",
+                            "lg": "24px",
+                            "xxl": "48px"
+                        },
+                        "fontFamily": {
+                            "numeric-lg": ["Inter"],
+                            "body-md": ["Inter"],
+                            "headline": ["Inter"],
+                            "display-lg": ["Inter"],
+                            "body-sm": ["Inter"],
+                            "body-lg": ["Inter"],
+                            "label-md": ["Inter"],
+                            "label-sm": ["Inter"],
+                            "display-xl": ["Inter"],
+                            "numeric-md": ["Inter"]
+                        },
+                        "fontSize": {
+                            "numeric-lg": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                            "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0", "fontWeight": "400"}],
+                            "headline": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                            "display-lg": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                            "body-sm": ["13px", {"lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "400"}],
+                            "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0", "fontWeight": "400"}],
+                            "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0", "fontWeight": "500"}],
+                            "label-sm": ["13px", {"lineHeight": "18px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                            "display-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                            "numeric-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}]
+                        }
+                    },
+                },
+            }
+        }catch(_e){}
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #fbf8ff; -webkit-font-smoothing: antialiased; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; display: inline-block; vertical-align: middle; }
+        .tabular-nums { font-variant-numeric: tabular-nums; }
+    </style>
+    <script src="theme_notifications.js"></script>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-hidden">
+    <div class="flex h-screen w-full">
+        <!-- SideNavBar - Identity: NexBank -->
+        <aside class="flex flex-col h-full py-lg h-screen w-64 border-r border-outline-variant bg-surface shrink-0">
+            <div class="px-lg mb-xxl">
+                <h1 class="font-headline text-headline text-primary cursor-pointer" onclick="window.location.href='index.html'">NexBank</h1>
+                <p class="text-on-surface-variant font-label-sm">Enterprise Banking</p>
+            </div>
+            <nav class="flex-1 px-sm space-y-xs overflow-y-auto">
+                <a href="dashboard.html" class="flex items-center gap-md px-md py-sm transition-colors duration-150 ease-out text-on-surface-variant hover:bg-surface-container hover:text-on-surface">
+                    <span class="material-symbols-outlined">dashboard</span>
+                    <span class="font-body-md">Dashboard</span>
+                </a>
+                <a href="transfer.html" class="flex items-center gap-md px-md py-sm transition-colors duration-150 ease-out text-on-surface-variant hover:bg-surface-container hover:text-on-surface">
+                    <span class="material-symbols-outlined">swap_horiz</span>
+                    <span class="font-body-md">Transfer Fund</span>
+                </a>
+                <a href="create_account.html" class="flex items-center gap-md px-md py-sm transition-colors duration-150 ease-out text-on-surface-variant hover:bg-surface-container hover:text-on-surface">
+                    <span class="material-symbols-outlined">contactless</span>
+                    <span class="font-body-md">Open New Account</span>
+                </a>
+                <a href="#" class="flex items-center gap-md px-md py-sm transition-all duration-150 ease-out bg-surface-tint/10 text-primary font-bold border-r-2 border-primary">
+                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add_circle</span>
+                    <span class="font-body-md">Deposit Fund</span>
+                </a>
+                <a href="withdraw.html" class="flex items-center gap-md px-md py-sm transition-colors duration-150 ease-out text-on-surface-variant hover:bg-surface-container hover:text-on-surface">
+                    <span class="material-symbols-outlined">outbox</span>
+                    <span class="font-body-md">Withdraw Fund</span>
+                </a>
+                <a href="transactions.html" class="flex items-center gap-md px-md py-sm transition-colors duration-150 ease-out text-on-surface-variant hover:bg-surface-container hover:text-on-surface">
+                    <span class="material-symbols-outlined">receipt_long</span>
+                    <span class="font-body-md">Transactions Ledger</span>
+                </a>
+                <a href="settings.html" class="flex items-center gap-md px-md py-sm transition-colors duration-150 ease-out text-on-surface-variant hover:bg-surface-container hover:text-on-surface">
+                    <span class="material-symbols-outlined">settings</span>
+                    <span class="font-body-md">Settings</span>
+                </a>
+                
+                <div class="pt-lg border-t border-outline-variant mt-lg mx-md opacity-30"></div>
+                
+                <a class="flex items-center gap-md px-md py-sm transition-colors duration-150 ease-out text-error hover:bg-error-container/20 cursor-pointer mt-auto" onclick="logoutUser()">
+                    <span class="material-symbols-outlined text-error">logout</span>
+                    <span class="font-body-md">Logout</span>
+                </a>
+            </nav>
+            <div class="px-lg mt-auto pt-lg border-t border-outline-variant bg-surface-container-low/30 py-md">
+                <div class="flex items-center gap-md">
+                    <div class="w-10 h-10 bg-surface-container-high rounded-full overflow-hidden flex-shrink-0 border border-outline-variant flex items-center justify-center text-primary font-bold text-lg select-none" id="avatarBadge">
+                        MS
+                    </div>
+                    <div>
+                        <p class="font-label-md text-on-surface truncate max-w-[140px]" id="sidebarUser">Marcus Sterling</p>
+                        <p class="text-[11px] text-on-surface-variant truncate" id="sidebarAccNo">Acc No: 1000</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 flex flex-col h-full relative overflow-hidden">
+            <!-- TopNavBar -->
+            <header class="flex justify-between items-center px-lg w-full h-16 border-b border-outline-variant bg-surface shrink-0">
+                <div class="flex items-center gap-lg">
+                    <span class="font-headline text-headline font-bold text-on-surface">Deposit</span>
+                    <div class="relative">
+                        <span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-outline">search</span>
+                        <input class="bg-surface-container h-10 pl-10 pr-md border-none focus:ring-1 focus:ring-primary rounded-lg text-body-sm w-64" placeholder="Search transactions..." type="text">
+                    </div>
+                </div>
+                <div class="flex items-center gap-md">
+                    <div class="relative">
+                        <button class="relative w-10 h-10 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors" id="notification-btn">
+                            <span class="material-symbols-outlined">notifications</span>
+                            <span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border-2 border-background hidden" id="notification-badge"></span>
+                        </button>
+                        <!-- Dropdown panel -->
+                        <div class="absolute right-0 mt-2 w-80 bg-surface border border-outline-variant rounded-xl shadow-2xl overflow-hidden hidden z-50 bg-white dark:bg-neutral-900" id="notification-dropdown">
+                            <div class="p-md border-b border-outline-variant flex justify-between items-center bg-surface-container-low dark:bg-neutral-800">
+                                <span class="font-label-md text-label-md text-on-surface font-bold">Notifications</span>
+                                <button class="text-xs text-primary hover:underline font-semibold" id="mark-all-read-btn">Mark all read</button>
+                            </div>
+                            <div class="max-h-64 overflow-y-auto divide-y divide-outline-variant no-scrollbar text-left" id="notification-list">
+                                <!-- Dynamic notifications list -->
+                            </div>
+                            <div class="p-sm text-center border-t border-outline-variant bg-surface-container-low dark:bg-neutral-800">
+                                <button class="text-xs text-on-surface-variant hover:underline font-medium" onclick="clearAllNotifications()">Clear All</button>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="p-xs text-on-surface-variant hover:text-primary transition-colors duration-150" id="theme-toggle">
+                        <span class="material-symbols-outlined">dark_mode</span>
+                    </button>
+                    <div class="h-6 w-[1px] bg-outline-variant mx-xs"></div>
+                    <button class="flex items-center gap-xs font-label-md text-on-surface px-sm py-xs hover:bg-surface-container-high rounded transition-colors duration-150" onclick="window.location.href='dashboard.html'">
+                        Dashboard
+                        <span class="material-symbols-outlined">arrow_forward</span>
+                    </button>
+                </div>
+            </header>
+            
+            <!-- Scrollable Content -->
+            <div class="flex-1 overflow-y-auto bg-surface-container-low p-xl">
+                <div class="max-w-7xl mx-auto">
+                    <!-- Navigation Header -->
+                    <div class="mb-xl">
+                        <a class="inline-flex items-center gap-xs text-primary font-label-md hover:underline transition-all duration-150 mb-sm cursor-pointer font-semibold" href="dashboard.html">
+                            <span class="material-symbols-outlined text-[18px]">arrow_back</span>
+                            Back to Dashboard
+                        </a>
+                        <h2 class="font-display-lg text-display-lg text-on-surface">Deposit Money</h2>
+                    </div>
+                    
+                    <!-- Deposit Form Card -->
+                    <div class="flex justify-center items-start pt-lg">
+                        <div class="w-[480px] bg-surface border border-outline-variant p-xl shadow-sm transition-all duration-150 ease-out bg-white" id="depositCard">
+                            <!-- Account Selector -->
+                            <div class="mb-xl">
+                                <label class="block font-label-sm text-on-surface-variant mb-sm">Select Destination Account</label>
+                                <div class="relative">
+                                    <select id="accountSelect" class="w-full h-[48px] bg-surface-container-low border border-outline-variant px-md pr-xl appearance-none focus:outline-none focus:border-primary focus:ring-0 rounded-lg transition-colors cursor-pointer text-body-md font-medium">
+                                        <!-- Dynamic destination accounts -->
+                                    </select>
+                                    <span class="material-symbols-outlined absolute right-md top-1/2 -translate-y-1/2 pointer-events-none text-outline">expand_more</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Amount Input -->
+                            <div class="mb-xl text-center">
+                                <label class="block font-label-sm text-on-surface-variant mb-md">Deposit Amount</label>
+                                <div class="relative flex items-center justify-center border-b border-outline-variant pb-xs focus-within:border-primary transition-colors group">
+                                    <span class="font-display-xl text-display-xl text-outline group-focus-within:text-primary font-semibold">$</span>
+                                    <input class="tabular-nums font-display-xl text-display-xl bg-transparent border-none focus:ring-0 text-center w-full max-w-[280px] p-0 font-bold" id="amount-input" onblur="if(this.value==='') this.value='0.00'" onfocus="if(this.value==='0.00') this.value=''" oninput="updateSummary(this.value)" type="text" value="0.00">
+                                </div>
+                            </div>
+                            
+                            <!-- Quick Amount Chips -->
+                            <div class="grid grid-cols-4 gap-sm mb-xl">
+                                <button class="h-10 border border-outline-variant font-label-md text-on-surface-variant hover:border-primary hover:text-primary hover:bg-primary-container/5 rounded-lg transition-all duration-150 font-semibold" onclick="setAmount('50.00')">$50</button>
+                                <button class="h-10 border border-outline-variant font-label-md text-on-surface-variant hover:border-primary hover:text-primary hover:bg-primary-container/5 rounded-lg transition-all duration-150 font-semibold" onclick="setAmount('100.00')">$100</button>
+                                <button class="h-10 border border-outline-variant font-label-md text-on-surface-variant hover:border-primary hover:text-primary hover:bg-primary-container/5 rounded-lg transition-all duration-150 font-semibold" onclick="setAmount('500.00')">$500</button>
+                                <button class="h-10 border border-outline-variant font-label-md text-on-surface-variant hover:border-primary hover:text-primary hover:bg-primary-container/5 rounded-lg transition-all duration-150 font-semibold" onclick="setAmount('1000.00')">$1,000</button>
+                            </div>
+                            
+                            <!-- Deposit Method Segmented Control -->
+                            <div class="mb-xl">
+                                <label class="block font-label-sm text-on-surface-variant mb-sm">Deposit Method</label>
+                                <div class="flex p-[2px] bg-surface-container border border-outline-variant rounded-lg">
+                                    <button class="flex-1 h-9 font-label-md transition-all duration-150 bg-white text-primary shadow-sm method-btn font-semibold rounded-md" onclick="setMethod(this, 'Bank Transfer')">Bank Transfer</button>
+                                    <button class="flex-1 h-9 font-label-md transition-all duration-150 text-on-surface-variant hover:text-on-surface method-btn font-semibold rounded-md" onclick="setMethod(this, 'Cash Deposit')">Cash Deposit</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Note Field -->
+                            <div class="mb-xl">
+                                <label class="block font-label-sm text-on-surface-variant mb-sm">Add a Note (Optional)</label>
+                                <textarea id="note-input" class="w-full bg-surface-container-low border border-outline-variant p-md focus:outline-none focus:border-primary focus:ring-0 rounded-lg transition-colors text-body-md resize-none" placeholder="Reference or description..." rows="2"></textarea>
+                            </div>
+                            
+                            <!-- Summary Row -->
+                            <div class="pt-lg border-t border-outline-variant mb-lg">
+                                <div class="flex justify-between items-center mb-xs">
+                                    <span class="text-on-surface-variant font-body-md">Net Deposit</span>
+                                    <span class="tabular-nums font-numeric-lg text-numeric-lg text-on-background" id="summary-amount">$0.00</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-on-surface-variant font-body-md">Processing Fee</span>
+                                    <span class="tabular-nums font-body-md text-emerald-600 font-semibold">Waived</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Error container -->
+                            <div id="depositError" class="text-error font-body-sm mb-md hidden text-center"></div>
+
+                            <!-- Confirm Button -->
+                            <button class="w-full h-12 bg-primary text-on-primary font-label-md hover:bg-opacity-90 rounded-lg shadow-lg shadow-primary/20 transition-all duration-150 active:scale-[0.98] font-bold" onclick="submitDeposit()">
+                                Confirm Deposit
+                            </button>
+                            <p class="mt-md text-center text-body-sm text-on-surface-variant opacity-70">
+                                Funds will be available in 1-2 business days.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Session Guard
+        let currentUser = null;
+        function checkSession() {
+            const session = localStorage.getItem("nexbank_current_user");
+            if (!session) {
+                window.location.href = "login.html";
+                return;
+            }
+            currentUser = JSON.parse(session);
+
+            // Fetch actual user values from simulated database
+            const accounts = JSON.parse(localStorage.getItem("nexbank_accounts") || "[]");
+            const actualUser = accounts.find(acc => acc.account_number === currentUser.account_number);
+            if (!actualUser) {
+                localStorage.removeItem("nexbank_current_user");
+                window.location.href = "login.html";
+                return;
+            }
+            currentUser = actualUser;
+        }
+        checkSession();
+
+        function logoutUser() {
+            localStorage.removeItem("nexbank_current_user");
+            window.location.href = "login.html";
+        }
+
+        // Selected deposit method state
+        let selectedMethod = 'Bank Transfer';
+
+        function setAmount(val) {
+            const input = document.getElementById('amount-input');
+            input.value = val;
+            updateSummary(val);
+        }
+
+        function updateSummary(val) {
+            const display = document.getElementById('summary-amount');
+            if(!val || val === '') {
+                display.innerText = '$0.00';
+                return;
+            }
+            // Simple formatting for the summary
+            const numeric = parseFloat(val.replace(/,/g, ''));
+            if(isNaN(numeric)) {
+                display.innerText = '$0.00';
+            } else {
+                display.innerText = '$' + numeric.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            }
+        }
+
+        function setMethod(btn, method) {
+            selectedMethod = method;
+            const btns = document.querySelectorAll('.method-btn');
+            btns.forEach(b => {
+                b.classList.remove('bg-white', 'text-primary', 'shadow-sm');
+                b.classList.add('text-on-surface-variant');
+            });
+            btn.classList.add('bg-white', 'text-primary', 'shadow-sm');
+            btn.classList.remove('text-on-surface-variant');
+        }
+
+        // Submit Deposit
+        function submitDeposit() {
+            const errorEl = document.getElementById('depositError');
+            errorEl.classList.add("hidden");
+
+            const inputVal = document.getElementById('amount-input').value;
+            const amt = parseFloat(inputVal.replace(/,/g, ''));
+            const note = document.getElementById('note-input').value.trim();
+
+            if (isNaN(amt) || amt <= 0) {
+                errorEl.textContent = "Invalid amount. Enter a positive number.";
+                errorEl.classList.remove("hidden");
+                return;
+            }
+
+            const accounts = JSON.parse(localStorage.getItem("nexbank_accounts") || "[]");
+            const idx = accounts.findIndex(acc => acc.account_number === currentUser.account_number);
+            
+            if (idx === -1) {
+                errorEl.textContent = "Session invalid. Redirecting to login...";
+                errorEl.classList.remove("hidden");
+                setTimeout(logoutUser, 1500);
+                return;
+            }
+
+            // Update balance
+            accounts[idx].balance += amt;
+            localStorage.setItem("nexbank_accounts", JSON.stringify(accounts));
+            currentUser.balance = accounts[idx].balance;
+            localStorage.setItem("nexbank_current_user", JSON.stringify(currentUser));
+
+            // Log Transaction
+            const logs = JSON.parse(localStorage.getItem("nexbank_transactions") || "[]");
+            const now = new Date();
+            const dateStr = now.toDateString() + " " + now.toTimeString().split(' ')[0] + " " + now.getFullYear();
+            const methodLabel = selectedMethod;
+            const noteSuffix = note ? ` - ${note}` : "";
+            const logEntry = `AccNo: ${currentUser.account_number} | DEPOSIT (${methodLabel})${noteSuffix} | Amount: ${amt.toFixed(2)} | Time: ${dateStr}`;
+            logs.push(logEntry);
+            localStorage.setItem("nexbank_transactions", JSON.stringify(logs));
+
+            // Trigger local notification
+            if (typeof window.addNotification === "function") {
+                window.addNotification("Deposit Successful", `Successfully deposited $${amt.toLocaleString('en-US', { minimumFractionDigits: 2 })} via ${methodLabel}.`);
+            }
+
+            alert(`Deposit of $${amt.toLocaleString('en-US', { minimumFractionDigits: 2 })} successfully confirmed!`);
+            window.location.href = "dashboard.html";
+        }
+
+        // Initialize UI Elements
+        function initUI() {
+            // Update greetings & user card information
+            document.getElementById("sidebarUser").textContent = currentUser.name;
+            document.getElementById("sidebarAccNo").textContent = `Acc No: ${currentUser.account_number}`;
+            
+            // Set Avatar Initials
+            const initials = currentUser.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+            document.getElementById("avatarBadge").textContent = initials;
+
+            // Fill accounts selector
+            const accountSelect = document.getElementById("accountSelect");
+            const formattedBalance = currentUser.balance.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            const last4 = currentUser.account_number.toString().slice(-4);
+            accountSelect.innerHTML = `<option>Portfolio Card •••• ${last4} ($${formattedBalance})</option>`;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initUI();
+
+            // Atmospheric micro-interaction: Subtle border highlight on card hover
+            const card = document.getElementById('depositCard');
+            card.addEventListener('mouseenter', () => {
+                card.style.borderColor = '#143de7';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.borderColor = '#c4c5d9';
+            });
+        });
+    </script>
+</body>
+</html>

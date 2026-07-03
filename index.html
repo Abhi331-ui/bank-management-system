@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>NexBank | Institutional Banking Infrastructure</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed": "#00105b",
+                    "primary-fixed": "#dee0ff",
+                    "primary-fixed-dim": "#bac3ff",
+                    "on-tertiary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "secondary": "#4c59a2",
+                    "on-primary-fixed": "#00105b",
+                    "surface-container": "#eeecfa",
+                    "background": "#fbf8ff",
+                    "tertiary-container": "#c14500",
+                    "tertiary": "#983500",
+                    "surface-container-low": "#f4f2ff",
+                    "surface-tint": "#2448ef",
+                    "on-tertiary-fixed": "#370e00",
+                    "on-secondary": "#ffffff",
+                    "secondary-container": "#a2aefe",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-fixed-variant": "#7f2b00",
+                    "surface-dim": "#dad9e6",
+                    "on-primary-fixed-variant": "#002eca",
+                    "on-error": "#ffffff",
+                    "surface-container-highest": "#e2e1ef",
+                    "secondary-fixed": "#dee0ff",
+                    "on-primary-container": "#f2f1ff",
+                    "error-container": "#ffdad6",
+                    "surface-bright": "#fbf8ff",
+                    "on-tertiary-container": "#ffefe9",
+                    "on-surface-variant": "#444656",
+                    "surface-container-high": "#e8e7f4",
+                    "outline": "#747688",
+                    "inverse-on-surface": "#f1effd",
+                    "on-background": "#1a1b24",
+                    "surface-variant": "#e2e1ef",
+                    "surface": "#fbf8ff",
+                    "primary-container": "#3b5bff",
+                    "on-secondary-container": "#323f87",
+                    "inverse-primary": "#bac3ff",
+                    "tertiary-fixed-dim": "#ffb599",
+                    "primary": "#143de7",
+                    "secondary-fixed-dim": "#bac3ff",
+                    "on-surface": "#1a1b24",
+                    "on-secondary-fixed-variant": "#344089",
+                    "error": "#ba1a1a",
+                    "on-primary": "#ffffff",
+                    "tertiary-fixed": "#ffdbce",
+                    "inverse-surface": "#2f303a",
+                    "outline-variant": "#c4c5d9"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "16px",
+                    "xxl": "48px",
+                    "xl": "32px",
+                    "xs": "4px",
+                    "sm": "8px",
+                    "md": "16px",
+                    "margin": "24px",
+                    "lg": "24px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Inter"],
+                    "display-xl": ["Inter"],
+                    "label-md": ["Inter"],
+                    "numeric-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "numeric-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "label-sm": ["Inter"]
+            },
+            "fontSize": {
+                    "display-lg": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "display-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0", "fontWeight": "500"}],
+                    "numeric-lg": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0", "fontWeight": "400"}],
+                    "numeric-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0", "fontWeight": "400"}],
+                    "headline": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-sm": ["13px", {"lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "400"}],
+                    "label-sm": ["13px", {"lineHeight": "18px", "letterSpacing": "0.02em", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+    <style>
+        body {
+            background-color: #fbf8ff;
+            color: #1a1b24;
+            font-family: 'Inter', sans-serif;
+            overflow-y: auto;
+            overscroll-behavior-y: none; /* prevent bounce overlap */
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px) scale(0.98);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: transform, opacity;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .nav-scrolled {
+            background-color: #fbf8ff;
+            border-bottom: 1px solid #e2e1ef;
+            box-shadow: 0 4px 20px -10px rgba(0, 0, 0, 0.05);
+        }
+        /* Custom modal entry transition */
+        .modal-active {
+            opacity: 1 !important;
+            pointer-events: auto !important;
+            transform: scale(1) !important;
+        }
+
+        /* 120fps UI Micro-interactions & animations */
+        button, a, input, select, textarea {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+        }
+        button:hover {
+            transform: translateY(-2px) scale(1.015);
+            filter: brightness(1.05);
+        }
+        button:active {
+            transform: translateY(0) scale(0.98);
+            filter: brightness(0.95);
+        }
+        .feature-card {
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
+            will-change: transform, box-shadow;
+        }
+        .feature-card:hover {
+            transform: translateY(-6px) scale(1.015);
+            border-color: #143de7 !important;
+            box-shadow: 0 20px 30px -10px rgba(20, 61, 231, 0.08);
+        }
+        .feature-card:hover span.material-symbols-outlined {
+            transform: scale(1.1) rotate(5deg);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+    </style>
+    <script src="theme_notifications.js"></script>
+</head>
+<body class="overflow-x-hidden">
+
+<!-- TopNavBar -->
+<nav class="sticky top-0 w-full z-40 transition-all duration-300 bg-background border-b border-outline-variant/30" id="navbar">
+    <div class="flex justify-between items-center h-16 w-full px-md sm:px-margin md:px-xl max-w-[1280px] mx-auto">
+        <div class="flex items-center gap-xl">
+            <span class="font-display-lg text-display-lg font-bold tracking-tight text-on-background cursor-pointer" onclick="window.scrollTo(0,0)">NexBank</span>
+            <div class="hidden md:flex gap-lg">
+                <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-150 ease-out" href="#">Solutions</a>
+                <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-150 ease-out" href="#">Partners</a>
+                <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-150 ease-out" href="#">Security</a>
+                <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-150 ease-out cursor-pointer" onclick="openAdminModal()">Admin Portal</a>
+                <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-150 ease-out" href="#">About</a>
+            </div>
+        </div>
+        <div class="flex items-center gap-xs sm:gap-md">
+            <button class="w-10 h-10 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors" id="theme-toggle">
+                <span class="material-symbols-outlined">dark_mode</span>
+            </button>
+            <button class="font-label-md text-label-md text-on-surface-variant px-xs sm:px-md h-10 hover:text-primary transition-colors duration-150" onclick="window.location.href='login.html'">Login</button>
+            <button class="bg-primary text-on-primary px-sm sm:px-lg h-10 rounded-lg font-label-md text-label-md hover:bg-opacity-90 transition-all duration-150 shadow-md shadow-primary/20" onclick="openCreateAccountModal()">Open<span class="hidden sm:inline"> Account</span></button>
+        </div>
+    </div>
+</nav>
+
+<main class="max-w-[1200px] mx-auto px-margin md:px-xl overflow-visible">
+    <!-- Hero Section -->
+    <section class="reveal pt-xxl pb-xxl text-center max-w-[800px] mx-auto">
+        <span class="inline-block font-label-sm text-label-sm text-primary uppercase tracking-widest mb-md">Modern Banking Infrastructure</span>
+        <h1 class="font-display-xl text-display-xl md:text-6xl md:leading-[1.1] mb-lg text-on-background">The foundation for institutional finance.</h1>
+        <p class="font-body-lg text-body-lg text-on-surface-variant mb-xl max-w-[600px] mx-auto">A secure, scalable platform designed for the complexities of modern enterprise banking. Reliable infrastructure for global operations.</p>
+        <div class="flex flex-col sm:flex-row justify-center gap-md">
+            <button class="bg-primary text-on-primary px-xxl h-[48px] rounded-lg font-label-md text-label-md hover:scale-[1.02] active:scale-[0.98] transition-all shadow-lg shadow-primary/25" onclick="openCreateAccountModal()">Get Started</button>
+            <button class="border border-outline px-xxl h-[48px] rounded-lg font-label-md text-label-md text-on-surface hover:bg-surface-container transition-all" onclick="openAdminModal()">System Dashboard</button>
+        </div>
+    </section>
+
+    <!-- Trust Strip -->
+    <section class="reveal py-xl border-t border-b border-outline-variant">
+        <p class="text-center font-label-sm text-label-sm text-on-surface-variant mb-xl uppercase tracking-widest">Trusted by financial institutions worldwide</p>
+        <div class="flex flex-wrap justify-center items-center gap-xxl opacity-60 grayscale">
+            <span class="font-display-lg text-on-surface font-bold">GLOBAL CAPITAL</span>
+            <span class="font-display-lg text-on-surface font-bold">APEX LEDGER</span>
+            <span class="font-display-lg text-on-surface font-bold">NORDIC TRUST</span>
+            <span class="font-display-lg text-on-surface font-bold">EQUITY PRIME</span>
+            <span class="font-display-lg text-on-surface font-bold">MERIDIAN</span>
+        </div>
+    </section>
+
+    <!-- Feature Grid -->
+    <section class="reveal py-xxl">
+        <div class="text-center mb-xxl">
+            <h2 class="font-display-lg text-display-lg mb-md">Built for Precision</h2>
+            <div class="w-16 h-1 bg-primary mx-auto"></div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-xl">
+            <!-- Feature 1 -->
+            <div class="feature-card p-lg border border-outline-variant rounded-lg hover:border-primary transition-all duration-300 hover:shadow-lg group bg-white">
+                <span class="material-symbols-outlined text-primary text-3xl mb-md">sync_alt</span>
+                <h3 class="font-headline text-headline mb-sm">Real-time processing</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant">Instant settlement and transaction reconciliation across global networks without latency.</p>
+            </div>
+            <!-- Feature 2 -->
+            <div class="feature-card p-lg border border-outline-variant rounded-lg hover:border-primary transition-all duration-300 hover:shadow-lg group bg-white">
+                <span class="material-symbols-outlined text-primary text-3xl mb-md">verified_user</span>
+                <h3 class="font-headline text-headline mb-sm">Bank-grade security</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant">Multi-layered defense protocols with hardware security modules and end-to-end encryption.</p>
+            </div>
+            <!-- Feature 3 -->
+            <div class="feature-card p-lg border border-outline-variant rounded-lg hover:border-primary transition-all duration-300 hover:shadow-lg group bg-white">
+                <span class="material-symbols-outlined text-primary text-3xl mb-md">admin_panel_settings</span>
+                <h3 class="font-headline text-headline mb-sm">Role-based access</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant">Granular permissions management for complex organizational structures and compliance needs.</p>
+            </div>
+            <!-- Feature 4 -->
+            <div class="feature-card p-lg border border-outline-variant rounded-lg hover:border-primary transition-all duration-300 hover:shadow-lg group bg-white">
+                <span class="material-symbols-outlined text-primary text-3xl mb-md">bar_chart</span>
+                <h3 class="font-headline text-headline mb-sm">Automated reporting</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant">Generate comprehensive regulatory reports and internal audits automatically with a single click.</p>
+            </div>
+            <!-- Feature 5 -->
+            <div class="feature-card p-lg border border-outline-variant rounded-lg hover:border-primary transition-all duration-300 hover:shadow-lg group bg-white">
+                <span class="material-symbols-outlined text-primary text-3xl mb-md">account_balance</span>
+                <h3 class="font-headline text-headline mb-sm">Multi-account management</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant">Seamlessly oversee thousands of sub-accounts from a single institutional parent dashboard.</p>
+            </div>
+            <!-- Feature 6 -->
+            <div class="feature-card p-lg border border-outline-variant rounded-lg hover:border-primary transition-all duration-300 hover:shadow-lg group bg-white">
+                <span class="material-symbols-outlined text-primary text-3xl mb-md">history</span>
+                <h3 class="font-headline text-headline mb-sm">Audit logs</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant">Immutable records of every action taken within the system, ensuring total operational transparency.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Deep Dives -->
+    <section class="py-xxl flex flex-col gap-xxl">
+        <!-- Deep Dive 1 -->
+        <div class="reveal grid grid-cols-1 md:grid-cols-2 items-center gap-xl">
+            <div>
+                <h2 class="font-display-lg text-display-lg mb-md">Comprehensive Dashboard Overview</h2>
+                <p class="font-body-lg text-body-lg text-on-surface-variant mb-lg">Monitor liquidity, transactions, and risk parameters in a single, unified interface designed for executive oversight. Our dashboard provides high-fidelity visualizations of your entire banking ecosystem.</p>
+                <ul class="space-y-sm">
+                    <li class="flex items-center gap-sm font-label-md text-on-surface"><span class="material-symbols-outlined text-primary text-xl">check_circle</span> Customizable widget layouts</li>
+                    <li class="flex items-center gap-sm font-label-md text-on-surface"><span class="material-symbols-outlined text-primary text-xl">check_circle</span> Real-time liquidity forecasting</li>
+                    <li class="flex items-center gap-sm font-label-md text-on-surface"><span class="material-symbols-outlined text-primary text-xl">check_circle</span> Direct ledger integration</li>
+                </ul>
+            </div>
+            <div class="relative">
+                <img class="w-full rounded-lg border border-outline-variant shadow-sm" data-alt="A sophisticated UI dashboard for an institutional banking platform, featuring clean white panels, subtle indigo accents, complex data visualizations, and professional typography. The lighting is crisp and modern, emphasizing clarity and precision in a high-end light-mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB46zlxxa4I9Ot3UnXDFIyKD51_6vl7ZiQC9NIMaEg_X1iw1CjushOu4bX2D6W1QfKZEzAgO9yxDPdQ5WYZ6aSjdaPwixgt_OgOJYgoQnHZU-2fTXIZsfUaYKoWsrdYfqdxsg9IFt7Zjkg2_nBc59Dp-e5aHTGFbPeljYlYlirBIr3YrTfcJvCFzhPQzdm3grbP_oodcQhKM-da5Y04Mi3wTki3eBGrZa-lCUNd-h5qFF9bpqKh3pzjkQ">
+            </div>
+        </div>
+        <!-- Deep Dive 2 -->
+        <div class="reveal grid grid-cols-1 md:grid-cols-2 items-center gap-xl">
+            <div class="md:order-2">
+                <h2 class="font-display-lg text-display-lg mb-md">Security &amp; Global Compliance</h2>
+                <p class="font-body-lg text-body-lg text-on-surface-variant mb-lg">Navigate complex global regulations with built-in compliance tools. Our platform is architected to meet the world's most stringent financial security standards across jurisdictions.</p>
+                <ul class="space-y-sm">
+                    <li class="flex items-center gap-sm font-label-md text-on-surface"><span class="material-symbols-outlined text-primary text-xl">lock</span> End-to-end PGP encryption</li>
+                    <li class="flex items-center gap-sm font-label-md text-on-surface"><span class="material-symbols-outlined text-primary text-xl">shield</span> Biometric multi-factor authentication</li>
+                    <li class="flex items-center gap-sm font-label-md text-on-surface"><span class="material-symbols-outlined text-primary text-xl">security</span> Regional data residency controls</li>
+                </ul>
+            </div>
+            <div class="md:order-1">
+                <img class="w-full rounded-lg border border-outline-variant shadow-sm" data-alt="Close-up of a security settings interface on a banking application, showcasing encrypted data streams and authentication logs. The design is minimalist with a light-grey and white palette, accented by professional indigo elements. Soft, diffused lighting creates an atmosphere of trust and high-tech security." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCE2klyIg2u2E4h_-hTnrOkBA5j_CoovBqTwqiMS8HYoif3J8yitfbFvHHvtJAVv1M_Xw8Uoq-NfDvuK9a-GuIDEbd-mk_kRiNsjgrYlwefAdIRAaCGjGAMXIrZY1eRhbMYiLoxodKBgrnef1SIwKqZ0AW71sNb3h3cMlzNtldG3gwwo1nIae7dAVqVeL3Y45LdMeHw1cXbyQ9uhIJbK5TlPCxrAXGOwDvU1t1ktDBldOt_0oYjUWb9wQ">
+            </div>
+        </div>
+        <!-- Deep Dive 3 -->
+        <div class="reveal grid grid-cols-1 md:grid-cols-2 items-center gap-xl">
+            <div>
+                <h2 class="font-display-lg text-display-lg mb-md">Advanced Reporting Tools</h2>
+                <p class="font-body-lg text-body-lg text-on-surface-variant mb-lg">Transform raw financial data into actionable insights. Export regulatory-compliant reports in seconds, tailored to the specific needs of your legal and treasury departments.</p>
+                <ul class="space-y-sm">
+                    <li class="flex items-center gap-sm font-label-md text-on-surface"><span class="material-symbols-outlined text-primary text-xl">description</span> Automated quarterly filings</li>
+                    <li class="flex items-center gap-sm font-label-md text-on-surface"><span class="material-symbols-outlined text-primary text-xl">analytics</span> SQL-based custom queries</li>
+                    <li class="flex items-center gap-sm font-label-md text-on-surface"><span class="material-symbols-outlined text-primary text-xl">share</span> Scheduled stakeholder delivery</li>
+                </ul>
+            </div>
+            <div>
+                <img class="w-full rounded-lg border border-outline-variant shadow-sm" data-alt="A sleek data analytics screen showing institutional financial reports with refined line charts and organized data tables. The UI is exceptionally clean, utilizing a white background and indigo highlights for key metrics. The overall vibe is professional, precise, and sophisticated, reflecting institutional reliability." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_Vxq0k8rtlV4EtTcFC_CPNFNeluDM9Gm5dkZ_XC3bZYwtTXRwAzmHqp0p6Uux4WyfqawekZpNDKRAy_s3rsBxD4Iv1kJAq9ljpfrcSrvTRMoMD_GUkyLQ7xZAG9eMamb8-0EiwumH2zvh1yzqnkwOQf7cvZd0J5n0lgTGN4YF04cBP1uST3_u7vMS2dBNb_TPjE7mBMRvYdq3-1FaMQ7xI7ayamHc7tOgWqL6EC9Mbm2gwYJtQ5YCXQ">
+            </div>
+        </div>
+    </section>
+
+    <!-- Security Stats -->
+    <section class="reveal py-xxl bg-surface-container-low rounded-xl px-xl">
+        <div class="text-center mb-xl">
+            <h2 class="font-display-lg text-display-lg">Built on a foundation of trust</h2>
+            <p class="font-body-md text-on-surface-variant mt-sm">Certified for the highest industry standards.</p>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-lg text-center">
+            <div class="p-md">
+                <p class="font-display-lg text-primary mb-xs">256-bit</p>
+                <p class="font-label-sm text-on-surface-variant uppercase">encryption</p>
+            </div>
+            <div class="p-md">
+                <p class="font-display-lg text-primary mb-xs">SOC 2</p>
+                <p class="font-label-sm text-on-surface-variant uppercase">aligned</p>
+            </div>
+            <div class="p-md">
+                <p class="font-display-lg text-primary mb-xs">99.9%</p>
+                <p class="font-label-sm text-on-surface-variant uppercase">Uptime</p>
+            </div>
+            <div class="p-md">
+                <p class="font-display-lg text-primary mb-xs">ISO 27001</p>
+                <p class="font-label-sm text-on-surface-variant uppercase">Certified</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="reveal py-xxl text-center">
+        <div class="max-w-[700px] mx-auto py-xxl border border-outline-variant rounded-xl bg-white shadow-xl shadow-surface-container/50">
+            <h2 class="font-display-xl text-display-xl mb-md px-md">Ready to modernize your banking infrastructure?</h2>
+            <p class="font-body-lg text-on-surface-variant mb-xl px-lg">Join the world's leading financial institutions on the NexBank platform.</p>
+            <button class="bg-primary text-on-primary px-xxl h-[48px] rounded-lg font-label-md text-label-md hover:scale-[1.02] active:scale-[0.98] transition-all shadow-lg shadow-primary/20" onclick="openCreateAccountModal()">Get Started</button>
+        </div>
+    </section>
+</main>
+
+<!-- Footer -->
+<footer class="bg-surface-container-lowest border-t border-outline-variant">
+    <div class="w-full pt-xxl pb-xl px-margin md:px-xl flex flex-col gap-xl max-w-[1280px] mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-xl">
+            <div class="col-span-1 md:col-span-1">
+                <span class="font-headline text-headline font-bold text-on-background block mb-md">NexBank</span>
+                <p class="font-body-sm text-on-surface-variant">Defining the future of institutional financial infrastructure through precision engineering and absolute security.</p>
+            </div>
+            <div>
+                <h4 class="font-label-md font-bold mb-md">Product</h4>
+                <ul class="flex flex-col gap-sm">
+                    <li><a class="font-body-sm text-on-surface-variant hover:text-primary transition-all" href="#">Solutions</a></li>
+                    <li><a class="font-body-sm text-on-surface-variant hover:text-primary transition-all" href="#">Infrastructure</a></li>
+                    <li><a class="font-body-sm text-on-surface-variant hover:text-primary transition-all" href="#">Integrations</a></li>
+                    <li><a class="font-body-sm text-on-surface-variant hover:text-primary transition-all" href="#">Pricing</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-label-md font-bold mb-md">Resources</h4>
+                <ul class="flex flex-col gap-sm">
+                    <li><a class="font-body-sm text-on-surface-variant hover:text-primary transition-all cursor-pointer" onclick="openAdminModal()">System Control Panel</a></li>
+                    <li><a class="font-body-sm text-on-surface-variant hover:text-primary transition-all" href="#">Security Whitepaper</a></li>
+                    <li><a class="font-body-sm text-on-surface-variant hover:text-primary transition-all" href="#">API Reference</a></li>
+                    <li><a class="font-body-sm text-on-surface-variant hover:text-primary transition-all" href="#">Global Compliance</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-label-md font-bold mb-md">Company</h4>
+                <ul class="flex flex-col gap-sm">
+                    <li><a class="font-body-sm text-on-surface-variant hover:text-primary transition-all" href="#">About Us</a></li>
+                    <li><a class="font-body-sm text-on-surface-variant hover:text-primary transition-all" href="#">Careers</a></li>
+                    <li><a class="font-body-sm text-on-surface-variant hover:text-primary transition-all" href="#">Contact</a></li>
+                    <li><a class="font-body-sm text-on-surface-variant hover:text-primary transition-all" href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="flex flex-col md:flex-row justify-between items-center pt-xl border-t border-outline-variant gap-md">
+            <p class="font-body-sm text-on-surface-variant">© 2026 NexBank Institutional. Member FDIC. Equal Housing Lender.</p>
+            <div class="flex gap-lg">
+                <a class="font-label-sm text-on-surface-variant hover:text-primary transition-all underline" href="#">Privacy Policy</a>
+                <a class="font-label-sm text-on-surface-variant hover:text-primary transition-all underline" href="#">Terms of Service</a>
+                <a class="font-label-sm text-on-surface-variant hover:text-primary transition-all underline" href="#">Security Disclosure</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Modals & Dashboards Container -->
+
+<!-- Create Account Modal -->
+<div id="createAccountModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300">
+    <div class="bg-white max-w-md w-full rounded-xl border border-outline-variant p-xl shadow-2xl scale-95 transition-all duration-300 relative mx-margin">
+        <button class="absolute top-md right-md text-outline hover:text-on-background" onclick="closeCreateAccountModal()">
+            <span class="material-symbols-outlined">close</span>
+        </button>
+        <h3 class="font-display-lg text-display-lg text-on-background mb-sm">Open Institutional Account</h3>
+        <p class="font-body-sm text-on-surface-variant mb-lg">Set up your modern capital account in seconds.</p>
+        
+        <div class="space-y-md">
+            <div>
+                <label class="block font-label-sm text-on-surface mb-xs" for="createAccNo">Account Number</label>
+                <input type="number" id="createAccNo" class="w-full h-10 border border-outline-variant rounded-lg px-md font-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none" placeholder="e.g. 1003">
+            </div>
+            <div>
+                <label class="block font-label-sm text-on-surface mb-xs" for="createName">Institution / Username</label>
+                <input type="text" id="createName" class="w-full h-10 border border-outline-variant rounded-lg px-md font-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none" placeholder="e.g. John Doe">
+            </div>
+            <div>
+                <label class="block font-label-sm text-on-surface mb-xs" for="createBalance">Initial Funding (USD)</label>
+                <input type="number" id="createBalance" class="w-full h-10 border border-outline-variant rounded-lg px-md font-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none" placeholder="e.g. 25000">
+            </div>
+            <div>
+                <label class="block font-label-sm text-on-surface mb-xs" for="createPin">Access PIN (Numeric)</label>
+                <input type="password" maxlength="6" id="createPin" class="w-full h-10 border border-outline-variant rounded-lg px-md font-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none" placeholder="e.g. 1234">
+            </div>
+        </div>
+        <div id="createAccountError" class="text-error font-body-sm mt-md hidden"></div>
+        <div class="flex justify-end gap-md mt-xl">
+            <button class="border border-outline px-lg h-10 rounded-lg font-label-md text-label-md text-on-surface hover:bg-surface-container transition-all" onclick="closeCreateAccountModal()">Cancel</button>
+            <button class="bg-primary text-on-primary px-lg h-10 rounded-lg font-label-md text-label-md hover:bg-opacity-90 transition-all shadow-md shadow-primary/20" onclick="submitCreateAccount()">Create Account</button>
+        </div>
+    </div>
+</div>
+
+<!-- Login Modal -->
+<div id="loginModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300">
+    <div class="bg-white max-w-md w-full rounded-xl border border-outline-variant p-xl shadow-2xl scale-95 transition-all duration-300 relative mx-margin">
+        <button class="absolute top-md right-md text-outline hover:text-on-background" onclick="closeLoginModal()">
+            <span class="material-symbols-outlined">close</span>
+        </button>
+        <h3 class="font-display-lg text-display-lg text-on-background mb-sm">Secure Portal Login</h3>
+        <p class="font-body-sm text-on-surface-variant mb-lg">Access your NexBank institutional portfolio.</p>
+        
+        <div class="space-y-md">
+            <div>
+                <label class="block font-label-sm text-on-surface mb-xs" for="loginAccNo">Account Number</label>
+                <input type="number" id="loginAccNo" class="w-full h-10 border border-outline-variant rounded-lg px-md font-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none" placeholder="Enter account number">
+            </div>
+            <div>
+                <label class="block font-label-sm text-on-surface mb-xs" for="loginPin">Security PIN</label>
+                <input type="password" id="loginPin" class="w-full h-10 border border-outline-variant rounded-lg px-md font-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none" placeholder="Enter PIN">
+            </div>
+        </div>
+        <div id="loginError" class="text-error font-body-sm mt-md hidden"></div>
+        <div class="flex justify-end gap-md mt-xl">
+            <button class="border border-outline px-lg h-10 rounded-lg font-label-md text-label-md text-on-surface hover:bg-surface-container transition-all" onclick="closeLoginModal()">Cancel</button>
+            <button class="bg-primary text-on-primary px-lg h-10 rounded-lg font-label-md text-label-md hover:bg-opacity-90 transition-all shadow-md shadow-primary/20" onclick="submitLogin()">Verify Identity</button>
+        </div>
+    </div>
+</div>
+
+<!-- User Dashboard Overlay -->
+<div id="dashboardPanel" class="fixed inset-0 z-50 bg-background overflow-y-auto translate-x-full transition-transform duration-300 ease-out">
+    <!-- Dashboard Header -->
+    <header class="border-b border-outline-variant bg-white sticky top-0 z-10">
+        <div class="max-w-[1280px] mx-auto h-16 px-margin md:px-xl flex justify-between items-center">
+            <div class="flex items-center gap-md">
+                <span class="material-symbols-outlined text-primary text-2xl">account_balance</span>
+                <span class="font-headline text-headline font-bold text-on-background">NexBank Operations Portal</span>
+            </div>
+            <div class="flex items-center gap-md">
+                <span id="userGreeting" class="font-body-md text-on-surface-variant hidden md:inline">Welcome, Admin</span>
+                <button class="border border-error text-error px-md h-9 rounded-lg font-label-md text-label-md hover:bg-error-container transition-all" onclick="logoutUser()">Logout</button>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Dashboard Main -->
+    <main class="max-w-[1200px] mx-auto px-margin md:px-xl py-xl">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-xl">
+            <!-- Account Summary Card -->
+            <div class="col-span-1 lg:col-span-1 space-y-lg">
+                <div class="bg-gradient-to-br from-primary to-[#2448ef] text-white p-lg rounded-xl shadow-xl shadow-primary/10 relative overflow-hidden">
+                    <!-- Chip Decoration -->
+                    <div class="absolute right-md top-md opacity-25">
+                        <span class="material-symbols-outlined text-6xl">contactless</span>
+                    </div>
+                    <div class="mb-xxl">
+                        <p class="font-label-sm text-primary-fixed-dim uppercase tracking-wider">Institutional Balance</p>
+                        <h2 id="portalBalance" class="text-4xl font-bold tracking-tight mt-xs">$0.00</h2>
+                    </div>
+                    <div>
+                        <p id="portalAccountHolder" class="font-headline text-headline font-semibold">Holder Name</p>
+                        <p id="portalAccountNumber" class="font-body-sm text-primary-fixed-dim mt-xs">Acc No: 0000</p>
+                    </div>
+                </div>
+                
+                <!-- Quick Operations Card -->
+                <div class="bg-white p-lg border border-outline-variant rounded-xl shadow-sm">
+                    <h3 class="font-headline text-headline mb-md text-on-background">Quick Actions</h3>
+                    
+                    <!-- Tabs -->
+                    <div class="flex border-b border-outline-variant mb-md">
+                        <button id="tabDepositBtn" class="flex-1 pb-sm border-b-2 border-primary font-label-md text-label-md text-primary" onclick="switchActionTab('deposit')">Deposit</button>
+                        <button id="tabWithdrawBtn" class="flex-1 pb-sm border-b-2 border-transparent font-label-md text-label-md text-on-surface-variant hover:text-primary" onclick="switchActionTab('withdraw')">Withdraw</button>
+                    </div>
+                    
+                    <!-- Action Form -->
+                    <div class="space-y-md">
+                        <div>
+                            <label id="actionAmountLabel" class="block font-label-sm text-on-surface mb-xs" for="actionAmount">Amount (USD)</label>
+                            <input type="number" id="actionAmount" class="w-full h-10 border border-outline-variant rounded-lg px-md font-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none" placeholder="Enter amount">
+                        </div>
+                        <div id="actionError" class="text-error font-body-sm hidden"></div>
+                        <div id="actionSuccess" class="text-primary font-body-sm hidden">Action successful!</div>
+                        <button id="actionSubmitBtn" class="w-full bg-primary text-on-primary h-10 rounded-lg font-label-md text-label-md hover:bg-opacity-90 transition-all shadow-md shadow-primary/20" onclick="submitQuickAction()">Confirm Transaction</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Transaction History Card -->
+            <div class="col-span-1 lg:col-span-2">
+                <div class="bg-white p-lg border border-outline-variant rounded-xl shadow-sm h-full flex flex-col">
+                    <div class="flex justify-between items-center mb-md">
+                        <h3 class="font-headline text-headline text-on-background">Transaction Audit Log</h3>
+                        <span class="bg-surface-container text-primary font-label-sm text-label-sm px-sm py-xs rounded-full">Secure Ledger</span>
+                    </div>
+                    
+                    <div class="flex-1 overflow-y-auto max-h-[400px] border border-outline-variant rounded-lg">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-surface-container-low border-b border-outline-variant font-label-sm text-on-surface-variant">
+                                    <th class="p-md">Type</th>
+                                    <th class="p-md text-right">Amount</th>
+                                    <th class="p-md text-right">Timestamp</th>
+                                </tr>
+                            </thead>
+                            <tbody id="portalTransactionRows" class="font-body-md text-on-surface divide-y divide-outline-variant">
+                                <!-- Dynamic rows -->
+                            </tbody>
+                        </table>
+                        <div id="noTransactionsMsg" class="p-xl text-center text-on-surface-variant font-body-md hidden">
+                            No ledger actions found for this account.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- Admin Portal Overlay -->
+<div id="adminPanel" class="fixed inset-0 z-50 bg-background overflow-y-auto translate-x-full transition-transform duration-300 ease-out">
+    <header class="border-b border-outline-variant bg-white sticky top-0 z-10">
+        <div class="max-w-[1280px] mx-auto h-16 px-margin md:px-xl flex justify-between items-center">
+            <div class="flex items-center gap-md">
+                <span class="material-symbols-outlined text-primary text-2xl font-bold">admin_panel_settings</span>
+                <span class="font-headline text-headline font-bold text-on-background">NexBank System Dashboard</span>
+            </div>
+            <button class="border border-outline text-on-surface px-md h-9 rounded-lg font-label-md text-label-md hover:bg-surface-container transition-all" onclick="closeAdminModal()">Close Portal</button>
+        </div>
+    </header>
+    
+    <main class="max-w-[1200px] mx-auto px-margin md:px-xl py-xl space-y-xl">
+        <!-- Stats Widgets -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-lg">
+            <div class="bg-white p-lg border border-outline-variant rounded-xl shadow-sm flex items-center gap-md">
+                <div class="p-md bg-primary-fixed rounded-xl text-primary">
+                    <span class="material-symbols-outlined text-3xl">account_balance_wallet</span>
+                </div>
+                <div>
+                    <p class="font-label-sm text-on-surface-variant uppercase tracking-wider">Total Liquidity</p>
+                    <h3 id="adminTotalLiquidity" class="font-display-lg text-display-lg text-on-background mt-xs">$0.00</h3>
+                </div>
+            </div>
+            <div class="bg-white p-lg border border-outline-variant rounded-xl shadow-sm flex items-center gap-md">
+                <div class="p-md bg-secondary-fixed rounded-xl text-secondary">
+                    <span class="material-symbols-outlined text-3xl">group</span>
+                </div>
+                <div>
+                    <p class="font-label-sm text-on-surface-variant uppercase tracking-wider">Active Portfolios</p>
+                    <h3 id="adminTotalAccounts" class="font-display-lg text-display-lg text-on-background mt-xs">0</h3>
+                </div>
+            </div>
+            <div class="bg-white p-lg border border-outline-variant rounded-xl shadow-sm flex items-center gap-md">
+                <div class="p-md bg-tertiary-fixed rounded-xl text-tertiary">
+                    <span class="material-symbols-outlined text-3xl">bar_chart</span>
+                </div>
+                <div>
+                    <p class="font-label-sm text-on-surface-variant uppercase tracking-wider">Total Transaction Logs</p>
+                    <h3 id="adminTotalLogs" class="font-display-lg text-display-lg text-on-background mt-xs">0</h3>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Account Database Explorer -->
+        <div class="bg-white p-lg border border-outline-variant rounded-xl shadow-sm">
+            <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-md mb-lg">
+                <div>
+                    <h3 class="font-headline text-headline text-on-background">Portfolio Database</h3>
+                    <p class="font-body-sm text-on-surface-variant">Manage security profiles and liquidity ledgers.</p>
+                </div>
+                <button class="bg-error text-on-error px-lg h-10 rounded-lg font-label-md text-label-md hover:bg-opacity-90 transition-all shadow-md shadow-error/20" onclick="triggerDeleteAllAccounts()">
+                    Reset Database (Delete All Accounts)
+                </button>
+            </div>
+            
+            <div class="overflow-x-auto border border-outline-variant rounded-lg">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-surface-container-low border-b border-outline-variant font-label-sm text-on-surface-variant">
+                            <th class="p-md">Acc No</th>
+                            <th class="p-md">Institution / Holder</th>
+                            <th class="p-md text-right">Balance (USD)</th>
+                            <th class="p-md text-center">PIN Code</th>
+                            <th class="p-md text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminAccountRows" class="font-body-md text-on-surface divide-y divide-outline-variant">
+                        <!-- Dynamic rows -->
+                    </tbody>
+                </table>
+                <div id="adminNoAccountsMsg" class="p-xl text-center text-on-surface-variant font-body-md hidden">
+                    No portfolios found. Use "Open Account" to register one.
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<script>
+    // Intersection Observer for 120fps scrolling animations (avoiding reflow layout thrashing)
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
+
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("active");
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    // Header style change on scroll observer (more optimized than onscroll event listener)
+    const navObserver = new IntersectionObserver((entries) => {
+        const navbar = document.getElementById("navbar");
+        if (!entries[0].isIntersecting) {
+            navbar.classList.add("nav-scrolled");
+        } else {
+            navbar.classList.remove("nav-scrolled");
+        }
+    }, { rootMargin: '50px 0px 0px 0px' });
+
+    // Track scroll velocity for high refresh rate 120fps smooth scrolling
+    class SmoothScroll {
+        constructor() {
+            this.target = window.scrollY;
+            this.current = window.scrollY;
+            this.ease = 0.085;
+            this.active = false;
+            
+            window.addEventListener('wheel', (e) => {
+                // Ignore small delta events (like trackpads) to preserve native feel
+                if (Math.abs(e.deltaY) < 10) return;
+                
+                e.preventDefault();
+                this.target += e.deltaY * 0.85;
+                this.target = Math.max(0, Math.min(this.target, document.documentElement.scrollHeight - window.innerHeight));
+                
+                if (!this.active) {
+                    this.active = true;
+                    requestAnimationFrame(() => this.update());
+                }
+            }, { passive: false });
+
+            window.addEventListener('scroll', () => {
+                if (!this.active) {
+                    this.target = window.scrollY;
+                    this.current = window.scrollY;
+                }
+            });
+        }
+        
+        update() {
+            if (!this.active) return;
+            const diff = this.target - this.current;
+            this.current += diff * this.ease;
+            if (Math.abs(diff) < 0.5) {
+                this.current = this.target;
+                this.active = false;
+            }
+            window.scrollTo(0, this.current);
+            if (this.active) {
+                requestAnimationFrame(() => this.update());
+            }
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        // Initialize observers
+        document.querySelectorAll(".reveal").forEach(el => {
+            revealObserver.observe(el);
+        });
+
+        const headerAnchor = document.createElement("div");
+        headerAnchor.style.position = "absolute";
+        headerAnchor.style.top = "0";
+        headerAnchor.style.height = "1px";
+        headerAnchor.style.width = "1px";
+        document.body.prepend(headerAnchor);
+        navObserver.observe(headerAnchor);
+
+        // Desktop smooth scroll activation
+        if (window.matchMedia("(pointer: fine)").matches) {
+            new SmoothScroll();
+        }
+    });
+
+    // Check if there is an active session or a redirect request
+    window.onload = function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('signup') === 'true') {
+            openCreateAccountModal();
+            // clean url
+            history.replaceState({}, document.title, window.location.pathname);
+        }
+
+        const session = localStorage.getItem("nexbank_current_user");
+        if (session) {
+            currentUser = JSON.parse(session);
+            // Verify user still exists in database
+            const accounts = getDBAccounts();
+            const found = accounts.find(acc => acc.account_number === currentUser.account_number);
+            if (found) {
+                window.location.href = "dashboard.html";
+            } else {
+                localStorage.removeItem("nexbank_current_user");
+            }
+        }
+    };
+
+    // ==========================================
+    // NexBank Simulated Database Logic
+    // ==========================================
+    const DEFAULT_ACCOUNTS = [
+        { account_number: 1001, name: "Jane Doe", balance: 50000.0, PIN: 1234 },
+        { account_number: 1002, name: "Apex Capital LLC", balance: 750000.0, PIN: 9988 }
+    ];
+
+    const DEFAULT_LOGS = [
+        "AccNo: 1001 | DEPOSIT | Amount: 50000.00 | Time: Thu Jul 02 12:45:00 2026",
+        "AccNo: 1002 | DEPOSIT | Amount: 750000.00 | Time: Thu Jul 02 14:10:00 2026"
+    ];
+
+    function getDBAccounts() {
+        const data = localStorage.getItem("nexbank_accounts");
+        if (!data) {
+            localStorage.setItem("nexbank_accounts", JSON.stringify(DEFAULT_ACCOUNTS));
+            return DEFAULT_ACCOUNTS;
+        }
+        return JSON.parse(data);
+    }
+
+    function setDBAccounts(accounts) {
+        localStorage.setItem("nexbank_accounts", JSON.stringify(accounts));
+    }
+
+    function getDBLogs() {
+        const data = localStorage.getItem("nexbank_transactions");
+        if (!data) {
+            localStorage.setItem("nexbank_transactions", JSON.stringify(DEFAULT_LOGS));
+            return DEFAULT_LOGS;
+        }
+        return JSON.parse(data);
+    }
+
+    function setDBLogs(logs) {
+        localStorage.setItem("nexbank_transactions", JSON.stringify(logs));
+    }
+
+    function logTransactionJS(accNo, type, amount) {
+        const logs = getDBLogs();
+        const now = new Date();
+        const dateStr = now.toDateString() + " " + now.toTimeString().split(' ')[0] + " " + now.getFullYear();
+        const logEntry = `AccNo: ${accNo} | ${type} | Amount: ${amount.toFixed(2)} | Time: ${dateStr}`;
+        logs.push(logEntry);
+        setDBLogs(logs);
+    }
+
+    // ==========================================
+    // Global Sessions State
+    // ==========================================
+    let currentUser = null;
+    let activeActionTab = 'deposit'; // 'deposit' or 'withdraw'
+
+    // ==========================================
+    // Modal & Overlay Triggers
+    // ==========================================
+    function openCreateAccountModal() {
+        window.location.href = "create_account.html";
+    }
+
+    function closeCreateAccountModal() {
+        document.getElementById("createAccountModal").classList.remove("modal-active");
+    }
+
+    function openLoginModal() {
+        const modal = document.getElementById("loginModal");
+        modal.classList.add("modal-active");
+        document.getElementById("loginAccNo").value = "";
+        document.getElementById("loginPin").value = "";
+        document.getElementById("loginError").classList.add("hidden");
+    }
+
+    function closeLoginModal() {
+        document.getElementById("loginModal").classList.remove("modal-active");
+    }
+
+    function openAdminModal() {
+        document.getElementById("adminPanel").classList.remove("translate-x-full");
+        renderAdminDashboard();
+    }
+
+    function closeAdminModal() {
+        document.getElementById("adminPanel").classList.add("translate-x-full");
+    }
+
+    // ==========================================
+    // Account Registration Logic
+    // ==========================================
+    function submitCreateAccount() {
+        const accNo = parseInt(document.getElementById("createAccNo").value);
+        const name = document.getElementById("createName").value.trim();
+        const balance = parseFloat(document.getElementById("createBalance").value);
+        const pin = parseInt(document.getElementById("createPin").value);
+        const errorEl = document.getElementById("createAccountError");
+
+        if (isNaN(accNo) || accNo <= 0) {
+            errorEl.textContent = "Please enter a valid positive account number.";
+            errorEl.classList.remove("hidden");
+            return;
+        }
+        if (!name) {
+            errorEl.textContent = "Institution/Username cannot be empty.";
+            errorEl.classList.remove("hidden");
+            return;
+        }
+        if (isNaN(balance) || balance < 0) {
+            errorEl.textContent = "Balance cannot be negative.";
+            errorEl.classList.remove("hidden");
+            return;
+        }
+        if (isNaN(pin) || pin < 0) {
+            errorEl.textContent = "PIN must be a valid positive number.";
+            errorEl.classList.remove("hidden");
+            return;
+        }
+
+        const accounts = getDBAccounts();
+        if (accounts.some(acc => acc.account_number === accNo)) {
+            errorEl.textContent = "Account number already exists. Please choose another.";
+            errorEl.classList.remove("hidden");
+            return;
+        }
+
+        // Add account
+        const newAcc = { account_number: accNo, name: name, balance: balance, PIN: pin };
+        accounts.push(newAcc);
+        setDBAccounts(accounts);
+
+        // Log creation transaction if there is initial balance
+        if (balance > 0) {
+            logTransactionJS(accNo, "DEPOSIT", balance);
+        }
+
+        closeCreateAccountModal();
+        alert("Account successfully created!");
+        
+        // Auto log-in to newly created account
+        currentUser = newAcc;
+        localStorage.setItem("nexbank_current_user", JSON.stringify(newAcc));
+        window.location.href = "dashboard.html";
+    }
+
+    // ==========================================
+    // Login Logic
+    // ==========================================
+    function submitLogin() {
+        const accNo = parseInt(document.getElementById("loginAccNo").value);
+        const pin = parseInt(document.getElementById("loginPin").value);
+        const errorEl = document.getElementById("loginError");
+
+        if (isNaN(accNo) || isNaN(pin)) {
+            errorEl.textContent = "Please enter valid credentials.";
+            errorEl.classList.remove("hidden");
+            return;
+        }
+
+        const accounts = getDBAccounts();
+        const found = accounts.find(acc => acc.account_number === accNo);
+
+        if (!found || found.PIN !== pin) {
+            errorEl.textContent = "Wrong Account Number or PIN.";
+            errorEl.classList.remove("hidden");
+            return;
+        }
+
+        currentUser = found;
+        closeLoginModal();
+        openUserDashboard();
+    }
+
+    // ==========================================
+    // Operations Dashboard Portal Rendering
+    // ==========================================
+    function openUserDashboard() {
+        document.getElementById("dashboardPanel").classList.remove("translate-x-full");
+        document.getElementById("userGreeting").textContent = `Operator: ${currentUser.name}`;
+        
+        // Clear quick action form
+        document.getElementById("actionAmount").value = "";
+        document.getElementById("actionError").classList.add("hidden");
+        document.getElementById("actionSuccess").classList.add("hidden");
+        
+        renderPortalDetails();
+    }
+
+    function logoutUser() {
+        currentUser = null;
+        localStorage.removeItem("nexbank_current_user");
+        document.getElementById("dashboardPanel").classList.add("translate-x-full");
+    }
+
+    function renderPortalDetails() {
+        if (!currentUser) return;
+        
+        // Set info
+        document.getElementById("portalBalance").textContent = `$${currentUser.balance.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+        document.getElementById("portalAccountHolder").textContent = currentUser.name;
+        document.getElementById("portalAccountNumber").textContent = `Acc No: ${currentUser.account_number}`;
+        
+        // Render logs table
+        const logs = getDBLogs();
+        const userLogs = logs.filter(log => log.includes(`AccNo: ${currentUser.account_number}`));
+        const tbody = document.getElementById("portalTransactionRows");
+        const noTransactions = document.getElementById("noTransactionsMsg");
+        
+        tbody.innerHTML = "";
+        if (userLogs.length === 0) {
+            noTransactions.classList.remove("hidden");
+        } else {
+            noTransactions.classList.add("hidden");
+            // Reverse order to show latest first
+            userLogs.reverse().forEach(log => {
+                // Parse log: "AccNo: [accNo] | [TYPE] | Amount: [amount] | Time: [dateString]"
+                const parts = log.split(" | ");
+                const type = parts[1];
+                const amt = parts[2].split(": ")[1];
+                const timestamp = parts[3].split(": ")[1];
+                
+                const isDeposit = type === "DEPOSIT";
+                const row = document.createElement("tr");
+                row.className = "hover:bg-surface-container-low transition-colors";
+                row.innerHTML = `
+                    <td class="p-md font-medium">
+                        <span class="inline-flex items-center gap-xs px-sm py-xs rounded-full text-xs font-semibold ${isDeposit ? 'bg-primary-fixed text-primary' : 'bg-tertiary-fixed text-tertiary'}">
+                            <span class="material-symbols-outlined text-sm">${isDeposit ? 'arrow_downward' : 'arrow_upward'}</span>
+                            ${type}
+                        </span>
+                    </td>
+                    <td class="p-md text-right font-semibold ${isDeposit ? 'text-primary' : 'text-on-background'}">
+                        ${isDeposit ? '+' : '-'}$${parseFloat(amt).toLocaleString('en-US', { minimumFractionDigits: 2 })}
+                    </td>
+                    <td class="p-md text-right text-on-surface-variant font-numeric-md text-sm">
+                        ${timestamp}
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+    }
+
+    // ==========================================
+    // Quick Actions Logic (Deposit/Withdraw)
+    // ==========================================
+    function switchActionTab(tab) {
+        activeActionTab = tab;
+        const depBtn = document.getElementById("tabDepositBtn");
+        const withBtn = document.getElementById("tabWithdrawBtn");
+        const amountLabel = document.getElementById("actionAmountLabel");
+        
+        if (tab === 'deposit') {
+            depBtn.className = "flex-1 pb-sm border-b-2 border-primary font-label-md text-label-md text-primary";
+            withBtn.className = "flex-1 pb-sm border-b-2 border-transparent font-label-md text-label-md text-on-surface-variant hover:text-primary";
+            amountLabel.textContent = "Amount to Deposit (USD)";
+        } else {
+            depBtn.className = "flex-1 pb-sm border-b-2 border-transparent font-label-md text-label-md text-on-surface-variant hover:text-primary";
+            withBtn.className = "flex-1 pb-sm border-b-2 border-primary font-label-md text-label-md text-primary";
+            amountLabel.textContent = "Amount to Withdraw (USD)";
+        }
+        
+        document.getElementById("actionError").classList.add("hidden");
+        document.getElementById("actionSuccess").classList.add("hidden");
+    }
+
+    function submitQuickAction() {
+        const amount = parseFloat(document.getElementById("actionAmount").value);
+        const errorEl = document.getElementById("actionError");
+        const successEl = document.getElementById("actionSuccess");
+        
+        errorEl.classList.add("hidden");
+        successEl.classList.add("hidden");
+
+        if (isNaN(amount) || amount <= 0) {
+            errorEl.textContent = "Invalid amount. Enter a positive number.";
+            errorEl.classList.remove("hidden");
+            return;
+        }
+
+        const accounts = getDBAccounts();
+        const accIdx = accounts.findIndex(acc => acc.account_number === currentUser.account_number);
+        
+        if (accIdx === -1) {
+            errorEl.textContent = "Session invalid. Please logout and try again.";
+            errorEl.classList.remove("hidden");
+            return;
+        }
+
+        if (activeActionTab === 'deposit') {
+            accounts[accIdx].balance += amount;
+            setDBAccounts(accounts);
+            currentUser.balance = accounts[accIdx].balance;
+            logTransactionJS(currentUser.account_number, "DEPOSIT", amount);
+            successEl.textContent = "Deposit Successful";
+            successEl.classList.remove("hidden");
+        } else {
+            if (amount > accounts[accIdx].balance) {
+                errorEl.textContent = "Insufficient Balance";
+                errorEl.classList.remove("hidden");
+                return;
+            }
+            accounts[accIdx].balance -= amount;
+            setDBAccounts(accounts);
+            currentUser.balance = accounts[accIdx].balance;
+            logTransactionJS(currentUser.account_number, "WITHDRAW", amount);
+            successEl.textContent = "Withdraw Successful";
+            successEl.classList.remove("hidden");
+        }
+
+        document.getElementById("actionAmount").value = "";
+        renderPortalDetails();
+    }
+
+    // ==========================================
+    // System Admin Control Panel Logic
+    // ==========================================
+    function renderAdminDashboard() {
+        const accounts = getDBAccounts();
+        const logs = getDBLogs();
+        
+        // Calculate statistics
+        const totalLiquidity = accounts.reduce((sum, acc) => sum + acc.balance, 0.0);
+        document.getElementById("adminTotalLiquidity").textContent = `$${totalLiquidity.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+        document.getElementById("adminTotalAccounts").textContent = accounts.length.toString();
+        document.getElementById("adminTotalLogs").textContent = logs.length.toString();
+        
+        // Render table
+        const tbody = document.getElementById("adminAccountRows");
+        const noAccounts = document.getElementById("adminNoAccountsMsg");
+        tbody.innerHTML = "";
+        
+        if (accounts.length === 0) {
+            noAccounts.classList.remove("hidden");
+        } else {
+            noAccounts.classList.add("hidden");
+            accounts.forEach(acc => {
+                const row = document.createElement("tr");
+                row.className = "hover:bg-surface-container-low transition-colors";
+                row.innerHTML = `
+                    <td class="p-md font-mono text-sm font-semibold">${acc.account_number}</td>
+                    <td class="p-md font-medium text-on-background">${acc.name}</td>
+                    <td class="p-md text-right font-semibold text-primary">$${acc.balance.toLocaleString('en-US', { minimumFractionDigits: 2 })}</td>
+                    <td class="p-md text-center font-mono text-xs opacity-60">${acc.PIN}</td>
+                    <td class="p-md text-center">
+                        <button class="text-error hover:bg-error-container p-sm rounded-lg transition-colors inline-flex items-center" onclick="deleteAccountByAdmin(${acc.account_number})">
+                            <span class="material-symbols-outlined text-md">delete</span>
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+    }
+
+    function deleteAccountByAdmin(accNo) {
+        if (!confirm(`Are you sure you want to delete Account Number ${accNo}?`)) {
+            return;
+        }
+        
+        let accounts = getDBAccounts();
+        accounts = accounts.filter(acc => acc.account_number !== accNo);
+        setDBAccounts(accounts);
+        
+        // Also log deletion
+        const logs = getDBLogs();
+        const now = new Date();
+        const dateStr = now.toDateString() + " " + now.toTimeString().split(' ')[0] + " " + now.getFullYear();
+        logs.push(`AccNo: ${accNo} | ACCOUNT_DELETED | Amount: 0.00 | Time: ${dateStr}`);
+        setDBLogs(logs);
+        
+        // If current logged-in user is deleted, force logout
+        if (currentUser && currentUser.account_number === accNo) {
+            logoutUser();
+        }
+        
+        renderAdminDashboard();
+    }
+
+    function triggerDeleteAllAccounts() {
+        if (!confirm("Are you sure you want to delete ALL accounts? This operation is irreversible.")) {
+            return;
+        }
+        
+        localStorage.removeItem("nexbank_accounts");
+        localStorage.removeItem("nexbank_transactions");
+        
+        // Reset DB to empty array instead of defaults for actual clean slate
+        localStorage.setItem("nexbank_accounts", JSON.stringify([]));
+        localStorage.setItem("nexbank_transactions", JSON.stringify([]));
+        
+        if (currentUser) {
+            logoutUser();
+        }
+        
+        renderAdminDashboard();
+        alert("All accounts deleted successfully.");
+    }
+</script>
+</body>
+</html>

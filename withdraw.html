@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexBank | Withdraw Money</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        try{
+            tailwind.config = {
+                darkMode: "class",
+                theme: {
+                    extend: {
+                        "colors": {
+                            "on-error": "#ffffff",
+                            "on-primary-fixed": "#00105b",
+                            "on-error-container": "#93000a",
+                            "surface-variant": "#e2e1ef",
+                            "surface-dim": "#dad9e6",
+                            "on-tertiary-fixed": "#370e00",
+                            "on-background": "#1a1b24",
+                            "on-tertiary-fixed-variant": "#7f2b00",
+                            "inverse-on-surface": "#f1effd",
+                            "surface-container-highest": "#e2e1ef",
+                            "on-tertiary": "#ffffff",
+                            "surface": "#fbf8ff",
+                            "primary-container": "#3b5bff",
+                            "on-tertiary-container": "#ffefe9",
+                            "tertiary-container": "#c14500",
+                            "secondary-container": "#a2aefe",
+                            "secondary": "#4c59a2",
+                            "on-primary-container": "#f2f1ff",
+                            "error": "#ba1a1a",
+                            "outline-variant": "#c4c5d9",
+                            "inverse-primary": "#bac3ff",
+                            "surface-container-lowest": "#ffffff",
+                            "surface-container-low": "#f4f2ff",
+                            "error-container": "#ffdad6",
+                            "tertiary": "#983500",
+                            "surface-container": "#eeecfa",
+                            "on-primary-fixed-variant": "#002eca",
+                            "on-secondary-fixed-variant": "#344089",
+                            "primary-fixed": "#dee0ff",
+                            "on-secondary": "#ffffff",
+                            "secondary-fixed-dim": "#bac3ff",
+                            "on-surface": "#1a1b24",
+                            "background": "#fbf8ff",
+                            "inverse-surface": "#2f303a",
+                            "surface-container-high": "#e8e7f4",
+                            "on-surface-variant": "#444656",
+                            "outline": "#747688",
+                            "surface-tint": "#2448ef",
+                            "primary-fixed-dim": "#bac3ff",
+                            "secondary-fixed": "#dee0ff",
+                            "on-secondary-fixed": "#00105b",
+                            "on-secondary-container": "#323f87",
+                            "tertiary-fixed": "#ffdbce",
+                            "tertiary-fixed-dim": "#ffb599",
+                            "primary": "#143de7",
+                            "surface-bright": "#fbf8ff",
+                            "on-primary": "#ffffff"
+                        },
+                        "borderRadius": {
+                            "DEFAULT": "0.25rem",
+                            "lg": "0.5rem",
+                            "xl": "0.75rem",
+                            "full": "9999px"
+                        },
+                        "spacing": {
+                            "xs": "4px",
+                            "sm": "8px",
+                            "xl": "32px",
+                            "gutter": "16px",
+                            "margin": "24px",
+                            "md": "16px",
+                            "lg": "24px",
+                            "xxl": "48px"
+                        },
+                        "fontFamily": {
+                            "numeric-lg": ["Inter"],
+                            "body-md": ["Inter"],
+                            "headline": ["Inter"],
+                            "display-lg": ["Inter"],
+                            "body-sm": ["Inter"],
+                            "body-lg": ["Inter"],
+                            "label-md": ["Inter"],
+                            "label-sm": ["Inter"],
+                            "display-xl": ["Inter"],
+                            "numeric-md": ["Inter"]
+                        },
+                        "fontSize": {
+                            "numeric-lg": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                            "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0", "fontWeight": "400"}],
+                            "headline": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                            "display-lg": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                            "body-sm": ["13px", {"lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "400"}],
+                            "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0", "fontWeight": "400"}],
+                            "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0", "fontWeight": "500"}],
+                            "label-sm": ["13px", {"lineHeight": "18px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                            "display-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                            "numeric-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}]
+                        }
+                    },
+                },
+            }
+        }catch(_e){}
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #fbf8ff; -webkit-font-smoothing: antialiased; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; display: inline-block; vertical-align: middle; }
+        .tabular-nums { font-variant-numeric: tabular-nums; }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #d1d5db;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #a1a1aa;
+        }
+    </style>
+    <script src="theme_notifications.js"></script>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-hidden h-screen flex">
+
+    <!-- SideNavBar (Shared Component) -->
+    <aside class="flex flex-col h-full py-lg bg-surface border-r border-outline-variant w-64 shrink-0 z-20">
+        <div class="px-lg mb-xxl">
+            <h1 class="font-headline text-headline text-primary font-bold cursor-pointer" onclick="window.location.href='index.html'">NexBank</h1>
+            <p class="text-on-surface-variant font-label-sm">Enterprise Banking</p>
+        </div>
+        <nav class="flex-1 space-y-xs px-md">
+            <a href="dashboard.html" class="flex items-center gap-md px-md py-sm transition-all duration-150 ease-out text-on-surface-variant hover:bg-surface-container-highest rounded">
+                <span class="material-symbols-outlined text-md">dashboard</span>
+                <span class="font-label-md">Dashboard</span>
+            </a>
+            <a href="transfer.html" class="flex items-center gap-md px-md py-sm transition-all duration-150 ease-out text-on-surface-variant hover:bg-surface-container-highest rounded">
+                <span class="material-symbols-outlined text-md">swap_horiz</span>
+                <span class="font-label-md">Transfer Fund</span>
+            </a>
+            <a href="create_account.html" class="flex items-center gap-md px-md py-sm transition-all duration-150 ease-out text-on-surface-variant hover:bg-surface-container-highest rounded">
+                <span class="material-symbols-outlined text-md">contactless</span>
+                <span class="font-label-md">Open New Account</span>
+            </a>
+            <a href="deposit.html" class="flex items-center gap-md px-md py-sm transition-all duration-150 ease-out text-on-surface-variant hover:bg-surface-container-highest rounded">
+                <span class="material-symbols-outlined text-md">add_circle</span>
+                <span class="font-label-md">Deposit Fund</span>
+            </a>
+            <!-- Transactions active since Withdraw is a sub-transaction -->
+            <a href="#" class="flex items-center gap-md px-md py-sm transition-all duration-150 ease-out bg-surface-tint/10 text-primary font-bold border-r-2 border-primary rounded">
+                <span class="material-symbols-outlined text-md" style="font-variation-settings: 'FILL' 1;">outbox</span>
+                <span class="font-label-md">Withdraw Fund</span>
+            </a>
+            <a href="transactions.html" class="flex items-center gap-md px-md py-sm transition-all duration-150 ease-out text-on-surface-variant hover:bg-surface-container-highest rounded">
+                <span class="material-symbols-outlined text-md">receipt_long</span>
+                <span class="font-label-md">Transactions Ledger</span>
+            </a>
+            <a href="settings.html" class="flex items-center gap-md px-md py-sm transition-all duration-150 ease-out text-on-surface-variant hover:bg-surface-container-highest rounded">
+                <span class="material-symbols-outlined text-md">settings</span>
+                <span class="font-label-md">Settings</span>
+            </a>
+            
+            <div class="pt-lg border-t border-outline-variant mt-lg mx-md opacity-30"></div>
+            
+            <a class="flex items-center gap-md px-md py-sm transition-colors duration-150 ease-out text-error hover:bg-error-container/20 cursor-pointer mt-auto" onclick="logoutUser()">
+                <span class="material-symbols-outlined text-error">logout</span>
+                <span class="font-label-md">Logout</span>
+            </a>
+        </nav>
+        <div class="px-lg mt-auto pt-lg border-t border-outline-variant bg-surface-container-low/30 py-md">
+            <div class="flex items-center gap-md">
+                <div class="w-10 h-10 bg-surface-container-high rounded-full overflow-hidden flex-shrink-0 border border-outline-variant flex items-center justify-center text-primary font-bold text-lg select-none" id="avatarBadge">
+                    MS
+                </div>
+                <div>
+                    <p class="font-label-md text-on-surface truncate max-w-[140px]" id="sidebarUser">Marcus Sterling</p>
+                    <p class="text-on-surface-variant text-label-sm truncate" id="sidebarAccNo">Acc No: 1000</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <div class="flex-1 flex flex-col min-w-0">
+        <!-- TopNavBar (Shared Component) -->
+        <header class="h-16 w-full border-b border-outline-variant bg-surface flex justify-between items-center px-lg shrink-0">
+            <div class="flex items-center gap-md w-1/3">
+                <div class="relative w-full max-w-xs">
+                    <span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+                    <input class="w-full h-10 bg-surface-container-low border border-outline-variant rounded px-xl text-body-sm focus:outline-none focus:border-primary transition-all duration-150" placeholder="Search transactions..." type="text">
+                </div>
+            </div>
+            <h2 class="font-headline text-headline font-bold text-on-surface">Withdraw Money</h2>
+            <div class="flex items-center gap-lg justify-end w-1/3">
+                <div class="relative">
+                    <button class="relative w-10 h-10 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors" id="notification-btn">
+                        <span class="material-symbols-outlined">notifications</span>
+                        <span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border-2 border-background hidden" id="notification-badge"></span>
+                    </button>
+                    <!-- Dropdown panel -->
+                    <div class="absolute right-0 mt-2 w-80 bg-surface border border-outline-variant rounded-xl shadow-2xl overflow-hidden hidden z-50 bg-white dark:bg-neutral-900" id="notification-dropdown">
+                        <div class="p-md border-b border-outline-variant flex justify-between items-center bg-surface-container-low dark:bg-neutral-800">
+                            <span class="font-label-md text-label-md text-on-surface font-bold">Notifications</span>
+                            <button class="text-xs text-primary hover:underline font-semibold" id="mark-all-read-btn">Mark all read</button>
+                        </div>
+                        <div class="max-h-64 overflow-y-auto divide-y divide-outline-variant no-scrollbar text-left" id="notification-list">
+                            <!-- Dynamic notifications list -->
+                        </div>
+                        <div class="p-sm text-center border-t border-outline-variant bg-surface-container-low dark:bg-neutral-800">
+                            <button class="text-xs text-on-surface-variant hover:underline font-medium" onclick="clearAllNotifications()">Clear All</button>
+                        </div>
+                    </div>
+                </div>
+                <button class="text-on-surface-variant hover:text-primary transition-colors duration-150" id="theme-toggle">
+                    <span class="material-symbols-outlined">dark_mode</span>
+                </button>
+                <div class="h-8 w-px bg-outline-variant"></div>
+                <button class="flex items-center gap-xs font-label-md text-on-surface px-sm py-xs hover:bg-surface-container-high rounded transition-colors duration-150" onclick="window.location.href='dashboard.html'">
+                    Dashboard
+                    <span class="material-symbols-outlined">arrow_forward</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 overflow-y-auto bg-background p-lg custom-scrollbar">
+            <div class="max-w-4xl mx-auto">
+                <a class="inline-flex items-center gap-xs text-primary font-label-md hover:underline mb-lg cursor-pointer font-semibold" href="dashboard.html">
+                    <span class="material-symbols-outlined text-sm">arrow_back</span>
+                    Back to Dashboard
+                </a>
+                
+                <div class="flex flex-col items-center">
+                    <!-- Withdrawal Card -->
+                    <div class="w-[480px] bg-surface border border-outline-variant rounded-xl overflow-hidden bg-white shadow-sm" id="withdrawCard">
+                        <div class="p-lg">
+                            <!-- Account Selector -->
+                            <div class="space-y-xs mb-lg">
+                                <label class="font-label-sm text-on-surface-variant block uppercase tracking-wider">From Account</label>
+                                <div class="relative">
+                                    <select id="accountSelect" class="w-full h-10 border border-outline-variant rounded px-md bg-surface text-body-md appearance-none focus:border-primary focus:ring-0 outline-none cursor-pointer font-medium">
+                                        <!-- Dynamic options -->
+                                    </select>
+                                    <span class="material-symbols-outlined absolute right-sm top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">expand_more</span>
+                                </div>
+                                <div class="flex justify-between items-center px-xs">
+                                    <span class="text-body-sm text-on-surface-variant">Available Balance</span>
+                                    <span class="font-numeric-md text-on-surface" id="availableBalanceLabel">$0.00</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Amount Input -->
+                            <div class="text-center space-y-sm mb-lg">
+                                <label class="font-label-sm text-on-surface-variant block uppercase tracking-wider">Amount</label>
+                                <div class="relative inline-block w-full">
+                                    <span class="absolute left-md top-1/2 -translate-y-1/2 font-display-xl text-on-surface-variant font-semibold">$</span>
+                                    <input class="w-full text-center py-sm px-xxl font-display-xl text-on-surface bg-transparent border-none focus:ring-0 tabular-nums placeholder:text-surface-variant font-bold" id="withdraw-amount" oninput="validateAmount(this.value)" placeholder="0.00" type="number" value="100.00">
+                                    <div class="hidden text-error text-body-sm mt-xs" id="error-msg">Amount exceeds available balance.</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Quick Amount Chips -->
+                            <div class="grid grid-cols-4 gap-sm mb-lg">
+                                <button class="h-10 border border-outline-variant rounded font-label-md hover:bg-surface-container hover:border-primary transition-all duration-150 font-semibold" onclick="setAmount(100)">$100</button>
+                                <button class="h-10 border border-outline-variant rounded font-label-md hover:bg-surface-container hover:border-primary transition-all duration-150 font-semibold" onclick="setAmount(500)">$500</button>
+                                <button class="h-10 border border-outline-variant rounded font-label-md hover:bg-surface-container hover:border-primary transition-all duration-150 font-semibold" onclick="setAmount(1000)">$1k</button>
+                                <button class="h-10 border border-primary text-primary bg-primary/5 rounded font-label-md hover:bg-primary hover:text-white transition-all duration-150 font-bold" onclick="setAmountMax()">Max</button>
+                            </div>
+                            
+                            <!-- Withdrawal Method -->
+                            <div class="space-y-sm mb-lg">
+                                <label class="font-label-sm text-on-surface-variant block uppercase tracking-wider">Method</label>
+                                <div class="flex border border-outline-variant rounded p-xs bg-surface-container-low">
+                                    <button class="flex-1 h-8 rounded font-label-sm transition-all duration-150 bg-white text-primary border border-outline-variant shadow-sm method-btn font-semibold" onclick="setMethod(this, 'Bank Transfer')">Bank Transfer</button>
+                                    <button class="flex-1 h-8 rounded font-label-sm transition-all duration-150 text-on-surface-variant hover:text-on-surface method-btn font-semibold" onclick="setMethod(this, 'ATM')">ATM</button>
+                                    <button class="flex-1 h-8 rounded font-label-sm transition-all duration-150 text-on-surface-variant hover:text-on-surface method-btn font-semibold" onclick="setMethod(this, 'Cash')">Cash</button>
+                                </div>
+                            </div>
+                            
+                            <!-- PIN Step -->
+                            <div class="space-y-sm mb-xxl">
+                                <label class="font-label-sm text-on-surface-variant block text-center uppercase tracking-wider font-semibold">Security PIN Confirmation</label>
+                                <div class="flex justify-center gap-sm">
+                                    <input class="pin-input w-10 h-12 border border-outline-variant rounded text-center font-display-lg focus:border-primary focus:ring-0 outline-none transition-all duration-150 font-bold" maxlength="1" type="password">
+                                    <input class="pin-input w-10 h-12 border border-outline-variant rounded text-center font-display-lg focus:border-primary focus:ring-0 outline-none transition-all duration-150 font-bold" maxlength="1" type="password">
+                                    <input class="pin-input w-10 h-12 border border-outline-variant rounded text-center font-display-lg focus:border-primary focus:ring-0 outline-none transition-all duration-150 font-bold" maxlength="1" type="password">
+                                    <input class="pin-input w-10 h-12 border border-outline-variant rounded text-center font-display-lg focus:border-primary focus:ring-0 outline-none transition-all duration-150 font-bold" maxlength="1" type="password">
+                                    <input class="pin-input w-10 h-12 border border-outline-variant rounded text-center font-display-lg focus:border-primary focus:ring-0 outline-none transition-all duration-150 font-bold" maxlength="1" type="password">
+                                    <input class="pin-input w-10 h-12 border border-outline-variant rounded text-center font-display-lg focus:border-primary focus:ring-0 outline-none transition-all duration-150 font-bold" maxlength="1" type="password">
+                                </div>
+                            </div>
+                            
+                            <!-- Summary and CTA -->
+                            <div class="pt-lg border-t border-outline-variant space-y-md">
+                                <div class="flex justify-between items-center text-body-md">
+                                    <span class="text-on-surface-variant">Processing Fee</span>
+                                    <span class="font-numeric-md">$0.00</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="font-label-md text-on-surface">Total Withdrawal</span>
+                                    <span class="font-numeric-lg text-primary font-bold" id="summary-total">$100.00</span>
+                                </div>
+                                
+                                <div id="withdrawError" class="text-error text-body-sm text-center hidden"></div>
+
+                                <button class="w-full h-12 bg-primary text-white font-label-md rounded hover:bg-primary-container hover:bg-opacity-95 shadow-lg shadow-primary/20 transition-all duration-150 flex items-center justify-center gap-sm font-bold" id="confirm-btn" onclick="submitWithdrawal()">
+                                    Confirm Withdrawal
+                                    <span class="material-symbols-outlined text-sm">lock</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Atmospheric Micro-detail -->
+                    <div class="mt-lg text-center opacity-60">
+                        <p class="text-body-sm text-on-surface-variant">Funds will arrive in your external account within 1-3 business days.</p>
+                        <p class="text-body-sm text-on-surface-variant">NexBank uses 256-bit AES encryption for all transactions.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Micro-interactions Script -->
+    <script>
+        // Session Guard
+        let currentUser = null;
+        function checkSession() {
+            const session = localStorage.getItem("nexbank_current_user");
+            if (!session) {
+                window.location.href = "login.html";
+                return;
+            }
+            currentUser = JSON.parse(session);
+
+            // Fetch actual user values from simulated database
+            const accounts = JSON.parse(localStorage.getItem("nexbank_accounts") || "[]");
+            const actualUser = accounts.find(acc => acc.account_number === currentUser.account_number);
+            if (!actualUser) {
+                localStorage.removeItem("nexbank_current_user");
+                window.location.href = "login.html";
+                return;
+            }
+            currentUser = actualUser;
+        }
+        checkSession();
+
+        function logoutUser() {
+            localStorage.removeItem("nexbank_current_user");
+            window.location.href = "login.html";
+        }
+
+        const amountInput = document.getElementById('withdraw-amount');
+        const summaryTotal = document.getElementById('summary-total');
+        const errorMsg = document.getElementById('error-msg');
+        const confirmBtn = document.getElementById('confirm-btn');
+        let selectedMethod = 'Bank Transfer';
+
+        function validateAmount(val) {
+            const num = parseFloat(val);
+            const errorEl = document.getElementById("withdrawError");
+            errorEl.classList.add("hidden");
+
+            if (num > currentUser.balance) {
+                amountInput.classList.add('text-error', 'border-error');
+                errorMsg.classList.remove('hidden');
+                confirmBtn.disabled = true;
+                confirmBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            } else if (isNaN(num) || num <= 0) {
+                amountInput.classList.remove('text-error', 'border-error');
+                errorMsg.classList.add('hidden');
+                confirmBtn.disabled = true;
+                confirmBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            } else {
+                amountInput.classList.remove('text-error', 'border-error');
+                errorMsg.classList.add('hidden');
+                confirmBtn.disabled = false;
+                confirmBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            }
+            const displayVal = isNaN(num) ? 0.00 : num;
+            summaryTotal.textContent = `$${displayVal.toLocaleString('en-US', {minimumFractionDigits: 2})}`;
+        }
+
+        function setAmount(amt) {
+            amountInput.value = amt.toFixed(2);
+            validateAmount(amt);
+        }
+
+        function setAmountMax() {
+            amountInput.value = currentUser.balance.toFixed(2);
+            validateAmount(currentUser.balance);
+        }
+
+        // Method Switcher Logic
+        function setMethod(btn, method) {
+            selectedMethod = method;
+            const btns = document.querySelectorAll('.method-btn');
+            btns.forEach(b => {
+                b.className = 'flex-1 h-8 rounded font-label-sm transition-all duration-150 text-on-surface-variant hover:text-on-surface method-btn font-semibold';
+            });
+            btn.className = 'flex-1 h-8 rounded font-label-sm transition-all duration-150 bg-white text-primary border border-outline-variant shadow-sm method-btn font-semibold';
+        }
+
+        // PIN Auto-focus logic
+        const pinInputs = document.querySelectorAll('.pin-input');
+        pinInputs.forEach((input, index) => {
+            input.addEventListener('input', (e) => {
+                if (e.target.value && index < pinInputs.length - 1) {
+                    pinInputs[index + 1].focus();
+                }
+            });
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && !e.target.value && index > 0) {
+                    pinInputs[index - 1].focus();
+                }
+            });
+        });
+
+        // Submit withdrawal execution
+        function submitWithdrawal() {
+            const errorEl = document.getElementById("withdrawError");
+            errorEl.classList.add("hidden");
+
+            const num = parseFloat(amountInput.value);
+            if (isNaN(num) || num <= 0) {
+                errorEl.textContent = "Please enter a valid positive withdrawal amount.";
+                errorEl.classList.remove("hidden");
+                return;
+            }
+            if (num > currentUser.balance) {
+                errorEl.textContent = "Withdrawal amount exceeds available balance.";
+                errorEl.classList.remove("hidden");
+                return;
+            }
+
+            // Verify PIN
+            const enteredPin = Array.from(pinInputs).map(input => input.value.trim()).join('');
+            const pinNum = parseInt(enteredPin);
+
+            if (enteredPin.length === 0 || isNaN(pinNum)) {
+                errorEl.textContent = "Please enter your Security PIN.";
+                errorEl.classList.remove("hidden");
+                return;
+            }
+
+            if (currentUser.PIN !== pinNum) {
+                errorEl.textContent = "Security PIN verification failed.";
+                errorEl.classList.remove("hidden");
+                // Clear inputs
+                pinInputs.forEach(i => i.value = "");
+                pinInputs[0].focus();
+                return;
+            }
+
+            // Execute transaction
+            const accounts = JSON.parse(localStorage.getItem("nexbank_accounts") || "[]");
+            const idx = accounts.findIndex(acc => acc.account_number === currentUser.account_number);
+            
+            if (idx === -1) {
+                errorEl.textContent = "Session invalid. Please login again.";
+                errorEl.classList.remove("hidden");
+                setTimeout(logoutUser, 1500);
+                return;
+            }
+
+            accounts[idx].balance -= num;
+            localStorage.setItem("nexbank_accounts", JSON.stringify(accounts));
+            currentUser.balance = accounts[idx].balance;
+            localStorage.setItem("nexbank_current_user", JSON.stringify(currentUser));
+
+            // Log details
+            const logs = JSON.parse(localStorage.getItem("nexbank_transactions") || "[]");
+            const now = new Date();
+            const dateStr = now.toDateString() + " " + now.toTimeString().split(' ')[0] + " " + now.getFullYear();
+            const logEntry = `AccNo: ${currentUser.account_number} | WITHDRAW (${selectedMethod}) | Amount: ${num.toFixed(2)} | Time: ${dateStr}`;
+            logs.push(logEntry);
+            localStorage.setItem("nexbank_transactions", JSON.stringify(logs));
+
+            // Trigger local notification
+            if (typeof window.addNotification === "function") {
+                window.addNotification("Withdrawal Successful", `Successfully withdrew $${num.toLocaleString('en-US', { minimumFractionDigits: 2 })} via ${selectedMethod}.`);
+            }
+
+            alert(`Withdrawal of $${num.toLocaleString('en-US', { minimumFractionDigits: 2 })} successfully confirmed!`);
+            window.location.href = "dashboard.html";
+        }
+
+        // Initialize UI Elements
+        function initUI() {
+            // Update user card information in sidebar
+            document.getElementById("sidebarUser").textContent = currentUser.name;
+            document.getElementById("sidebarAccNo").textContent = `Acc No: ${currentUser.account_number}`;
+            
+            // Set Avatar Initials
+            const initials = currentUser.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+            document.getElementById("avatarBadge").textContent = initials;
+
+            // Fill accounts selector
+            const accountSelect = document.getElementById("accountSelect");
+            const formattedBalance = currentUser.balance.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            const last4 = currentUser.account_number.toString().slice(-4);
+            
+            accountSelect.innerHTML = `<option>Portfolio Card •••• ${last4}</option>`;
+            document.getElementById("availableBalanceLabel").textContent = `$${formattedBalance}`;
+            
+            // Focus first pin input
+            pinInputs[0].focus();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initUI();
+            validateAmount(amountInput.value);
+
+            // Atmospheric micro-interaction
+            const card = document.getElementById('withdrawCard');
+            card.addEventListener('mouseenter', () => {
+                card.style.borderColor = '#143de7';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.borderColor = '#c4c5d9';
+            });
+        });
+    </script>
+</body>
+</html>
