@@ -186,9 +186,31 @@
             </button>
             <button class="font-label-md text-label-md text-on-surface-variant px-xs sm:px-md h-10 hover:text-primary transition-colors duration-150" onclick="window.location.href='login.html'">Login</button>
             <button class="bg-primary text-on-primary px-sm sm:px-lg h-10 rounded-lg font-label-md text-label-md hover:bg-opacity-90 transition-all duration-150 shadow-md shadow-primary/20" onclick="openCreateAccountModal()">Open<span class="hidden sm:inline"> Account</span></button>
+            <button class="md:hidden w-10 h-10 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors" id="mobile-menu-toggle-btn">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
         </div>
     </div>
 </nav>
+
+<!-- Mobile Navigation Drawer -->
+<div id="mobileMenuDrawer" class="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300 md:hidden">
+    <div class="bg-white w-64 h-full border-r border-outline-variant p-lg flex flex-col gap-lg transform -translate-x-full transition-transform duration-300 ease-out dark:bg-neutral-900" id="mobileMenuContent">
+        <div class="flex justify-between items-center pb-md border-b border-outline-variant">
+            <span class="font-headline text-headline font-bold text-on-background">Menu</span>
+            <button id="mobile-menu-close-btn" class="w-8 h-8 flex items-center justify-center text-outline hover:text-on-background transition-colors">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </div>
+        <div class="flex flex-col gap-md">
+            <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-150 py-sm" href="#">Solutions</a>
+            <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-150 py-sm" href="#">Partners</a>
+            <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-150 py-sm" href="#">Security</a>
+            <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-150 py-sm cursor-pointer" onclick="openAdminModal()">Admin Portal</a>
+            <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-150 py-sm" href="#">About</a>
+        </div>
+    </div>
+</div>
 
 <main class="max-w-[1200px] mx-auto px-margin md:px-xl overflow-visible">
     <!-- Hero Section -->

@@ -52,7 +52,108 @@
     document.addEventListener("DOMContentLoaded", () => {
         setupThemeToggle();
         setupNotificationsUI();
+        setupSidebarToggle();
+        setupLandingMobileMenu();
     });
+
+    // Sidebar Drawer Toggle Logic for Mobile Viewports
+    function setupSidebarToggle() {
+        const toggleBtn = document.getElementById("sidebar-toggle-btn");
+        const sidebar = document.getElementById("sidebar");
+        if (!toggleBtn || !sidebar) return;
+
+        // Create backdrop dynamically if it does not exist
+        let backdrop = document.getElementById("sidebar-backdrop");
+        if (!backdrop) {
+            backdrop = document.createElement("div");
+            backdrop.id = "sidebar-backdrop";
+            backdrop.className = "fixed inset-0 bg-black/40 backdrop-blur-sm z-40 hidden transition-opacity duration-300 opacity-0 pointer-events-none";
+            document.body.appendChild(backdrop);
+        }
+
+        function openSidebar() {
+            sidebar.classList.remove("-translate-x-full");
+            sidebar.classList.add("translate-x-0");
+            backdrop.classList.remove("hidden");
+            // Trigger transition reflow
+            setTimeout(() => {
+                backdrop.classList.remove("opacity-0", "pointer-events-none");
+                backdrop.classList.add("opacity-100", "pointer-events-auto");
+            }, 10);
+        }
+
+        function closeSidebar() {
+            sidebar.classList.remove("translate-x-0");
+            sidebar.classList.add("-translate-x-full");
+            backdrop.classList.remove("opacity-100", "pointer-events-auto");
+            backdrop.classList.add("opacity-0", "pointer-events-none");
+            setTimeout(() => {
+                backdrop.classList.add("hidden");
+            }, 300);
+        }
+
+        toggleBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            if (sidebar.classList.contains("-translate-x-full")) {
+                openSidebar();
+            } else {
+                closeSidebar();
+            }
+        });
+
+        backdrop.addEventListener("click", () => {
+            closeSidebar();
+        });
+
+        // Close sidebar if user clicks on nav links inside on mobile
+        const navLinks = sidebar.querySelectorAll("nav a");
+        navLinks.forEach(link => {
+            link.addEventListener("click", () => {
+                if (window.innerWidth < 768) {
+                    closeSidebar();
+                }
+            });
+        });
+    }
+
+    // Mobile menu drawer toggle for landing page (index.html)
+    function setupLandingMobileMenu() {
+        const toggleBtn = document.getElementById("mobile-menu-toggle-btn");
+        const drawer = document.getElementById("mobileMenuDrawer");
+        const content = document.getElementById("mobileMenuContent");
+        if (!toggleBtn || !drawer || !content) return;
+
+        function openMenu() {
+            drawer.classList.remove("opacity-0", "pointer-events-none");
+            content.classList.remove("-translate-x-full");
+            content.classList.add("translate-x-0");
+        }
+
+        function closeMenu() {
+            drawer.classList.add("opacity-0", "pointer-events-none");
+            content.classList.remove("translate-x-0");
+            content.classList.add("-translate-x-full");
+        }
+
+        toggleBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            openMenu();
+        });
+
+        drawer.addEventListener("click", (e) => {
+            // Close if clicked on the backdrop (drawer element itself)
+            if (e.target === drawer) {
+                closeMenu();
+            }
+        });
+
+        const closeBtn = drawer.querySelector("#mobile-menu-close-btn");
+        if (closeBtn) {
+            closeBtn.addEventListener("click", () => {
+                closeMenu();
+            });
+        }
+    }
 
     // Theme Toggle setup
     function setupThemeToggle() {

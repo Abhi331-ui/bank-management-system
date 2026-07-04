@@ -143,7 +143,7 @@
     <script src="theme_notifications.js"></script>
 <body class="bg-background text-on-surface">
     <!-- Sidebar Navigation Shell -->
-    <aside class="fixed left-0 top-0 h-full w-[240px] border-r border-outline-variant bg-surface flex flex-col py-lg px-md h-full">
+    <aside class="fixed left-0 top-0 h-full w-64 border-r border-outline-variant bg-surface flex flex-col py-lg px-md h-full z-50 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out" id="sidebar">
         <div class="mb-xxl px-sm flex items-center gap-sm">
             <div class="w-8 h-8 bg-primary rounded flex items-center justify-center text-on-primary">
                 <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">account_balance</span>
@@ -197,9 +197,12 @@
     </aside>
 
     <!-- Top Bar Navigation Shell -->
-    <header class="fixed top-0 right-0 left-[240px] h-14 bg-surface flex items-center justify-between px-xl w-full border-b border-outline-variant z-10">
-        <div class="flex items-center gap-md">
-            <div class="relative">
+    <header class="fixed top-0 right-0 left-0 md:left-64 h-14 bg-surface flex items-center justify-between px-md md:px-xl border-b border-outline-variant z-40">
+        <div class="flex items-center gap-sm">
+            <button class="md:hidden w-10 h-10 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors" id="sidebar-toggle-btn">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
+            <div class="relative hidden md:block">
                 <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-md">search</span>
                 <input class="h-10 pl-10 pr-md w-64 bg-surface-container-low border border-outline-variant rounded-lg text-body-md focus:border-primary focus:ring-0 transition-colors" placeholder="Search transactions or recipients" type="text" onkeyup="alert('Global transfer ledger search active.')">
             </div>
@@ -238,7 +241,7 @@
     </header>
 
     <!-- Main Content Canvas -->
-    <main class="ml-[240px] mt-14 p-xxl min-h-screen flex justify-center items-start">
+    <main class="ml-0 md:ml-64 mt-14 p-md md:p-xxl min-h-screen flex justify-center items-start">
         <div class="w-full max-w-[480px]">
             <!-- Header Section -->
             <div class="mb-xl text-center">

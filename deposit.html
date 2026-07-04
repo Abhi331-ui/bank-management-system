@@ -117,7 +117,7 @@
 <body class="bg-background text-on-surface font-body-md overflow-hidden">
     <div class="flex h-screen w-full">
         <!-- SideNavBar - Identity: NexBank -->
-        <aside class="flex flex-col h-full py-lg h-screen w-64 border-r border-outline-variant bg-surface shrink-0">
+        <aside class="fixed md:static left-0 top-0 h-full w-64 border-r border-outline-variant bg-surface flex flex-col py-lg z-50 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out shrink-0" id="sidebar">
             <div class="px-lg mb-xxl">
                 <h1 class="font-headline text-headline text-primary cursor-pointer" onclick="window.location.href='index.html'">NexBank</h1>
                 <p class="text-on-surface-variant font-label-sm">Enterprise Banking</p>
@@ -175,10 +175,13 @@
         <!-- Main Content Area -->
         <main class="flex-1 flex flex-col h-full relative overflow-hidden">
             <!-- TopNavBar -->
-            <header class="flex justify-between items-center px-lg w-full h-16 border-b border-outline-variant bg-surface shrink-0">
-                <div class="flex items-center gap-lg">
+            <header class="flex justify-between items-center px-md md:px-lg w-full h-16 border-b border-outline-variant bg-surface shrink-0 z-40">
+                <div class="flex items-center gap-sm md:gap-lg">
+                    <button class="md:hidden w-10 h-10 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors" id="sidebar-toggle-btn">
+                        <span class="material-symbols-outlined">menu</span>
+                    </button>
                     <span class="font-headline text-headline font-bold text-on-surface">Deposit</span>
-                    <div class="relative">
+                    <div class="relative hidden md:block">
                         <span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-outline">search</span>
                         <input class="bg-surface-container h-10 pl-10 pr-md border-none focus:ring-1 focus:ring-primary rounded-lg text-body-sm w-64" placeholder="Search transactions..." type="text">
                     </div>
@@ -215,7 +218,7 @@
             </header>
             
             <!-- Scrollable Content -->
-            <div class="flex-1 overflow-y-auto bg-surface-container-low p-xl">
+            <div class="flex-1 overflow-y-auto bg-surface-container-low p-4 md:p-xl">
                 <div class="max-w-7xl mx-auto">
                     <!-- Navigation Header -->
                     <div class="mb-xl">
@@ -228,7 +231,7 @@
                     
                     <!-- Deposit Form Card -->
                     <div class="flex justify-center items-start pt-lg">
-                        <div class="w-[480px] bg-surface border border-outline-variant p-xl shadow-sm transition-all duration-150 ease-out bg-white" id="depositCard">
+                        <div class="w-full max-w-[480px] bg-surface border border-outline-variant p-6 md:p-xl shadow-sm transition-all duration-150 ease-out bg-white rounded-xl" id="depositCard">
                             <!-- Account Selector -->
                             <div class="mb-xl">
                                 <label class="block font-label-sm text-on-surface-variant mb-sm">Select Destination Account</label>

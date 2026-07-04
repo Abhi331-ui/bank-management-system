@@ -127,7 +127,7 @@
 </head>
 <body class="bg-background text-on-background min-h-screen">
     <!-- SideNavBar (Authority: JSON) -->
-    <aside class="fixed left-0 top-0 h-full w-[240px] bg-surface border-r border-outline-variant flex flex-col py-lg px-md h-full z-50">
+    <aside class="fixed left-0 top-0 h-full w-64 bg-surface border-r border-outline-variant flex flex-col py-lg px-md h-full z-50 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out" id="sidebar">
         <div class="mb-xxl">
             <h1 class="font-headline text-headline text-primary tracking-tight cursor-pointer" onclick="window.location.href='index.html'">NexBank</h1>
             <p class="font-label-sm text-label-sm text-on-surface-variant">Enterprise Banking</p>
@@ -189,10 +189,15 @@
     </aside>
 
     <!-- TopAppBar (Authority: JSON) -->
-    <header class="fixed top-0 right-0 left-[240px] h-14 bg-surface border-b border-outline-variant flex items-center justify-between px-xl w-full z-40">
-        <div class="flex items-center bg-surface-container-low border border-outline-variant rounded-lg px-md w-80 h-9 transition-colors duration-150 hover:border-primary">
-            <span class="material-symbols-outlined text-on-surface-variant text-[20px] mr-sm">search</span>
-            <input class="bg-transparent border-none focus:ring-0 text-body-md w-full placeholder:text-outline p-0 focus:outline-none" placeholder="Search functionality..." type="text" onkeyup="alert('Global ledger search is active in client view.')">
+    <header class="fixed top-0 right-0 left-0 md:left-64 h-14 bg-surface border-b border-outline-variant flex items-center justify-between px-md md:px-xl z-40">
+        <div class="flex items-center gap-sm">
+            <button class="md:hidden w-10 h-10 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors" id="sidebar-toggle-btn">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
+            <div class="hidden md:flex items-center bg-surface-container-low border border-outline-variant rounded-lg px-md w-80 h-9 transition-colors duration-150 hover:border-primary">
+                <span class="material-symbols-outlined text-on-surface-variant text-[20px] mr-sm">search</span>
+                <input class="bg-transparent border-none focus:ring-0 text-body-md w-full placeholder:text-outline p-0 focus:outline-none" placeholder="Search functionality..." type="text" onkeyup="alert('Global ledger search is active in client view.')">
+            </div>
         </div>
             <div class="relative">
                 <button class="relative w-10 h-10 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors" id="notification-btn">
@@ -219,7 +224,7 @@
     </header>
 
     <!-- Main Content Canvas -->
-    <main class="ml-[240px] pt-14 p-xl max-w-[1248px]">
+    <main class="ml-0 md:ml-64 pt-14 p-4 md:p-xl max-w-[1248px]">
         <!-- Page Header -->
         <section class="flex items-end justify-between mb-xl mt-md">
             <div>
@@ -233,23 +238,23 @@
         </section>
         
         <!-- Filter Bar -->
-        <section class="flex flex-wrap gap-md items-center justify-between mb-lg bg-surface p-md rounded-lg border border-outline-variant bg-white">
-            <div class="w-[320px] relative">
+        <section class="flex flex-col md:flex-row gap-md items-stretch md:items-center justify-between mb-lg bg-surface p-md rounded-lg border border-outline-variant bg-white">
+            <div class="w-full md:w-[320px] relative">
                 <span class="absolute left-md top-1/2 -translate-y-1/2 material-symbols-outlined text-outline text-[20px]">search</span>
                 <input id="search-input" class="w-full h-10 pl-11 pr-md bg-surface-bright border border-outline-variant rounded-lg text-body-md focus:border-primary focus:ring-0 outline-none transition-all" placeholder="Search by merchant or reference" type="text" oninput="applyFiltersAndResetPage()">
             </div>
             
-            <div class="flex items-center gap-sm">
-                <select id="timeframe-select" class="h-10 px-md bg-surface-bright border border-outline-variant rounded-lg text-body-md text-on-surface focus:border-primary focus:ring-0 appearance-none min-w-[140px] font-medium" onchange="applyFiltersAndResetPage()">
+            <div class="flex flex-wrap items-center gap-sm">
+                <select id="timeframe-select" class="flex-1 md:flex-initial h-10 px-md bg-surface-bright border border-outline-variant rounded-lg text-body-md text-on-surface focus:border-primary focus:ring-0 appearance-none min-w-[120px] font-medium" onchange="applyFiltersAndResetPage()">
                     <option>All times</option>
                     <option>Last 30 days</option>
                     <option>Last 90 days</option>
                     <option>Year to date</option>
                 </select>
-                <select id="portfolio-select" class="h-10 px-md bg-surface-bright border border-outline-variant rounded-lg text-body-md text-on-surface focus:border-primary focus:ring-0 appearance-none min-w-[140px] font-medium">
+                <select id="portfolio-select" class="flex-1 md:flex-initial h-10 px-md bg-surface-bright border border-outline-variant rounded-lg text-body-md text-on-surface focus:border-primary focus:ring-0 appearance-none min-w-[120px] font-medium">
                     <option>All accounts</option>
                 </select>
-                <select id="type-select" class="h-10 px-md bg-surface-bright border border-outline-variant rounded-lg text-body-md text-on-surface focus:border-primary focus:ring-0 appearance-none min-w-[140px] font-medium" onchange="applyFiltersAndResetPage()">
+                <select id="type-select" class="flex-1 md:flex-initial h-10 px-md bg-surface-bright border border-outline-variant rounded-lg text-body-md text-on-surface focus:border-primary focus:ring-0 appearance-none min-w-[120px] font-medium" onchange="applyFiltersAndResetPage()">
                     <option>Type filter</option>
                     <option>Deposits</option>
                     <option>Withdrawals</option>

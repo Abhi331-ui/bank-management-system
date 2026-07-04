@@ -125,7 +125,7 @@
 </head>
 <body class="bg-background text-on-surface selection:bg-primary-container selection:text-on-primary-container">
     <!-- SideNavBar Shell -->
-    <aside class="fixed left-0 top-0 h-full flex flex-col w-64 border-r border-outline-variant bg-background z-50">
+    <aside class="fixed left-0 top-0 h-full flex flex-col w-64 border-r border-outline-variant bg-background z-50 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out" id="sidebar">
         <!-- Brand Header -->
         <div class="px-md py-lg flex flex-col gap-xs">
             <h1 class="font-headline text-headline text-primary tracking-tight cursor-pointer" onclick="window.location.href='index.html'">NexBank</h1>
@@ -184,8 +184,11 @@
     </aside>
 
     <!-- TopNavBar Shell -->
-    <header class="sticky top-0 z-40 h-16 w-full border-b border-outline-variant bg-background ml-64 flex items-center justify-between px-margin" style="width: calc(100% - 16rem);">
-        <div class="flex items-center gap-md">
+    <header class="sticky top-0 z-40 h-16 w-full border-b border-outline-variant bg-background flex items-center justify-between px-md md:px-margin ml-0 md:ml-64 md:w-[calc(100%-16rem)]">
+        <div class="flex items-center gap-sm">
+            <button class="md:hidden w-10 h-10 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors" id="sidebar-toggle-btn">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
             <h2 class="font-headline text-headline text-on-surface">Account Settings</h2>
         </div>
         <div class="flex items-center gap-lg">
@@ -216,7 +219,7 @@
     </header>
 
     <!-- Main Content Canvas -->
-    <main class="ml-64 p-margin min-h-screen">
+    <main class="ml-0 md:ml-64 p-4 md:p-margin min-h-screen">
         <div class="max-w-5xl mx-auto">
             <!-- Header Section -->
             <div class="mb-xl">
