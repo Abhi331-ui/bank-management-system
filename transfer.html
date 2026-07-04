@@ -158,11 +158,19 @@
 <body class="bg-background text-on-surface">
     <!-- Sidebar Navigation Shell -->
     <aside class="fixed left-0 top-0 h-full w-64 border-r border-outline-variant bg-surface flex flex-col py-lg px-md h-full z-50 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out" id="sidebar">
-        <div class="mb-xxl px-sm flex items-center gap-sm">
-            <div class="w-8 h-8 bg-primary rounded flex items-center justify-center text-on-primary">
-                <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">account_balance</span>
+        <div class="mb-xxl px-sm flex items-center justify-between gap-sm">
+            <div class="flex items-center gap-sm">
+                <div class="w-8 h-8 bg-primary rounded flex items-center justify-center text-on-primary">
+                    <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">account_balance</span>
+                </div>
+                <div>
+                    <span class="font-headline text-headline text-on-surface font-semibold tracking-tight">NexBank</span>
+                    <p class="text-xs text-on-surface-variant">Secure Vault</p>
+                </div>
             </div>
-            <span class="font-headline text-headline text-primary tracking-tight cursor-pointer" onclick="window.location.href='index.html'">NexBank</span>
+            <button class="md:hidden w-8 h-8 flex items-center justify-center text-outline hover:text-on-background transition-colors" onclick="const sb = document.getElementById('sidebar'); sb.classList.add('-translate-x-full'); sb.classList.remove('translate-x-0'); const bd = document.getElementById('sidebar-backdrop'); if(bd){ bd.classList.add('opacity-0', 'pointer-events-none'); setTimeout(() => bd.classList.add('hidden'), 300); }">
+                <span class="material-symbols-outlined">close</span>
+            </button>
         </div>
         <nav class="flex-1 space-y-xs overflow-y-auto no-scrollbar">
             <!-- Nav Items -->

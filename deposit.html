@@ -132,9 +132,14 @@
     <div class="flex h-screen w-full">
         <!-- SideNavBar - Identity: NexBank -->
         <aside class="fixed md:static left-0 top-0 h-full w-64 border-r border-outline-variant bg-surface flex flex-col py-lg z-50 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out shrink-0" id="sidebar">
-            <div class="px-lg mb-xxl">
-                <h1 class="font-headline text-headline text-primary cursor-pointer" onclick="window.location.href='index.html'">NexBank</h1>
-                <p class="text-on-surface-variant font-label-sm">Enterprise Banking</p>
+            <div class="px-lg mb-xxl flex justify-between items-start">
+                <div>
+                    <h1 class="font-headline text-headline text-primary cursor-pointer" onclick="window.location.href='index.html'">NexBank</h1>
+                    <p class="text-on-surface-variant font-label-sm">Enterprise Banking</p>
+                </div>
+                <button class="md:hidden w-8 h-8 flex items-center justify-center text-outline hover:text-on-background transition-colors" onclick="const sb = document.getElementById('sidebar'); sb.classList.add('-translate-x-full'); sb.classList.remove('translate-x-0'); const bd = document.getElementById('sidebar-backdrop'); if(bd){ bd.classList.add('opacity-0', 'pointer-events-none'); setTimeout(() => bd.classList.add('hidden'), 300); }">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
             </div>
             <nav class="flex-1 px-sm space-y-xs overflow-y-auto">
                 <a href="dashboard.html" class="flex items-center gap-md px-md py-sm transition-colors duration-150 ease-out text-on-surface-variant hover:bg-surface-container hover:text-on-surface">

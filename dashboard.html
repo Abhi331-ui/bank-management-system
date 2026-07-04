@@ -146,9 +146,14 @@
 
     <!-- Sidebar Shell -->
     <aside class="fixed left-0 top-0 h-full w-64 bg-background border-r border-outline-variant flex flex-col z-50 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out" id="sidebar">
-        <div class="px-lg py-xl">
-            <span class="font-headline text-headline text-primary tracking-tight cursor-pointer" onclick="window.location.href='index.html'">NexBank</span>
-            <p class="font-label-sm text-label-sm text-on-surface-variant opacity-70">Enterprise Banking</p>
+        <div class="px-lg py-xl flex justify-between items-start">
+            <div>
+                <span class="font-headline text-headline text-primary tracking-tight cursor-pointer" onclick="window.location.href='index.html'">NexBank</span>
+                <p class="font-label-sm text-label-sm text-on-surface-variant opacity-70">Enterprise Banking</p>
+            </div>
+            <button class="md:hidden w-8 h-8 flex items-center justify-center text-outline hover:text-on-background transition-colors" onclick="const sb = document.getElementById('sidebar'); sb.classList.add('-translate-x-full'); sb.classList.remove('translate-x-0'); const bd = document.getElementById('sidebar-backdrop'); if(bd){ bd.classList.add('opacity-0', 'pointer-events-none'); setTimeout(() => bd.classList.add('hidden'), 300); }">
+                <span class="material-symbols-outlined">close</span>
+            </button>
         </div>
         <nav class="flex-1 flex flex-col gap-xs overflow-y-auto">
             <a class="flex items-center gap-sm px-md py-sm bg-surface-container-low text-primary font-bold sidebar-active transition-all duration-150" href="#">
@@ -389,8 +394,8 @@
                         <div class="mt-auto">
                             <p class="font-body-sm text-body-sm opacity-80 mb-sm">Total savings increased by</p>
                             <div class="flex items-end gap-sm">
-                                <span class="font-display-xl text-display-xl tabular-nums leading-none">$4,290.00</span>
-                                <span class="font-label-sm text-label-sm bg-white/20 px-xs py-[2px] rounded mb-1">+12.4%</span>
+                                <span class="font-display-xl text-display-xl tabular-nums leading-none">$0.00</span>
+                                <span class="font-label-sm text-label-sm bg-white/20 px-xs py-[2px] rounded mb-1">+0.0%</span>
                             </div>
                             <button class="w-full mt-lg h-10 bg-white text-primary font-bold rounded-lg hover:bg-surface-container-lowest transition-colors" onclick="alert('Generating and downloading your secure financial audit file...')">Download PDF</button>
                         </div>
