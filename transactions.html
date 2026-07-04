@@ -2,6 +2,20 @@
 <html class="light" lang="en">
 <head>
     <meta charset="utf-8">
+    <script>
+        (function() {
+            const storedTheme = localStorage.getItem("theme");
+            const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+            if (storedTheme === "dark" || (!storedTheme && systemPrefersDark)) {
+                document.documentElement.classList.add("dark");
+                document.documentElement.classList.remove("light");
+            } else {
+                document.documentElement.classList.remove("dark");
+                document.documentElement.classList.add("light");
+            }
+        })();
+    </script>
+    <link href="dark_mode.css" rel="stylesheet">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>NexBank | Transaction History</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -199,6 +213,7 @@
                 <input class="bg-transparent border-none focus:ring-0 text-body-md w-full placeholder:text-outline p-0 focus:outline-none" placeholder="Search functionality..." type="text" onkeyup="alert('Global ledger search is active in client view.')">
             </div>
         </div>
+        <div class="flex items-center gap-xs sm:gap-md">
             <div class="relative">
                 <button class="relative w-10 h-10 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors" id="notification-btn">
                     <span class="material-symbols-outlined">notifications</span>
@@ -218,8 +233,8 @@
                     </div>
                 </div>
             </div>
-            <div class="h-6 w-[1px] bg-outline-variant"></div>
-            <p class="font-label-md text-label-md text-on-surface">Institutional Portal</p>
+            <div class="h-6 w-[1px] bg-outline-variant hidden sm:block"></div>
+            <p class="font-label-md text-label-md text-on-surface hidden sm:block">Institutional Portal</p>
         </div>
     </header>
 

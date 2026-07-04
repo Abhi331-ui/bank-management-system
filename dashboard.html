@@ -2,6 +2,20 @@
 <html class="light" lang="en">
 <head>
     <meta charset="utf-8">
+    <script>
+        (function() {
+            const storedTheme = localStorage.getItem("theme");
+            const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+            if (storedTheme === "dark" || (!storedTheme && systemPrefersDark)) {
+                document.documentElement.classList.add("dark");
+                document.documentElement.classList.remove("light");
+            } else {
+                document.documentElement.classList.remove("dark");
+                document.documentElement.classList.add("light");
+            }
+        })();
+    </script>
+    <link href="dark_mode.css" rel="stylesheet">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>NexBank | Dashboard</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -190,7 +204,7 @@
                 </button>
                 <div class="flex flex-col">
                     <h1 class="font-headline text-headline text-on-surface">Dashboard</h1>
-                    <p class="font-body-sm text-body-sm text-on-surface-variant" id="greetingUser">Welcome back, Marcus</p>
+                    <p class="font-body-sm text-body-sm text-on-surface-variant hidden sm:block" id="greetingUser">Welcome back, Marcus</p>
                 </div>
             </div>
             <div class="flex items-center gap-lg">
@@ -198,7 +212,7 @@
                     <span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-outline">search</span>
                     <input class="w-full h-10 pl-10 pr-md bg-surface-container-lowest border border-outline-variant rounded-lg font-body-md text-body-md focus:outline-none focus:border-primary transition-colors" placeholder="Search transactions, accounts..." type="text">
                 </div>
-                <div class="flex items-center gap-md">
+                <div class="flex items-center gap-xs sm:gap-md">
                     <div class="relative">
                         <button class="relative w-10 h-10 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors" id="notification-btn">
                             <span class="material-symbols-outlined">notifications</span>
@@ -221,7 +235,7 @@
                     <button class="w-10 h-10 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors" id="theme-toggle">
                         <span class="material-symbols-outlined">dark_mode</span>
                     </button>
-                    <button class="w-10 h-10 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors" onclick="alert('Help line: Contact support@nexbank.com for operational assistance.')">
+                    <button class="w-10 h-10 hidden sm:flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors" onclick="alert('Help line: Contact support@nexbank.com for operational assistance.')">
                         <span class="material-symbols-outlined">help</span>
                     </button>
                 </div>

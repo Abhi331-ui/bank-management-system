@@ -2,12 +2,6 @@
 // Persists Dark Mode preferences and handles interactive notification dropdowns across all pages.
 
 (function() {
-    // Inject dark mode stylesheet dynamically
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = "dark_mode.css";
-    document.head.appendChild(link);
-
     // 1. Theme persistence and dark mode setup (Immediate Execution to prevent FOUC)
     const storedTheme = localStorage.getItem("theme");
     const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;

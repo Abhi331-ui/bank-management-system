@@ -2,6 +2,20 @@
 <html class="light" lang="en">
 <head>
     <meta charset="utf-8"/>
+    <script>
+        (function() {
+            const storedTheme = localStorage.getItem("theme");
+            const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+            if (storedTheme === "dark" || (!storedTheme && systemPrefersDark)) {
+                document.documentElement.classList.add("dark");
+                document.documentElement.classList.remove("light");
+            } else {
+                document.documentElement.classList.remove("dark");
+                document.documentElement.classList.add("light");
+            }
+        })();
+    </script>
+    <link href="dark_mode.css" rel="stylesheet">
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>NexBank - Settings</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -191,7 +205,7 @@
             </button>
             <h2 class="font-headline text-headline text-on-surface">Account Settings</h2>
         </div>
-        <div class="flex items-center gap-lg">
+        <div class="flex items-center gap-xs sm:gap-lg">
             <div class="relative hidden lg:block">
                 <span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-outline text-[20px]">search</span>
                 <input class="h-10 w-64 bg-surface-container border border-outline-variant rounded-none pl-10 pr-md font-body-md text-body-md focus:border-primary focus:ring-0 transition-colors" placeholder="Search parameters..." type="text"/>

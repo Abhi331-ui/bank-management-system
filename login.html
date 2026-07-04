@@ -2,6 +2,20 @@
 <html class="light" lang="en">
 <head>
     <meta charset="utf-8">
+    <script>
+        (function() {
+            const storedTheme = localStorage.getItem("theme");
+            const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+            if (storedTheme === "dark" || (!storedTheme && systemPrefersDark)) {
+                document.documentElement.classList.add("dark");
+                document.documentElement.classList.remove("light");
+            } else {
+                document.documentElement.classList.remove("dark");
+                document.documentElement.classList.add("light");
+            }
+        })();
+    </script>
+    <link href="dark_mode.css" rel="stylesheet">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Login | NexBank</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>

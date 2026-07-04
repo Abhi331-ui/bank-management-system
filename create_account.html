@@ -2,6 +2,20 @@
 <html lang="en" class="light">
 <head>
     <meta charset="UTF-8">
+    <script>
+        (function() {
+            const storedTheme = localStorage.getItem("theme");
+            const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+            if (storedTheme === "dark" || (!storedTheme && systemPrefersDark)) {
+                document.documentElement.classList.add("dark");
+                document.documentElement.classList.remove("light");
+            } else {
+                document.documentElement.classList.remove("dark");
+                document.documentElement.classList.add("light");
+            }
+        })();
+    </script>
+    <link href="dark_mode.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NexBank | Create Account</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
@@ -138,9 +152,8 @@
         </aside>
 
         <div class="flex-1 flex flex-col min-w-0 overflow-hidden">
-            <!-- TopNavBar (Shared Component) -->
             <header class="h-16 w-full border-b border-outline-variant bg-surface flex justify-between items-center px-md md:px-lg shrink-0 z-40">
-                <div class="flex items-center gap-sm md:gap-xl w-1/3">
+                <div class="flex items-center gap-sm md:gap-xl">
                     <button class="md:hidden w-10 h-10 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors shrink-0" id="sidebar-toggle-btn">
                         <span class="material-symbols-outlined">menu</span>
                     </button>
@@ -150,7 +163,7 @@
                         <input class="bg-transparent border-none focus:ring-0 text-body-sm font-body-sm w-64 px-sm" placeholder="Search wealth data..." type="text">
                     </div>
                 </div>
-                <div class="flex items-center gap-md">
+                <div class="flex items-center gap-xs sm:gap-md">
                     <div class="relative">
                         <button class="relative w-10 h-10 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors" id="notification-btn">
                             <span class="material-symbols-outlined">notifications</span>
@@ -173,8 +186,8 @@
                     <button class="p-sm hover:text-primary transition-colors duration-150 ease-out" id="theme-toggle">
                         <span class="material-symbols-outlined">dark_mode</span>
                     </button>
-                    <div class="h-6 w-[1px] bg-outline-variant mx-xs"></div>
-                    <button id="headerBtn" class="flex items-center gap-xs font-label-md text-on-surface px-sm py-xs hover:bg-surface-container-high rounded transition-colors duration-150" onclick="window.location.href='index.html'">
+                    <div class="h-6 w-[1px] bg-outline-variant mx-xs hidden sm:block"></div>
+                    <button id="headerBtn" class="hidden sm:flex items-center gap-xs font-label-md text-on-surface px-sm py-xs hover:bg-surface-container-high rounded transition-colors duration-150" onclick="window.location.href='index.html'">
                         Main Website
                         <span class="material-symbols-outlined">arrow_forward</span>
                     </button>

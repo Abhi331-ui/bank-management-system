@@ -2,6 +2,20 @@
 <html class="light" lang="en">
 <head>
     <meta charset="utf-8">
+    <script>
+        (function() {
+            const storedTheme = localStorage.getItem("theme");
+            const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+            if (storedTheme === "dark" || (!storedTheme && systemPrefersDark)) {
+                document.documentElement.classList.add("dark");
+                document.documentElement.classList.remove("light");
+            } else {
+                document.documentElement.classList.remove("dark");
+                document.documentElement.classList.add("light");
+            }
+        })();
+    </script>
+    <link href="dark_mode.css" rel="stylesheet">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>NexBank - Transfer Money</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -207,8 +221,8 @@
                 <input class="h-10 pl-10 pr-md w-64 bg-surface-container-low border border-outline-variant rounded-lg text-body-md focus:border-primary focus:ring-0 transition-colors" placeholder="Search transactions or recipients" type="text" onkeyup="alert('Global transfer ledger search active.')">
             </div>
         </div>
-        <div class="flex items-center gap-xl">
-            <div class="flex items-center gap-md">
+        <div class="flex items-center gap-xs sm:gap-xl">
+            <div class="flex items-center gap-xs sm:gap-md">
                 <div class="relative">
                     <button class="relative w-10 h-10 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors" id="notification-btn">
                         <span class="material-symbols-outlined">notifications</span>
@@ -231,8 +245,8 @@
                 <button class="p-sm text-on-surface-variant hover:text-primary transition-colors" id="theme-toggle">
                     <span class="material-symbols-outlined">contrast</span>
                 </button>
-                <div class="h-6 w-[1px] bg-outline-variant mx-xs"></div>
-                <button class="flex items-center gap-xs font-label-md text-on-surface px-sm py-xs hover:bg-surface-container-high rounded transition-colors duration-150" onclick="window.location.href='dashboard.html'">
+                <div class="h-6 w-[1px] bg-outline-variant mx-xs hidden sm:block"></div>
+                <button class="hidden sm:flex items-center gap-xs font-label-md text-on-surface px-sm py-xs hover:bg-surface-container-high rounded transition-colors duration-150" onclick="window.location.href='dashboard.html'">
                     Dashboard
                     <span class="material-symbols-outlined">arrow_forward</span>
                 </button>

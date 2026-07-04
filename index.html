@@ -2,6 +2,20 @@
 <html class="light" lang="en">
 <head>
     <meta charset="utf-8">
+    <script>
+        (function() {
+            const storedTheme = localStorage.getItem("theme");
+            const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+            if (storedTheme === "dark" || (!storedTheme && systemPrefersDark)) {
+                document.documentElement.classList.add("dark");
+                document.documentElement.classList.remove("light");
+            } else {
+                document.documentElement.classList.remove("dark");
+                document.documentElement.classList.add("light");
+            }
+        })();
+    </script>
+    <link href="dark_mode.css" rel="stylesheet">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>NexBank | Institutional Banking Infrastructure</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -180,15 +194,15 @@
                 <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-150 ease-out" href="#">About</a>
             </div>
         </div>
-        <div class="flex items-center gap-xs sm:gap-md">
+        <div class="flex items-center gap-xs">
             <button class="w-10 h-10 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors" id="theme-toggle">
                 <span class="material-symbols-outlined">dark_mode</span>
             </button>
-            <button class="font-label-md text-label-md text-on-surface-variant px-xs sm:px-md h-10 hover:text-primary transition-colors duration-150" onclick="window.location.href='login.html'">Login</button>
-            <button class="bg-primary text-on-primary px-sm sm:px-lg h-10 rounded-lg font-label-md text-label-md hover:bg-opacity-90 transition-all duration-150 shadow-md shadow-primary/20" onclick="openCreateAccountModal()">Open<span class="hidden sm:inline"> Account</span></button>
             <button class="md:hidden w-10 h-10 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors" id="mobile-menu-toggle-btn">
                 <span class="material-symbols-outlined">menu</span>
             </button>
+            <button class="hidden md:inline-flex font-label-md text-label-md text-on-surface-variant px-md h-10 hover:text-primary transition-colors duration-150 items-center" onclick="window.location.href='login.html'">Login</button>
+            <button class="hidden md:inline-flex bg-primary text-on-primary px-lg h-10 rounded-lg font-label-md text-label-md hover:bg-opacity-90 transition-all duration-150 shadow-md shadow-primary/20 items-center justify-center" onclick="openCreateAccountModal()">Open Account</button>
         </div>
     </div>
 </nav>
@@ -208,6 +222,9 @@
             <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-150 py-sm" href="#">Security</a>
             <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-150 py-sm cursor-pointer" onclick="openAdminModal()">Admin Portal</a>
             <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-150 py-sm" href="#">About</a>
+            <hr class="border-outline-variant my-xs">
+            <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-150 py-sm" href="login.html">Login</a>
+            <a class="font-label-md text-label-md text-primary hover:underline transition-colors duration-150 py-sm font-semibold" href="create_account.html">Open Account</a>
         </div>
     </div>
 </div>
