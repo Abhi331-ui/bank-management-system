@@ -143,9 +143,14 @@
     <script src="theme_notifications.js"></script>
 </head>
 <body class="text-on-background min-h-screen flex flex-col items-center justify-center relative overflow-x-hidden">
+    <!-- Portfolio Project Disclaimer Banner -->
+    <div class="fixed top-0 left-0 w-full bg-amber-500 text-neutral-900 px-md py-2 text-center font-label-md text-xs font-bold select-none flex items-center justify-center gap-xs z-50">
+        <span class="material-symbols-outlined text-[16px]">warning</span>
+        <span>Disclaimer: Simulated portfolio demo project. NOT a real bank. Do NOT enter real credentials.</span>
+    </div>
 
     <!-- Top AppBar Anchor (Minimalist / Absolute) -->
-    <header class="absolute top-0 left-0 w-full flex items-center h-16 px-margin">
+    <header class="absolute top-8 left-0 w-full flex items-center h-16 px-margin">
         <a href="index.html" class="font-headline text-[20px] font-semibold text-on-background flex items-center gap-2 cursor-pointer hover:text-primary transition-colors">
             <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">account_balance</span>
             NexBank
